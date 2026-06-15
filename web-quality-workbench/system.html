@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 时代研发协同与质量工程平台</title>
+    <link rel="stylesheet" href="/system.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Enterprise AI Delivery Control Plane</p>
+          <h1>AI 时代研发协同与质量工程平台</h1>
+        </div>
+        <div class="top-actions">
+          <select id="modeSelect" aria-label="执行模式">
+            <option value="full_agent">全流程 Agent 托管</option>
+            <option value="supervised">关键节点人工确认</option>
+            <option value="audit_only">仅审计与建议</option>
+          </select>
+          <button id="startRunBtn" class="primary">启动任务</button>
+          <button id="nextStepBtn">执行下一步</button>
+          <button id="autoRunBtn">自动跑完</button>
+          <button id="approveBtn">人工批准</button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="rail">
+          <section>
+            <div class="section-title">
+              <span>项目群</span>
+              <button id="refreshBtn" class="icon-btn" title="刷新">↻</button>
+            </div>
+            <div id="programList" class="program-list"></div>
+          </section>
+          <section>
+            <div class="section-title">
+              <span>执行记录</span>
+            </div>
+            <div id="runList" class="run-list"></div>
+          </section>
+        </aside>
+
+        <section class="main-stage">
+          <div class="summary-band">
+            <div>
+              <p class="label">当前项目</p>
+              <h2 id="programName">-</h2>
+              <p id="programDesc" class="muted">-</p>
+            </div>
+            <div class="metric-row">
+              <div class="metric">
+                <span>风险等级</span>
+                <strong id="riskLevel">-</strong>
+              </div>
+              <div class="metric">
+                <span>证据得分</span>
+                <strong id="evidenceScore">-</strong>
+              </div>
+              <div class="metric">
+                <span>门禁结论</span>
+                <strong id="decisionText">-</strong>
+              </div>
+              <div class="metric">
+                <span>完成步骤</span>
+                <strong id="stepProgress">-</strong>
+              </div>
+            </div>
+          </div>
+
+          <nav id="pipeline" class="pipeline" aria-label="AI Agent 执行流水线"></nav>
+
+          <div class="content-grid">
+            <section class="panel full">
+              <div class="panel-head">
+                <div>
+                  <p class="label">Portfolio Control</p>
+                  <h3>年度项目组合质量保障</h3>
+                </div>
+                <button id="intakeProjectBtn">接入示例项目</button>
+              </div>
+              <div id="portfolioBoard" class="portfolio-board"></div>
+            </section>
+
+            <section class="panel full">
+              <div class="panel-head">
+                <div>
+                  <p class="label">Role Based Agents</p>
+                  <h3>角色化 Agent 配置</h3>
+                </div>
+              </div>
+              <div id="roleBoard" class="role-board"></div>
+            </section>
+
+            <section class="panel wide">
+              <div class="panel-head">
+                <div>
+                  <p class="label">Agent 当前工作包</p>
+                  <h3 id="stepTitle">等待启动</h3>
+                </div>
+                <span id="stepStatus" class="badge">未开始</span>
+              </div>
+              <div id="stepDetail" class="step-detail"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <h3>风险雷达</h3>
+              </div>
+              <div id="riskRadar" class="risk-radar"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <h3>跨团队依赖</h3>
+              </div>
+              <div id="dependencyBoard" class="dependency-board"></div>
+            </section>
+
+            <section class="panel wide">
+              <div class="panel-head">
+                <h3>工具证据中心</h3>
+                <button id="exportBtn">生成报告</button>
+              </div>
+              <div id="toolTable" class="tool-table"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <h3>测试模拟数据</h3>
+              </div>
+              <div id="mockData" class="mock-data"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <h3>执行日志</h3>
+              </div>
+              <div id="logStream" class="log-stream"></div>
+            </section>
+
+            <section class="panel full">
+              <div class="panel-head">
+                <div>
+                  <p class="label">后台维护模型</p>
+                  <h3>8 个 Agent 协同与治理</h3>
+                </div>
+              </div>
+              <div id="agentRegistry" class="agent-registry"></div>
+            </section>
+
+            <section class="panel full">
+              <div class="panel-head">
+                <div>
+                  <p class="label">Agent Studio</p>
+                  <h3>完整 Agent 维护台</h3>
+                </div>
+                <div class="panel-actions">
+                  <select id="agentSelect" aria-label="选择 Agent"></select>
+                  <button id="simulateAgentBtn">试运行</button>
+                  <button id="saveAgentBtn" class="primary">保存配置</button>
+                </div>
+              </div>
+              <div class="agent-studio">
+                <div class="studio-form">
+                  <label>
+                    <span>维护 Owner</span>
+                    <input id="agentOwnerInput" type="text" />
+                  </label>
+                  <label>
+                    <span>版本号</span>
+                    <input id="agentVersionInput" type="text" />
+                  </label>
+                  <label class="span-2">
+                    <span>Agent 职责</span>
+                    <textarea id="agentMissionInput" rows="3"></textarea>
+                  </label>
+                  <label class="span-2">
+                    <span>系统提示词</span>
+                    <textarea id="agentPromptInput" rows="7"></textarea>
+                  </label>
+                  <label>
+                    <span>输入 Schema(JSON)</span>
+                    <textarea id="agentInputSchemaInput" rows="9"></textarea>
+                  </label>
+                  <label>
+                    <span>输出 Schema(JSON)</span>
+                    <textarea id="agentOutputSchemaInput" rows="9"></textarea>
+                  </label>
+                  <label>
+                    <span>工具权限(JSON)</span>
+                    <textarea id="agentToolsInput" rows="10"></textarea>
+                  </label>
+                  <label>
+                    <span>策略规则(JSON)</span>
+                    <textarea id="agentPoliciesInput" rows="10"></textarea>
+                  </label>
+                  <label>
+                    <span>评测用例(JSON)</span>
+                    <textarea id="agentEvalInput" rows="10"></textarea>
+                  </label>
+                  <label>
+                    <span>维护机制(JSON)</span>
+                    <textarea id="agentMaintenanceInput" rows="10"></textarea>
+                  </label>
+                  <label class="span-2">
+                    <span>变更说明</span>
+                    <input id="agentChangeNoteInput" type="text" placeholder="例如：补充订单金额一致性阻断策略" />
+                  </label>
+                </div>
+                <aside class="studio-preview">
+                  <h4>试运行结果</h4>
+                  <pre id="agentSimulationOutput">选择 Agent 后，可基于当前项目群试运行。</pre>
+                </aside>
+              </div>
+            </section>
+
+            <section class="panel full">
+              <div class="panel-head">
+                <h3>质量门禁报告</h3>
+                <span id="reportHint" class="muted">执行后自动生成</span>
+              </div>
+              <pre id="reportPreview" class="report-preview"></pre>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" hidden></div>
+    <script src="/system.js"></script>
+  </body>
+</html>

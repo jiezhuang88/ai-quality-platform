@@ -1,0 +1,33 @@
+Task mode: create
+Primary deck profile: strategy-leadership
+Secondary gates: engineering-platform
+
+Audience:
+- Company executives, engineering leadership, QA leadership, product/operations stakeholders.
+
+Executive objective:
+- Secure approval to implement an AI-code quality gate operating model.
+- Show why manual review cannot scale with AI-generated code volume.
+- Explain the risk-tiered gate model and how automation/AI reduce both risk and cycle time.
+
+Required proof objects:
+- Executive thesis and decision ask.
+- Risk escalation from AI coding.
+- End-to-end quality gate lifecycle.
+- Risk-tiered gate matrix.
+- Automated testing and AI-assisted analysis architecture.
+- Operating model and ownership.
+- 90-day rollout roadmap.
+- Metrics dashboard.
+- Investment and expected outcomes.
+
+Source assets:
+- docs/executable-ai-code-quality-gate-plan.md
+- docs/industry-quality-blueprint.md
+- Existing web platform at http://127.0.0.1:8787 as implementation proof.
+
+QA gates:
+- No slide should require reading dense paragraphs.
+- Every slide title must make a claim.
+- Technical labels must remain accurate while understandable for executives.
+- At thumbnail size, the deck must show distinct slide rhythms.

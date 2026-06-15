@@ -1,0 +1,28 @@
+{
+  "output": "/Users/mac/Documents/New project 2/outputs/manual-20260610-future-testing/presentations/future-testing-mode/output/future-testing-quality-mode-cto.pptx",
+  "outputBytes": 18390,
+  "slideCount": 1,
+  "slideSize": {
+    "width": 1280,
+    "height": 720
+  },
+  "previewDir": "/Users/mac/Documents/New project 2/outputs/manual-20260610-future-testing/presentations/future-testing-mode/preview",
+  "previewPaths": [
+    "/Users/mac/Documents/New project 2/outputs/manual-20260610-future-testing/presentations/future-testing-mode/preview/slide-01.png"
+  ],
+  "layoutDir": "/Users/mac/Documents/New project 2/outputs/manual-20260610-future-testing/presentations/future-testing-mode/layout/final",
+  "layoutResults": [
+    {
+      "layoutPath": "/Users/mac/Documents/New project 2/outputs/manual-20260610-future-testing/presentations/future-testing-mode/layout/final/slide-01.layout.json"
+    }
+  ],
+  "contactSheet": "/Users/mac/Documents/New project 2/outputs/manual-20260610-future-testing/presentations/future-testing-mode/preview/contact-sheet.png",
+  "slides": [
+    {
+      "index": 1,
+      "requestedSlideNumber": 1,
+      "modulePath": "/Users/mac/Documents/New project 2/outputs/manual-20260610-future-testing/presentations/future-testing-mode/slides/slide-01.mjs",
+      "exportName": "slide01"
+    }
+  ]
+}

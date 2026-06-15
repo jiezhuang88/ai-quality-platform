@@ -1,0 +1,16 @@
+task mode: create
+primary deck-profile: engineering-platform
+secondary gates: strategy-leadership
+required proof objects:
+- Platform positioning from QA quality assurance to whole-R&D collaboration operating system.
+- Architecture blueprint covering process orchestration, tool integration, AI agents, quality gates, knowledge assets, and engineering cockpit.
+- Walmart order transaction core-link case using full-site coupon and item coupon only.
+source/asset requirements:
+- Use user-provided current assets: data bank, automation framework, performance test platform, chaos engineering, Sonar, unit coverage, API automation coverage, API latency, legacy defects, test pass rate.
+- Do not introduce unsupported coupon concepts such as platform coupon or store coupon.
+profile-specific QA gates:
+- Frame as whole-R&D collaboration platform, not QA-only platform.
+- Keep the stage model actionable for R&D, product, QA, release, and business UAT roles.
+- Security and supply-chain are horizontal controls inside engineering governance.
+known missing inputs:
+- No internal baseline values were provided; metrics are shown as governance dimensions rather than hard KPI targets.

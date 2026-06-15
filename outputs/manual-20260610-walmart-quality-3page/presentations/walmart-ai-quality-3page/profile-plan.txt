@@ -1,0 +1,16 @@
+task mode: create
+primary deck-profile: engineering-platform
+secondary gates: strategy-leadership, consumer-retail business accuracy
+required proof objects:
+- Executive target model for AI-Native Quality Engineering
+- SDLC risk-based quality gate workflow with current platform assets mapped in
+- Walmart order transaction core-link case using only full-site coupon and item coupon
+source/asset requirements:
+- Use existing internal platform facts supplied by the user: data bank, automation framework, performance platform, chaos engineering, Sonar, unit coverage, API automation coverage, API latency, legacy defects, test pass rate.
+- Do not introduce platform coupon, store coupon, merchant coupon, or unsupported business concepts.
+profile-specific QA gates:
+- Technical labels must stay precise and executive-readable.
+- Security and supply-chain controls are represented as horizontal gate capabilities, not an independent SDLC stage.
+- Three slides only; no appendix.
+known missing inputs:
+- No exact Walmart production metrics were provided; metric targets are framed as governance examples and should be replaced by internal baselines before final executive publication.

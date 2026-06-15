@@ -1,0 +1,22 @@
+Task mode: create
+Primary deck profile: strategy-leadership
+Secondary profile gates: engineering-platform
+
+Audience:
+- CTO, engineering leadership, QA leadership.
+
+Objective:
+- Review whether the proposed AI Coding quality assurance model is feasible.
+- Reflect current SDLC: requirements, design, AI coding/development, PR, test verification, UAT, release, operate/learn.
+- Treat security and supply chain as horizontal quality gates, not a standalone SDLC stage.
+- Use a Walmart order transaction case with full-site coupon and item coupon only.
+
+Required proof objects:
+- Existing tooling and metrics baseline.
+- Future testing work mode evolution.
+- SDLC quality model with UAT.
+- Risk-tiered gates.
+- Platform capability map.
+- Walmart order transaction case.
+- Quality metrics dashboard.
+- Rollout and CTO decisions.

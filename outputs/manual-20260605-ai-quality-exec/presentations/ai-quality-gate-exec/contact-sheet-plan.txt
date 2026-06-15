@@ -1,0 +1,23 @@
+Slide plan:
+1. Dark cover with executive thesis and outcome rail.
+2. Market/operating problem slide with AI coding volume versus quality risk.
+3. Strategic target operating model with three layers.
+4. End-to-end lifecycle flow.
+5. Risk-tiered gate matrix.
+6. Automation and AI testing architecture.
+7. Quality evidence model by PR.
+8. Governance and roles.
+9. 90-day rollout roadmap.
+10. Executive dashboard and decision ask.
+
+Macro-layout rhythm:
+- Cover with metric rail.
+- Tension slide with split proof.
+- Layered operating model.
+- Horizontal workflow.
+- Risk matrix.
+- Architecture system map.
+- Evidence stack.
+- RACI/ownership table.
+- Roadmap timeline.
+- KPI dashboard plus decision box.

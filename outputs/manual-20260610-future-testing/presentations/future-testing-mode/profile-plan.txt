@@ -1,0 +1,21 @@
+Task mode: create
+Primary deck profile: strategy-leadership
+Secondary profile gates: engineering-platform
+
+Audience:
+- CTO and senior engineering leadership.
+
+Objective:
+- One-slide executive summary explaining how testing work mode evolves under AI Coding.
+- Must combine capability planning and SDLC/PR quality gates.
+- Must include one concrete e-commerce case.
+
+Key thesis:
+- Testing evolves from execution-centered QA to AI-era quality operating system ownership.
+- The operating model is risk-driven, automation-first, AI-assisted, and production-feedback-driven.
+
+Required proof objects:
+- Work mode evolution.
+- Future quality closed loop.
+- E-commerce coupon stacking case.
+- CTO decision implications.

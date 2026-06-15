@@ -1,0 +1,5247 @@
+{
+  "projects": [
+    {
+      "id": "P-1c205b1e",
+      "name": "新订单链路质量保障项目",
+      "business_domain": "交易",
+      "project_type": "业务迭代",
+      "risk_level": "L2",
+      "status": "planning",
+      "owner": "项目负责人",
+      "product_owner": "产品 Owner",
+      "dev_owner": "研发 Owner",
+      "qa_owner": "QA Owner",
+      "uat_owner": "业务验收 Owner",
+      "repo_url": "https://git.example.com/order/new-service",
+      "stage": "项目接入",
+      "evidence_score": 0,
+      "blockers": [],
+      "created_at": "2026-06-11 19:16:10",
+      "updated_at": "2026-06-11 19:16:10",
+      "systems": [
+        {
+          "name": "交易",
+          "domain": "交易",
+          "owner": "研发 Owner",
+          "criticality": "普通",
+          "repo_url": "https://git.example.com/order/new-service",
+          "id": "P-1c205b1e-SYS-01"
+        }
+      ],
+      "repositories": [
+        {
+          "name": "new-service",
+          "url": "https://git.example.com/order/new-service",
+          "branch": "main",
+          "owner": "研发 Owner",
+          "system": "交易",
+          "id": "P-1c205b1e-REPO-01"
+        }
+      ],
+      "stakeholders": []
+    },
+    {
+      "id": "P-2026-001",
+      "name": "订单交易优惠规则改造",
+      "business_domain": "交易",
+      "project_type": "业务迭代",
+      "risk_level": "L3",
+      "status": "testing",
+      "owner": "项目负责人",
+      "product_owner": "产品 Owner",
+      "dev_owner": "研发 Owner",
+      "qa_owner": "QA Owner",
+      "uat_owner": "业务验收 Owner",
+      "repo_url": "https://git.example.com/order/order-service",
+      "stage": "测试验证",
+      "evidence_score": 74,
+      "blockers": [
+        "接口自动化 6 条失败",
+        "支付前金额一致性证据缺失"
+      ],
+      "created_at": "2026-06-11 19:12:34",
+      "updated_at": "2026-06-11 19:12:34",
+      "systems": [
+        {
+          "name": "订单服务",
+          "domain": "交易",
+          "owner": "订单研发 Owner",
+          "criticality": "核心",
+          "repo_url": "https://git.example.com/order/order-service",
+          "id": "P-2026-001-SYS-01"
+        },
+        {
+          "name": "优惠服务",
+          "domain": "营销",
+          "owner": "优惠研发 Owner",
+          "criticality": "核心",
+          "repo_url": "https://git.example.com/promo/coupon-service",
+          "id": "P-2026-001-SYS-02"
+        },
+        {
+          "name": "库存服务",
+          "domain": "履约",
+          "owner": "库存研发 Owner",
+          "criticality": "核心",
+          "repo_url": "https://git.example.com/inventory/inventory-service",
+          "id": "P-2026-001-SYS-03"
+        },
+        {
+          "name": "支付校验服务",
+          "domain": "支付",
+          "owner": "支付研发 Owner",
+          "criticality": "核心",
+          "repo_url": "https://git.example.com/payment/payment-check-service",
+          "id": "P-2026-001-SYS-04"
+        }
+      ],
+      "repositories": [
+        {
+          "name": "order-service",
+          "url": "https://git.example.com/order/order-service",
+          "branch": "main",
+          "owner": "订单研发 Owner",
+          "system": "订单服务",
+          "id": "P-2026-001-REPO-01"
+        },
+        {
+          "name": "coupon-service",
+          "url": "https://git.example.com/promo/coupon-service",
+          "branch": "main",
+          "owner": "优惠研发 Owner",
+          "system": "优惠服务",
+          "id": "P-2026-001-REPO-02"
+        },
+        {
+          "name": "inventory-service",
+          "url": "https://git.example.com/inventory/inventory-service",
+          "branch": "main",
+          "owner": "库存研发 Owner",
+          "system": "库存服务",
+          "id": "P-2026-001-REPO-03"
+        },
+        {
+          "name": "payment-check-service",
+          "url": "https://git.example.com/payment/payment-check-service",
+          "branch": "main",
+          "owner": "支付研发 Owner",
+          "system": "支付校验服务",
+          "id": "P-2026-001-REPO-04"
+        }
+      ],
+      "stakeholders": [
+        {
+          "role": "产品 Owner",
+          "name": "产品 Owner",
+          "approval_scope": "业务规则和验收标准"
+        },
+        {
+          "role": "研发 Owner",
+          "name": "订单研发 Owner",
+          "approval_scope": "核心代码和接口契约"
+        },
+        {
+          "role": "QA Owner",
+          "name": "QA Owner",
+          "approval_scope": "测试覆盖和阻断项"
+        },
+        {
+          "role": "发布经理",
+          "name": "发布经理",
+          "approval_scope": "灰度、回滚和发布准入"
+        }
+      ]
+    },
+    {
+      "id": "P-2026-002",
+      "name": "库存可售承诺与数据回补",
+      "business_domain": "履约",
+      "project_type": "数据改造",
+      "risk_level": "L4",
+      "status": "blocked",
+      "owner": "项目负责人",
+      "product_owner": "产品 Owner",
+      "dev_owner": "研发 Owner",
+      "qa_owner": "QA Owner",
+      "uat_owner": "业务验收 Owner",
+      "repo_url": "https://git.example.com/inventory/inventory-service",
+      "stage": "发布决策",
+      "evidence_score": 61,
+      "blockers": [
+        "ETA 契约未冻结",
+        "回滚演练缺失"
+      ],
+      "created_at": "2026-06-11 19:12:34",
+      "updated_at": "2026-06-11 19:12:34",
+      "systems": [
+        {
+          "name": "库存服务",
+          "domain": "履约",
+          "owner": "库存 Owner",
+          "criticality": "核心",
+          "repo_url": "https://git.example.com/inventory/inventory-service",
+          "id": "P-2026-002-SYS-01"
+        },
+        {
+          "name": "履约 ETA 服务",
+          "domain": "履约",
+          "owner": "履约 Owner",
+          "criticality": "核心",
+          "repo_url": "https://git.example.com/fulfillment/eta-service",
+          "id": "P-2026-002-SYS-02"
+        },
+        {
+          "name": "数据回补任务",
+          "domain": "数据",
+          "owner": "数据 Owner",
+          "criticality": "高",
+          "repo_url": "https://git.example.com/data/inventory-backfill",
+          "id": "P-2026-002-SYS-03"
+        }
+      ],
+      "repositories": [
+        {
+          "name": "inventory-service",
+          "url": "https://git.example.com/inventory/inventory-service",
+          "branch": "main",
+          "owner": "库存 Owner",
+          "system": "库存服务",
+          "id": "P-2026-002-REPO-01"
+        },
+        {
+          "name": "eta-service",
+          "url": "https://git.example.com/fulfillment/eta-service",
+          "branch": "main",
+          "owner": "履约 Owner",
+          "system": "履约 ETA 服务",
+          "id": "P-2026-002-REPO-02"
+        },
+        {
+          "name": "inventory-backfill",
+          "url": "https://git.example.com/data/inventory-backfill",
+          "branch": "main",
+          "owner": "数据 Owner",
+          "system": "数据回补任务",
+          "id": "P-2026-002-REPO-03"
+        }
+      ],
+      "stakeholders": [
+        {
+          "role": "架构 Owner",
+          "name": "架构 Owner",
+          "approval_scope": "L4 方案与回滚"
+        },
+        {
+          "role": "数据 Owner",
+          "name": "数据 Owner",
+          "approval_scope": "数据回补与一致性"
+        },
+        {
+          "role": "QA Owner",
+          "name": "QA Owner",
+          "approval_scope": "混沌与回归覆盖"
+        }
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-364a741f",
+      "project_id": "P-2026-001",
+      "source_type": "feishu",
+      "business_goal": "目标：冒烟验证级联导入。",
+      "rules": [
+        "规则：支付前金额必须一致。",
+        "验收：生成规则卡。"
+      ],
+      "acceptance_criteria": [
+        "验收：生成规则卡。"
+      ],
+      "ambiguities": [],
+      "risk_hints": [
+        "规则：支付前金额必须一致。"
+      ],
+      "status": "draft",
+      "created_at": "2026-06-15 15:42:50",
+      "confirmed_by": "",
+      "source_id": "SRC-90c2a3a7",
+      "source_name": "验收冒烟 PRD",
+      "source_url": "https://feishu.example.com/docx/smoke",
+      "file_name": "",
+      "import_mode": "feishu",
+      "integration_status": "linked"
+    },
+    {
+      "id": "REQ-5b24a4b8",
+      "project_id": "P-2026-001",
+      "source_type": "paste",
+      "business_goal": "目标：支持全场券与商品券叠加，结算金额必须准确。",
+      "rules": [
+        "目标：支持全场券与商品券叠加，结算金额必须准确。",
+        "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+        "验收：支付前金额必须与结算金额一致。",
+        "待确认：券叠加顺序是否以商品券优先。"
+      ],
+      "acceptance_criteria": [
+        "验收：支付前金额必须与结算金额一致。",
+        "待确认：券叠加顺序是否以商品券优先。"
+      ],
+      "ambiguities": [
+        "待确认：券叠加顺序是否以商品券优先。"
+      ],
+      "risk_hints": [
+        "目标：支持全场券与商品券叠加，结算金额必须准确。",
+        "验收：支付前金额必须与结算金额一致。",
+        "风险：库存并发、支付超时、金额回滚需要验证。"
+      ],
+      "status": "draft",
+      "created_at": "2026-06-15 15:26:11",
+      "confirmed_by": "",
+      "source_id": "SRC-417e27cf",
+      "source_name": "订单优惠 PRD v1.0",
+      "source_url": "",
+      "file_name": "",
+      "import_mode": "paste",
+      "integration_status": "uploaded"
+    },
+    {
+      "id": "REQ-1a88ba28",
+      "project_id": "P-2026-001",
+      "source_type": "paste",
+      "business_goal": "目标：支持全场券与商品券叠加，结算金额必须准确。",
+      "rules": [
+        "目标：支持全场券与商品券叠加，结算金额必须准确。",
+        "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+        "验收：支付前金额必须与结算金额一致。",
+        "待确认：券叠加顺序是否以商品券优先。"
+      ],
+      "acceptance_criteria": [
+        "验收：支付前金额必须与结算金额一致。",
+        "待确认：券叠加顺序是否以商品券优先。"
+      ],
+      "ambiguities": [
+        "待确认：券叠加顺序是否以商品券优先。"
+      ],
+      "risk_hints": [
+        "目标：支持全场券与商品券叠加，结算金额必须准确。",
+        "验收：支付前金额必须与结算金额一致。",
+        "风险：库存并发、支付超时、金额回滚需要验证。"
+      ],
+      "status": "confirmed",
+      "created_at": "2026-06-15 15:25:50",
+      "confirmed_by": "Product Owner",
+      "source_id": "SRC-132f2ca2",
+      "source_name": "订单优惠 PRD v1.0",
+      "source_url": "",
+      "file_name": "",
+      "import_mode": "paste",
+      "integration_status": "uploaded",
+      "confirmed_at": "2026-06-15 15:25:58"
+    },
+    {
+      "id": "REQ-f753b797",
+      "project_id": "P-1c205b1e",
+      "source_type": "file",
+      "business_goal": "目标：支持全场券与商品券叠加，结算金额必须准确。",
+      "rules": [
+        "目标：支持全场券与商品券叠加，结算金额必须准确。",
+        "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+        "验收：支付前金额必须与结算金额一致。",
+        "待确认：券叠加顺序是否以商品券优先。"
+      ],
+      "acceptance_criteria": [
+        "验收：支付前金额必须与结算金额一致。",
+        "待确认：券叠加顺序是否以商品券优先。"
+      ],
+      "ambiguities": [
+        "待确认：券叠加顺序是否以商品券优先。"
+      ],
+      "risk_hints": [
+        "目标：支持全场券与商品券叠加，结算金额必须准确。",
+        "验收：支付前金额必须与结算金额一致。",
+        "风险：库存并发、支付超时、金额回滚需要验证。"
+      ],
+      "status": "draft",
+      "created_at": "2026-06-12 10:38:30",
+      "confirmed_by": "",
+      "source_id": "SRC-68d4b29b",
+      "source_name": "订单优惠 PRD v1.0",
+      "source_url": "",
+      "file_name": "",
+      "import_mode": "file",
+      "integration_status": "uploaded"
+    },
+    {
+      "id": "REQ-171a8593",
+      "project_id": "P-2026-001",
+      "source_type": "feishu",
+      "business_goal": "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+      "rules": [
+        "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+        "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+        "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。",
+        "待确认：券叠加顺序是否以商品券优先。"
+      ],
+      "acceptance_criteria": [
+        "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。",
+        "待确认：券叠加顺序是否以商品券优先。"
+      ],
+      "ambiguities": [
+        "待确认：券叠加顺序是否以商品券优先。"
+      ],
+      "risk_hints": [
+        "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+        "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+        "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。",
+        "风险：库存并发、优惠回滚、支付超时和跨系统接口契约需要验证。"
+      ],
+      "status": "confirmed",
+      "created_at": "2026-06-12 10:04:55",
+      "confirmed_by": "Product Owner",
+      "source_id": "SRC-783469b3",
+      "source_name": "订单交易核心链路 PRD",
+      "source_url": "https://feishu.example.com/docx/order-core-chain",
+      "file_name": "",
+      "import_mode": "feishu",
+      "integration_status": "linked",
+      "confirmed_at": "2026-06-15 15:26:01"
+    },
+    {
+      "id": "REQ-f982cde3",
+      "project_id": "P-2026-001",
+      "source_type": "feishu",
+      "business_goal": "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括交易。",
+      "rules": [
+        "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括交易。",
+        "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+        "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。",
+        "待确认：券叠加顺序是否以商品券优先。"
+      ],
+      "acceptance_criteria": [
+        "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。",
+        "待确认：券叠加顺序是否以商品券优先。"
+      ],
+      "ambiguities": [
+        "待确认：券叠加顺序是否以商品券优先。"
+      ],
+      "risk_hints": [
+        "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+        "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。",
+        "风险：库存并发、优惠回滚、支付超时和跨系统接口契约需要验证。"
+      ],
+      "status": "confirmed",
+      "created_at": "2026-06-12 09:59:36",
+      "confirmed_by": "Product Owner",
+      "source_id": "SRC-23a83128",
+      "source_name": "订单交易核心链路 PRD",
+      "source_url": "https://feishu.example.com/docx/order-core-chain",
+      "file_name": "",
+      "import_mode": "feishu",
+      "integration_status": "linked",
+      "confirmed_at": "2026-06-15 15:26:04"
+    },
+    {
+      "id": "REQ-0d615908",
+      "project_id": "P-2026-002",
+      "source_type": "feishu-link",
+      "business_goal": "目标：支持全场券与商品券叠加，结算金额必须准确。",
+      "rules": [
+        "目标：支持全场券与商品券叠加，结算金额必须准确。",
+        "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+        "验收：支付前金额必须与结算金额一致。"
+      ],
+      "acceptance_criteria": [
+        "验收：支付前金额必须与结算金额一致。"
+      ],
+      "ambiguities": [],
+      "risk_hints": [
+        "目标：支持全场券与商品券叠加，结算金额必须准确。",
+        "验收：支付前金额必须与结算金额一致。",
+        "风险：库存并发、支付超时、金额回滚需要验证。"
+      ],
+      "status": "draft",
+      "created_at": "2026-06-11 19:14:41",
+      "confirmed_by": "",
+      "source_name": "订单优惠 PRD"
+    },
+    {
+      "id": "REQ-3d5e6edb",
+      "project_id": "P-2026-002",
+      "source_type": "text",
+      "business_goal": "目标：支持全场券与商品券叠加，结算金额必须准确。",
+      "rules": [
+        "目标：支持全场券与商品券叠加，结算金额必须准确。",
+        "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+        "验收：支付前金额必须与结算金额一致。"
+      ],
+      "acceptance_criteria": [
+        "验收：支付前金额必须与结算金额一致。"
+      ],
+      "ambiguities": [],
+      "risk_hints": [
+        "目标：支持全场券与商品券叠加，结算金额必须准确。",
+        "验收：支付前金额必须与结算金额一致。",
+        "风险：库存并发、支付超时、金额回滚需要验证。"
+      ],
+      "status": "draft",
+      "created_at": "2026-06-11 19:14:18",
+      "confirmed_by": "",
+      "source_name": "订单优惠 PRD"
+    },
+    {
+      "id": "REQ-81fabe23",
+      "project_id": "P-2026-001",
+      "source_type": "markdown",
+      "business_goal": "目标：支持全场券与商品券叠加，结算金额必须准确。",
+      "rules": [
+        "目标：支持全场券与商品券叠加，结算金额必须准确。",
+        "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+        "验收：支付前金额必须与结算金额一致。"
+      ],
+      "acceptance_criteria": [
+        "验收：支付前金额必须与结算金额一致。"
+      ],
+      "ambiguities": [],
+      "risk_hints": [
+        "目标：支持全场券与商品券叠加，结算金额必须准确。",
+        "验收：支付前金额必须与结算金额一致。",
+        "风险：库存并发、支付超时、金额回滚需要验证。"
+      ],
+      "status": "confirmed",
+      "created_at": "2026-06-11 19:13:00",
+      "confirmed_by": "Product Owner",
+      "source_name": "订单优惠PRD",
+      "confirmed_at": "2026-06-15 15:26:06"
+    }
+  ],
+  "prs": [
+    {
+      "id": "PR-3065cfe4",
+      "project_id": "P-2026-001",
+      "provider": "manual",
+      "external_id": "",
+      "repository_url": "https://git.example.com/order/order-service",
+      "repository_name": "order-service",
+      "system_name": "订单服务",
+      "branch": "feature/order-coupon-pay-check",
+      "changed_files": 26,
+      "lines_added": 420,
+      "lines_deleted": 86,
+      "title": "feat: 订单优惠与支付前金额一致性校验",
+      "author": "developer",
+      "url": "https://git.example.com/order/order-service/pull/306",
+      "status": "open",
+      "ai_generated_ratio": 72,
+      "gate_status": "blocked",
+      "risk_summary": "Sonar Quality Gate ERROR；AI 生成比例较高，需要加强单测和 Review；变更文件较多，需要拆分风险或补充影响面说明",
+      "created_at": "2026-06-12 10:05:03",
+      "updated_at": "2026-06-12 10:05:03"
+    },
+    {
+      "id": "PR-3ea459b9",
+      "project_id": "P-2026-001",
+      "provider": "manual",
+      "external_id": "",
+      "title": "feat: 优惠叠加计算改造",
+      "author": "developer",
+      "url": "https://git.example.com/order/order-service/pull/128",
+      "status": "open",
+      "ai_generated_ratio": 65,
+      "gate_status": "blocked",
+      "risk_summary": "Sonar Quality Gate 未通过，需修复阻断项。",
+      "created_at": "2026-06-11 19:13:00",
+      "updated_at": "2026-06-11 19:13:00"
+    }
+  ],
+  "sonar_results": [
+    {
+      "id": "SONAR-5e73066c",
+      "pr_id": "PR-3065cfe4",
+      "project_id": "P-2026-001",
+      "projectKey": "demo-project",
+      "repository_name": "order-service",
+      "system_name": "订单服务",
+      "qualityGateStatus": "ERROR",
+      "bugs": 1,
+      "vulnerabilities": 0,
+      "codeSmells": 12,
+      "coverage": 78.5,
+      "duplicatedLinesDensity": 1.1,
+      "blockerIssues": [
+        "Sonar Quality Gate ERROR",
+        "AI 生成比例较高，需要加强单测和 Review",
+        "变更文件较多，需要拆分风险或补充影响面说明"
+      ],
+      "criticalIssues": [],
+      "collected_at": "2026-06-15 15:26:51"
+    },
+    {
+      "id": "SONAR-0f966bfe",
+      "pr_id": "PR-3065cfe4",
+      "project_id": "P-2026-001",
+      "projectKey": "demo-project",
+      "repository_name": "order-service",
+      "system_name": "订单服务",
+      "qualityGateStatus": "ERROR",
+      "bugs": 1,
+      "vulnerabilities": 0,
+      "codeSmells": 12,
+      "coverage": 78.5,
+      "duplicatedLinesDensity": 1.1,
+      "blockerIssues": [
+        "Sonar Quality Gate ERROR",
+        "AI 生成比例较高，需要加强单测和 Review",
+        "变更文件较多，需要拆分风险或补充影响面说明"
+      ],
+      "criticalIssues": [],
+      "collected_at": "2026-06-15 15:26:48"
+    },
+    {
+      "id": "SONAR-cdb330f8",
+      "pr_id": "PR-3065cfe4",
+      "project_id": "P-2026-001",
+      "projectKey": "demo-project",
+      "repository_name": "order-service",
+      "system_name": "订单服务",
+      "qualityGateStatus": "ERROR",
+      "bugs": 1,
+      "vulnerabilities": 0,
+      "codeSmells": 12,
+      "coverage": 78.5,
+      "duplicatedLinesDensity": 1.1,
+      "blockerIssues": [
+        "Sonar Quality Gate ERROR",
+        "AI 生成比例较高，需要加强单测和 Review",
+        "变更文件较多，需要拆分风险或补充影响面说明"
+      ],
+      "criticalIssues": [],
+      "collected_at": "2026-06-12 10:05:16"
+    },
+    {
+      "id": "SONAR-6a1d4bc9",
+      "pr_id": "PR-3ea459b9",
+      "project_id": "P-2026-001",
+      "projectKey": "demo-project",
+      "qualityGateStatus": "ERROR",
+      "bugs": 1,
+      "vulnerabilities": 0,
+      "codeSmells": 12,
+      "coverage": 78.5,
+      "duplicatedLinesDensity": 1.1,
+      "blockerIssues": [],
+      "criticalIssues": [],
+      "collected_at": "2026-06-11 19:13:10"
+    }
+  ],
+  "test_cases": [
+    {
+      "id": "TC-1129bf67",
+      "project_id": "P-1c205b1e",
+      "requirement_id": "REQ-f753b797",
+      "title": "需求规则卡验收覆盖完整性检查",
+      "objective": "确认 PRD 中已确认的业务规则均被测试资产覆盖，避免 AI 生成代码只覆盖 happy path。",
+      "case_type": "uat",
+      "priority": "P0",
+      "risk_level": "L2",
+      "affected_systems": [
+        "交易"
+      ],
+      "precondition": "需求规则卡已完成产品 Owner 初审，项目影响系统和 Owner 已维护。",
+      "test_data": [
+        "已导入 PRD",
+        "需求规则卡",
+        "项目系统清单"
+      ],
+      "steps": [
+        "打开需求规则卡",
+        "逐条核对业务规则和验收标准",
+        "检查每条规则是否映射到候选用例",
+        "记录未覆盖规则和待确认问题"
+      ],
+      "expected_result": "需求规则、验收标准、歧义点和风险提示均有对应测试覆盖或人工确认记录。",
+      "assertions": [
+        "每条规则存在 traceability.requirement_ids",
+        "未确认歧义点进入 review_notes",
+        "L3/L4 风险点不允许无用例覆盖"
+      ],
+      "negative_or_boundary": false,
+      "automation_recommendation": {
+        "recommended": false,
+        "framework": "UAT 平台",
+        "suite": "business-acceptance-review",
+        "reason": "规则覆盖完整性需要人工确认"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-f753b797"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "验收：支付前金额必须与结算金额一致。",
+          "风险：库存并发、支付超时、金额回滚需要验证。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+          "验收：支付前金额必须与结算金额一致。"
+        ]
+      },
+      "review_notes": [
+        "确认是否存在 PRD 未说明但研发实现中新增的业务概念"
+      ],
+      "test_data_refs": [
+        "已导入 PRD",
+        "需求规则卡",
+        "项目系统清单"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-15 15:49:09",
+      "updated_at": "2026-06-15 15:49:09"
+    },
+    {
+      "id": "TC-b81281fa",
+      "project_id": "P-1c205b1e",
+      "requirement_id": "REQ-f753b797",
+      "title": "核心接口正常链路契约回归",
+      "objective": "验证核心接口在标准输入下返回字段、错误码和状态符合契约。",
+      "case_type": "contract",
+      "priority": "P0",
+      "risk_level": "L2",
+      "affected_systems": [
+        "交易"
+      ],
+      "precondition": "测试环境可用，接口契约版本已冻结，基础测试账号和商品数据已准备。",
+      "test_data": [
+        "标准用户账号",
+        "可售商品",
+        "有效请求参数",
+        "接口契约基线"
+      ],
+      "steps": [
+        "构造标准请求",
+        "调用核心接口",
+        "校验响应字段和错误码",
+        "校验服务日志和 Trace"
+      ],
+      "expected_result": "核心接口响应成功，关键字段类型、枚举、金额、状态符合接口契约。",
+      "assertions": [
+        "HTTP 状态码符合预期",
+        "必填字段不为空",
+        "枚举值兼容旧版本",
+        "Trace 中无下游异常"
+      ],
+      "negative_or_boundary": false,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "接口自动化框架",
+        "suite": "contract-regression",
+        "reason": "契约回归适合稳定自动化"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-f753b797"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "验收：支付前金额必须与结算金额一致。",
+          "风险：库存并发、支付超时、金额回滚需要验证。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+          "验收：支付前金额必须与结算金额一致。"
+        ]
+      },
+      "review_notes": [
+        "补充具体接口路径和契约版本"
+      ],
+      "test_data_refs": [
+        "标准用户账号",
+        "可售商品",
+        "有效请求参数",
+        "接口契约基线"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-15 15:49:09",
+      "updated_at": "2026-06-15 15:49:09"
+    },
+    {
+      "id": "TC-a65ec4fb",
+      "project_id": "P-1c205b1e",
+      "requirement_id": "REQ-f753b797",
+      "title": "异常参数与幂等重复提交处理",
+      "objective": "验证异常输入、重复提交和超时重试不会造成脏数据或重复业务动作。",
+      "case_type": "api",
+      "priority": "P1",
+      "risk_level": "L2",
+      "affected_systems": [
+        "交易"
+      ],
+      "precondition": "接口可调用，幂等键、请求流水号和日志检索能力可用。",
+      "test_data": [
+        "缺失必填字段请求",
+        "非法枚举请求",
+        "重复 request_id",
+        "超时重试请求"
+      ],
+      "steps": [
+        "发送缺失必填字段请求",
+        "发送非法枚举请求",
+        "使用相同 request_id 重复提交",
+        "查询业务数据和日志"
+      ],
+      "expected_result": "系统返回明确错误码或幂等结果，不产生重复订单、重复扣减或错误状态。",
+      "assertions": [
+        "错误码明确且可被调用方处理",
+        "重复请求只产生一次业务结果",
+        "无重复扣减或重复状态流转",
+        "审计日志记录幂等命中"
+      ],
+      "negative_or_boundary": true,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "接口自动化框架",
+        "suite": "negative-idempotent-regression",
+        "reason": "负向和幂等场景应长期回归"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-f753b797"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "验收：支付前金额必须与结算金额一致。",
+          "风险：库存并发、支付超时、金额回滚需要验证。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+          "验收：支付前金额必须与结算金额一致。"
+        ]
+      },
+      "review_notes": [
+        "确认幂等键字段和重复提交判定窗口"
+      ],
+      "test_data_refs": [
+        "缺失必填字段请求",
+        "非法枚举请求",
+        "重复 request_id",
+        "超时重试请求"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 86,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-15 15:49:09",
+      "updated_at": "2026-06-15 15:49:09"
+    },
+    {
+      "id": "TC-0a8b0643",
+      "project_id": "P-1c205b1e",
+      "requirement_id": "REQ-f753b797",
+      "title": "失败后状态与数据回滚验证",
+      "objective": "验证流程中任一核心依赖失败后，订单、库存、优惠、支付相关状态可回滚或进入可补偿状态。",
+      "case_type": "e2e",
+      "priority": "P1",
+      "risk_level": "L2",
+      "affected_systems": [
+        "交易"
+      ],
+      "precondition": "可模拟下游失败，具备数据库、消息和日志观测权限。",
+      "test_data": [
+        "正常订单",
+        "可售库存",
+        "可用优惠",
+        "下游失败注入开关"
+      ],
+      "steps": [
+        "创建订单并进入核心流程",
+        "注入下游失败",
+        "观察订单状态和补偿任务",
+        "恢复依赖后验证最终状态"
+      ],
+      "expected_result": "失败后业务状态一致，补偿任务可追踪，不允许进入不可恢复中间态。",
+      "assertions": [
+        "订单未进入错误终态",
+        "库存和优惠占用被释放或可补偿",
+        "补偿任务有唯一流水",
+        "告警和日志可定位失败原因"
+      ],
+      "negative_or_boundary": true,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "E2E 自动化框架",
+        "suite": "rollback-compensation-regression",
+        "reason": "L3/L4 必须覆盖回滚补偿"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-f753b797"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "验收：支付前金额必须与结算金额一致。",
+          "风险：库存并发、支付超时、金额回滚需要验证。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+          "验收：支付前金额必须与结算金额一致。"
+        ]
+      },
+      "review_notes": [
+        "确认失败注入方式和可观测数据表"
+      ],
+      "test_data_refs": [
+        "正常订单",
+        "可售库存",
+        "可用优惠",
+        "下游失败注入开关"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 86,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-15 15:49:09",
+      "updated_at": "2026-06-15 15:49:09"
+    },
+    {
+      "id": "TC-f29d134c",
+      "project_id": "P-1c205b1e",
+      "requirement_id": "REQ-f753b797",
+      "title": "全场券与商品券叠加后应付金额计算正确",
+      "objective": "验证当前真实业务中的全场券和商品券叠加规则，确保结算金额准确。",
+      "case_type": "api",
+      "priority": "P0",
+      "risk_level": "L2",
+      "affected_systems": [
+        "优惠服务",
+        "订单服务",
+        "支付校验服务"
+      ],
+      "precondition": "商品 SKU-10086 支持商品券减 15，订单满足全场券满 199 减 20。",
+      "test_data": [
+        "SKU-10086 商品金额 219",
+        "商品券减 15",
+        "全场券满 199 减 20",
+        "普通会员测试账号"
+      ],
+      "steps": [
+        "创建包含 SKU-10086 的订单",
+        "选择商品券",
+        "选择全场券",
+        "提交结算",
+        "查询结算结果和优惠明细"
+      ],
+      "expected_result": "应付金额等于商品金额减商品券优惠减全场券优惠，优惠明细和支付前金额一致。",
+      "assertions": [
+        "payable_amount = 219 - 15 - 20 = 184",
+        "优惠明细包含商品券和全场券",
+        "支付前金额校验通过",
+        "不存在平台券或店铺券字段"
+      ],
+      "negative_or_boundary": false,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "接口自动化框架",
+        "suite": "order-core-risk-regression",
+        "reason": "核心金额规则必须自动化回归"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-f753b797"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "验收：支付前金额必须与结算金额一致。",
+          "风险：库存并发、支付超时、金额回滚需要验证。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+          "验收：支付前金额必须与结算金额一致。"
+        ]
+      },
+      "review_notes": [
+        "确认商品券和全场券叠加顺序是否已由产品确认"
+      ],
+      "test_data_refs": [
+        "SKU-10086 商品金额 219",
+        "商品券减 15",
+        "全场券满 199 减 20",
+        "普通会员测试账号"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-15 15:49:09",
+      "updated_at": "2026-06-15 15:49:09"
+    },
+    {
+      "id": "TC-4b9a6093",
+      "project_id": "P-1c205b1e",
+      "requirement_id": "REQ-f753b797",
+      "title": "支付前金额与结算金额不一致时阻断支付",
+      "objective": "验证支付前金额一致性门禁，防止 AI 修改结算或支付代码后产生资金风险。",
+      "case_type": "e2e",
+      "priority": "P0",
+      "risk_level": "L2",
+      "affected_systems": [
+        "订单服务",
+        "支付校验服务"
+      ],
+      "precondition": "订单已完成结算，应付金额为 184，可模拟支付请求金额。",
+      "test_data": [
+        "已结算订单 payable_amount=184",
+        "支付请求 amount=185",
+        "支付前校验接口"
+      ],
+      "steps": [
+        "创建订单并完成优惠结算",
+        "发起支付前校验",
+        "传入不一致支付金额 185",
+        "查询订单状态和支付审计日志"
+      ],
+      "expected_result": "支付被阻断，订单状态不进入支付中，返回明确金额不一致错误。",
+      "assertions": [
+        "支付校验接口返回金额不一致错误码",
+        "订单状态不进入支付中",
+        "支付网关未创建支付单",
+        "审计日志记录结算金额和请求金额"
+      ],
+      "negative_or_boundary": true,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "E2E 自动化框架",
+        "suite": "payment-guard-regression",
+        "reason": "资金风险 P0 场景必须自动化"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-f753b797"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "验收：支付前金额必须与结算金额一致。",
+          "风险：库存并发、支付超时、金额回滚需要验证。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+          "验收：支付前金额必须与结算金额一致。"
+        ]
+      },
+      "review_notes": [
+        "确认金额精度、四舍五入和币种字段断言"
+      ],
+      "test_data_refs": [
+        "已结算订单 payable_amount=184",
+        "支付请求 amount=185",
+        "支付前校验接口"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-15 15:49:09",
+      "updated_at": "2026-06-15 15:49:09"
+    },
+    {
+      "id": "TC-39172ee4",
+      "project_id": "P-1c205b1e",
+      "requirement_id": "REQ-f753b797",
+      "title": "优惠服务超时时订单不得进入支付",
+      "objective": "验证优惠依赖超时或不可用时，订单不会绕过优惠计算直接进入支付。",
+      "case_type": "chaos",
+      "priority": "P0",
+      "risk_level": "L2",
+      "affected_systems": [
+        "订单服务",
+        "优惠服务",
+        "支付校验服务"
+      ],
+      "precondition": "可通过混沌平台注入优惠服务超时或不可用故障。",
+      "test_data": [
+        "满足全场券和商品券条件的订单",
+        "优惠服务超时注入规则",
+        "Trace 查询条件"
+      ],
+      "steps": [
+        "注入优惠服务超时",
+        "提交订单结算",
+        "尝试发起支付",
+        "查询订单状态、日志、Trace 和告警"
+      ],
+      "expected_result": "结算失败或进入可重试状态，不允许支付，告警和 Trace 可定位优惠服务超时。",
+      "assertions": [
+        "订单未进入待支付或支付中",
+        "返回明确的优惠计算失败或可重试错误",
+        "触发优惠服务超时告警",
+        "Trace 标记下游超时"
+      ],
+      "negative_or_boundary": true,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "混沌工程平台",
+        "suite": "coupon-timeout-chaos",
+        "reason": "L3 核心交易链路需要混沌验证"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-f753b797"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "验收：支付前金额必须与结算金额一致。",
+          "风险：库存并发、支付超时、金额回滚需要验证。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+          "验收：支付前金额必须与结算金额一致。"
+        ]
+      },
+      "review_notes": [
+        "确认故障注入窗口和恢复后补偿行为"
+      ],
+      "test_data_refs": [
+        "满足全场券和商品券条件的订单",
+        "优惠服务超时注入规则",
+        "Trace 查询条件"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-15 15:49:09",
+      "updated_at": "2026-06-15 15:49:09"
+    },
+    {
+      "id": "TC-31707755",
+      "project_id": "P-1c205b1e",
+      "requirement_id": "REQ-f753b797",
+      "title": "库存并发扣减不超卖",
+      "objective": "验证优惠叠加场景下并发下单不会绕过库存扣减保护。",
+      "case_type": "performance",
+      "priority": "P0",
+      "risk_level": "L2",
+      "affected_systems": [
+        "订单服务",
+        "库存服务",
+        "优惠服务"
+      ],
+      "precondition": "SKU-10086 可售库存固定为 10，具备并发压测和库存查询能力。",
+      "test_data": [
+        "SKU-10086 库存 10",
+        "并发用户 50",
+        "全场券和商品券可用"
+      ],
+      "steps": [
+        "初始化库存为 10",
+        "构造 50 个并发下单请求",
+        "执行并发请求",
+        "查询订单成功数、库存余量和失败原因"
+      ],
+      "expected_result": "库存扣减不超过可售库存，超出请求返回库存不足或排队失败。",
+      "assertions": [
+        "成功订单数不超过 10",
+        "库存余量不为负数",
+        "失败订单返回库存不足或明确失败原因",
+        "无重复扣减消息"
+      ],
+      "negative_or_boundary": true,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "性能测试平台",
+        "suite": "inventory-concurrency-baseline",
+        "reason": "库存并发属于核心容量和一致性风险"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-f753b797"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "验收：支付前金额必须与结算金额一致。",
+          "风险：库存并发、支付超时、金额回滚需要验证。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+          "验收：支付前金额必须与结算金额一致。"
+        ]
+      },
+      "review_notes": [
+        "确认压测环境隔离和库存初始化方式"
+      ],
+      "test_data_refs": [
+        "SKU-10086 库存 10",
+        "并发用户 50",
+        "全场券和商品券可用"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-15 15:49:09",
+      "updated_at": "2026-06-15 15:49:09"
+    },
+    {
+      "id": "TC-1b21c107",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-5b24a4b8",
+      "title": "需求规则卡验收覆盖完整性检查",
+      "objective": "确认 PRD 中已确认的业务规则均被测试资产覆盖，避免 AI 生成代码只覆盖 happy path。",
+      "case_type": "uat",
+      "priority": "P0",
+      "risk_level": "L3",
+      "affected_systems": [
+        "订单服务",
+        "优惠服务",
+        "库存服务",
+        "支付校验服务"
+      ],
+      "precondition": "需求规则卡已完成产品 Owner 初审，项目影响系统和 Owner 已维护。",
+      "test_data": [
+        "已导入 PRD",
+        "需求规则卡",
+        "项目系统清单"
+      ],
+      "steps": [
+        "打开需求规则卡",
+        "逐条核对业务规则和验收标准",
+        "检查每条规则是否映射到候选用例",
+        "记录未覆盖规则和待确认问题"
+      ],
+      "expected_result": "需求规则、验收标准、歧义点和风险提示均有对应测试覆盖或人工确认记录。",
+      "assertions": [
+        "每条规则存在 traceability.requirement_ids",
+        "未确认歧义点进入 review_notes",
+        "L3/L4 风险点不允许无用例覆盖"
+      ],
+      "negative_or_boundary": false,
+      "automation_recommendation": {
+        "recommended": false,
+        "framework": "UAT 平台",
+        "suite": "business-acceptance-review",
+        "reason": "规则覆盖完整性需要人工确认"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-5b24a4b8"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "验收：支付前金额必须与结算金额一致。",
+          "风险：库存并发、支付超时、金额回滚需要验证。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+          "验收：支付前金额必须与结算金额一致。"
+        ]
+      },
+      "review_notes": [
+        "确认是否存在 PRD 未说明但研发实现中新增的业务概念"
+      ],
+      "test_data_refs": [
+        "已导入 PRD",
+        "需求规则卡",
+        "项目系统清单"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-15 15:26:59",
+      "updated_at": "2026-06-15 15:26:59"
+    },
+    {
+      "id": "TC-03b87771",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-5b24a4b8",
+      "title": "核心接口正常链路契约回归",
+      "objective": "验证核心接口在标准输入下返回字段、错误码和状态符合契约。",
+      "case_type": "contract",
+      "priority": "P0",
+      "risk_level": "L3",
+      "affected_systems": [
+        "订单服务",
+        "优惠服务",
+        "库存服务",
+        "支付校验服务"
+      ],
+      "precondition": "测试环境可用，接口契约版本已冻结，基础测试账号和商品数据已准备。",
+      "test_data": [
+        "标准用户账号",
+        "可售商品",
+        "有效请求参数",
+        "接口契约基线"
+      ],
+      "steps": [
+        "构造标准请求",
+        "调用核心接口",
+        "校验响应字段和错误码",
+        "校验服务日志和 Trace"
+      ],
+      "expected_result": "核心接口响应成功，关键字段类型、枚举、金额、状态符合接口契约。",
+      "assertions": [
+        "HTTP 状态码符合预期",
+        "必填字段不为空",
+        "枚举值兼容旧版本",
+        "Trace 中无下游异常"
+      ],
+      "negative_or_boundary": false,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "接口自动化框架",
+        "suite": "contract-regression",
+        "reason": "契约回归适合稳定自动化"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-5b24a4b8"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "验收：支付前金额必须与结算金额一致。",
+          "风险：库存并发、支付超时、金额回滚需要验证。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+          "验收：支付前金额必须与结算金额一致。"
+        ]
+      },
+      "review_notes": [
+        "补充具体接口路径和契约版本"
+      ],
+      "test_data_refs": [
+        "标准用户账号",
+        "可售商品",
+        "有效请求参数",
+        "接口契约基线"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-15 15:26:59",
+      "updated_at": "2026-06-15 15:26:59"
+    },
+    {
+      "id": "TC-0a3c6d58",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-5b24a4b8",
+      "title": "异常参数与幂等重复提交处理",
+      "objective": "验证异常输入、重复提交和超时重试不会造成脏数据或重复业务动作。",
+      "case_type": "api",
+      "priority": "P1",
+      "risk_level": "L3",
+      "affected_systems": [
+        "订单服务",
+        "优惠服务",
+        "库存服务",
+        "支付校验服务"
+      ],
+      "precondition": "接口可调用，幂等键、请求流水号和日志检索能力可用。",
+      "test_data": [
+        "缺失必填字段请求",
+        "非法枚举请求",
+        "重复 request_id",
+        "超时重试请求"
+      ],
+      "steps": [
+        "发送缺失必填字段请求",
+        "发送非法枚举请求",
+        "使用相同 request_id 重复提交",
+        "查询业务数据和日志"
+      ],
+      "expected_result": "系统返回明确错误码或幂等结果，不产生重复订单、重复扣减或错误状态。",
+      "assertions": [
+        "错误码明确且可被调用方处理",
+        "重复请求只产生一次业务结果",
+        "无重复扣减或重复状态流转",
+        "审计日志记录幂等命中"
+      ],
+      "negative_or_boundary": true,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "接口自动化框架",
+        "suite": "negative-idempotent-regression",
+        "reason": "负向和幂等场景应长期回归"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-5b24a4b8"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "验收：支付前金额必须与结算金额一致。",
+          "风险：库存并发、支付超时、金额回滚需要验证。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+          "验收：支付前金额必须与结算金额一致。"
+        ]
+      },
+      "review_notes": [
+        "确认幂等键字段和重复提交判定窗口"
+      ],
+      "test_data_refs": [
+        "缺失必填字段请求",
+        "非法枚举请求",
+        "重复 request_id",
+        "超时重试请求"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 86,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-15 15:26:59",
+      "updated_at": "2026-06-15 15:26:59"
+    },
+    {
+      "id": "TC-ab2dc4a5",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-5b24a4b8",
+      "title": "失败后状态与数据回滚验证",
+      "objective": "验证流程中任一核心依赖失败后，订单、库存、优惠、支付相关状态可回滚或进入可补偿状态。",
+      "case_type": "e2e",
+      "priority": "P1",
+      "risk_level": "L3",
+      "affected_systems": [
+        "订单服务",
+        "优惠服务",
+        "库存服务",
+        "支付校验服务"
+      ],
+      "precondition": "可模拟下游失败，具备数据库、消息和日志观测权限。",
+      "test_data": [
+        "正常订单",
+        "可售库存",
+        "可用优惠",
+        "下游失败注入开关"
+      ],
+      "steps": [
+        "创建订单并进入核心流程",
+        "注入下游失败",
+        "观察订单状态和补偿任务",
+        "恢复依赖后验证最终状态"
+      ],
+      "expected_result": "失败后业务状态一致，补偿任务可追踪，不允许进入不可恢复中间态。",
+      "assertions": [
+        "订单未进入错误终态",
+        "库存和优惠占用被释放或可补偿",
+        "补偿任务有唯一流水",
+        "告警和日志可定位失败原因"
+      ],
+      "negative_or_boundary": true,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "E2E 自动化框架",
+        "suite": "rollback-compensation-regression",
+        "reason": "L3/L4 必须覆盖回滚补偿"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-5b24a4b8"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "验收：支付前金额必须与结算金额一致。",
+          "风险：库存并发、支付超时、金额回滚需要验证。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+          "验收：支付前金额必须与结算金额一致。"
+        ]
+      },
+      "review_notes": [
+        "确认失败注入方式和可观测数据表"
+      ],
+      "test_data_refs": [
+        "正常订单",
+        "可售库存",
+        "可用优惠",
+        "下游失败注入开关"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 86,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-15 15:26:59",
+      "updated_at": "2026-06-15 15:26:59"
+    },
+    {
+      "id": "TC-3ab52939",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-5b24a4b8",
+      "title": "全场券与商品券叠加后应付金额计算正确",
+      "objective": "验证当前真实业务中的全场券和商品券叠加规则，确保结算金额准确。",
+      "case_type": "api",
+      "priority": "P0",
+      "risk_level": "L3",
+      "affected_systems": [
+        "优惠服务",
+        "订单服务",
+        "支付校验服务"
+      ],
+      "precondition": "商品 SKU-10086 支持商品券减 15，订单满足全场券满 199 减 20。",
+      "test_data": [
+        "SKU-10086 商品金额 219",
+        "商品券减 15",
+        "全场券满 199 减 20",
+        "普通会员测试账号"
+      ],
+      "steps": [
+        "创建包含 SKU-10086 的订单",
+        "选择商品券",
+        "选择全场券",
+        "提交结算",
+        "查询结算结果和优惠明细"
+      ],
+      "expected_result": "应付金额等于商品金额减商品券优惠减全场券优惠，优惠明细和支付前金额一致。",
+      "assertions": [
+        "payable_amount = 219 - 15 - 20 = 184",
+        "优惠明细包含商品券和全场券",
+        "支付前金额校验通过",
+        "不存在平台券或店铺券字段"
+      ],
+      "negative_or_boundary": false,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "接口自动化框架",
+        "suite": "order-core-risk-regression",
+        "reason": "核心金额规则必须自动化回归"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-5b24a4b8"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "验收：支付前金额必须与结算金额一致。",
+          "风险：库存并发、支付超时、金额回滚需要验证。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+          "验收：支付前金额必须与结算金额一致。"
+        ]
+      },
+      "review_notes": [
+        "确认商品券和全场券叠加顺序是否已由产品确认"
+      ],
+      "test_data_refs": [
+        "SKU-10086 商品金额 219",
+        "商品券减 15",
+        "全场券满 199 减 20",
+        "普通会员测试账号"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-15 15:26:59",
+      "updated_at": "2026-06-15 15:26:59"
+    },
+    {
+      "id": "TC-91688273",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-5b24a4b8",
+      "title": "支付前金额与结算金额不一致时阻断支付",
+      "objective": "验证支付前金额一致性门禁，防止 AI 修改结算或支付代码后产生资金风险。",
+      "case_type": "e2e",
+      "priority": "P0",
+      "risk_level": "L3",
+      "affected_systems": [
+        "订单服务",
+        "支付校验服务"
+      ],
+      "precondition": "订单已完成结算，应付金额为 184，可模拟支付请求金额。",
+      "test_data": [
+        "已结算订单 payable_amount=184",
+        "支付请求 amount=185",
+        "支付前校验接口"
+      ],
+      "steps": [
+        "创建订单并完成优惠结算",
+        "发起支付前校验",
+        "传入不一致支付金额 185",
+        "查询订单状态和支付审计日志"
+      ],
+      "expected_result": "支付被阻断，订单状态不进入支付中，返回明确金额不一致错误。",
+      "assertions": [
+        "支付校验接口返回金额不一致错误码",
+        "订单状态不进入支付中",
+        "支付网关未创建支付单",
+        "审计日志记录结算金额和请求金额"
+      ],
+      "negative_or_boundary": true,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "E2E 自动化框架",
+        "suite": "payment-guard-regression",
+        "reason": "资金风险 P0 场景必须自动化"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-5b24a4b8"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "验收：支付前金额必须与结算金额一致。",
+          "风险：库存并发、支付超时、金额回滚需要验证。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+          "验收：支付前金额必须与结算金额一致。"
+        ]
+      },
+      "review_notes": [
+        "确认金额精度、四舍五入和币种字段断言"
+      ],
+      "test_data_refs": [
+        "已结算订单 payable_amount=184",
+        "支付请求 amount=185",
+        "支付前校验接口"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-15 15:26:59",
+      "updated_at": "2026-06-15 15:26:59"
+    },
+    {
+      "id": "TC-7f682d11",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-5b24a4b8",
+      "title": "优惠服务超时时订单不得进入支付",
+      "objective": "验证优惠依赖超时或不可用时，订单不会绕过优惠计算直接进入支付。",
+      "case_type": "chaos",
+      "priority": "P0",
+      "risk_level": "L3",
+      "affected_systems": [
+        "订单服务",
+        "优惠服务",
+        "支付校验服务"
+      ],
+      "precondition": "可通过混沌平台注入优惠服务超时或不可用故障。",
+      "test_data": [
+        "满足全场券和商品券条件的订单",
+        "优惠服务超时注入规则",
+        "Trace 查询条件"
+      ],
+      "steps": [
+        "注入优惠服务超时",
+        "提交订单结算",
+        "尝试发起支付",
+        "查询订单状态、日志、Trace 和告警"
+      ],
+      "expected_result": "结算失败或进入可重试状态，不允许支付，告警和 Trace 可定位优惠服务超时。",
+      "assertions": [
+        "订单未进入待支付或支付中",
+        "返回明确的优惠计算失败或可重试错误",
+        "触发优惠服务超时告警",
+        "Trace 标记下游超时"
+      ],
+      "negative_or_boundary": true,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "混沌工程平台",
+        "suite": "coupon-timeout-chaos",
+        "reason": "L3 核心交易链路需要混沌验证"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-5b24a4b8"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "验收：支付前金额必须与结算金额一致。",
+          "风险：库存并发、支付超时、金额回滚需要验证。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+          "验收：支付前金额必须与结算金额一致。"
+        ]
+      },
+      "review_notes": [
+        "确认故障注入窗口和恢复后补偿行为"
+      ],
+      "test_data_refs": [
+        "满足全场券和商品券条件的订单",
+        "优惠服务超时注入规则",
+        "Trace 查询条件"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-15 15:26:59",
+      "updated_at": "2026-06-15 15:26:59"
+    },
+    {
+      "id": "TC-99de389a",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-5b24a4b8",
+      "title": "库存并发扣减不超卖",
+      "objective": "验证优惠叠加场景下并发下单不会绕过库存扣减保护。",
+      "case_type": "performance",
+      "priority": "P0",
+      "risk_level": "L3",
+      "affected_systems": [
+        "订单服务",
+        "库存服务",
+        "优惠服务"
+      ],
+      "precondition": "SKU-10086 可售库存固定为 10，具备并发压测和库存查询能力。",
+      "test_data": [
+        "SKU-10086 库存 10",
+        "并发用户 50",
+        "全场券和商品券可用"
+      ],
+      "steps": [
+        "初始化库存为 10",
+        "构造 50 个并发下单请求",
+        "执行并发请求",
+        "查询订单成功数、库存余量和失败原因"
+      ],
+      "expected_result": "库存扣减不超过可售库存，超出请求返回库存不足或排队失败。",
+      "assertions": [
+        "成功订单数不超过 10",
+        "库存余量不为负数",
+        "失败订单返回库存不足或明确失败原因",
+        "无重复扣减消息"
+      ],
+      "negative_or_boundary": true,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "性能测试平台",
+        "suite": "inventory-concurrency-baseline",
+        "reason": "库存并发属于核心容量和一致性风险"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-5b24a4b8"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "验收：支付前金额必须与结算金额一致。",
+          "风险：库存并发、支付超时、金额回滚需要验证。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：支持全场券与商品券叠加，结算金额必须准确。",
+          "规则：商品券 SKU-10086 减 15，全场券满 199 减 20。",
+          "验收：支付前金额必须与结算金额一致。"
+        ]
+      },
+      "review_notes": [
+        "确认压测环境隔离和库存初始化方式"
+      ],
+      "test_data_refs": [
+        "SKU-10086 库存 10",
+        "并发用户 50",
+        "全场券和商品券可用"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-15 15:26:59",
+      "updated_at": "2026-06-15 15:26:59"
+    },
+    {
+      "id": "TC-f1412a8e",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-171a8593",
+      "title": "需求规则卡验收覆盖完整性检查",
+      "objective": "确认 PRD 中已确认的业务规则均被测试资产覆盖，避免 AI 生成代码只覆盖 happy path。",
+      "case_type": "uat",
+      "priority": "P0",
+      "risk_level": "L3",
+      "affected_systems": [
+        "订单服务",
+        "优惠服务",
+        "库存服务",
+        "支付校验服务"
+      ],
+      "precondition": "需求规则卡已完成产品 Owner 初审，项目影响系统和 Owner 已维护。",
+      "test_data": [
+        "已导入 PRD",
+        "需求规则卡",
+        "项目系统清单"
+      ],
+      "steps": [
+        "打开需求规则卡",
+        "逐条核对业务规则和验收标准",
+        "检查每条规则是否映射到候选用例",
+        "记录未覆盖规则和待确认问题"
+      ],
+      "expected_result": "需求规则、验收标准、歧义点和风险提示均有对应测试覆盖或人工确认记录。",
+      "assertions": [
+        "每条规则存在 traceability.requirement_ids",
+        "未确认歧义点进入 review_notes",
+        "L3/L4 风险点不允许无用例覆盖"
+      ],
+      "negative_or_boundary": false,
+      "automation_recommendation": {
+        "recommended": false,
+        "framework": "UAT 平台",
+        "suite": "business-acceptance-review",
+        "reason": "规则覆盖完整性需要人工确认"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-171a8593"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+          "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+          "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+          "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+          "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。"
+        ]
+      },
+      "review_notes": [
+        "确认是否存在 PRD 未说明但研发实现中新增的业务概念"
+      ],
+      "test_data_refs": [
+        "已导入 PRD",
+        "需求规则卡",
+        "项目系统清单"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-12 11:28:40",
+      "updated_at": "2026-06-12 11:28:40"
+    },
+    {
+      "id": "TC-df4b1003",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-171a8593",
+      "title": "核心接口正常链路契约回归",
+      "objective": "验证核心接口在标准输入下返回字段、错误码和状态符合契约。",
+      "case_type": "contract",
+      "priority": "P0",
+      "risk_level": "L3",
+      "affected_systems": [
+        "订单服务",
+        "优惠服务",
+        "库存服务",
+        "支付校验服务"
+      ],
+      "precondition": "测试环境可用，接口契约版本已冻结，基础测试账号和商品数据已准备。",
+      "test_data": [
+        "标准用户账号",
+        "可售商品",
+        "有效请求参数",
+        "接口契约基线"
+      ],
+      "steps": [
+        "构造标准请求",
+        "调用核心接口",
+        "校验响应字段和错误码",
+        "校验服务日志和 Trace"
+      ],
+      "expected_result": "核心接口响应成功，关键字段类型、枚举、金额、状态符合接口契约。",
+      "assertions": [
+        "HTTP 状态码符合预期",
+        "必填字段不为空",
+        "枚举值兼容旧版本",
+        "Trace 中无下游异常"
+      ],
+      "negative_or_boundary": false,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "接口自动化框架",
+        "suite": "contract-regression",
+        "reason": "契约回归适合稳定自动化"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-171a8593"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+          "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+          "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+          "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+          "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。"
+        ]
+      },
+      "review_notes": [
+        "补充具体接口路径和契约版本"
+      ],
+      "test_data_refs": [
+        "标准用户账号",
+        "可售商品",
+        "有效请求参数",
+        "接口契约基线"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-12 11:28:40",
+      "updated_at": "2026-06-12 11:28:40"
+    },
+    {
+      "id": "TC-5c553585",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-171a8593",
+      "title": "异常参数与幂等重复提交处理",
+      "objective": "验证异常输入、重复提交和超时重试不会造成脏数据或重复业务动作。",
+      "case_type": "api",
+      "priority": "P1",
+      "risk_level": "L3",
+      "affected_systems": [
+        "订单服务",
+        "优惠服务",
+        "库存服务",
+        "支付校验服务"
+      ],
+      "precondition": "接口可调用，幂等键、请求流水号和日志检索能力可用。",
+      "test_data": [
+        "缺失必填字段请求",
+        "非法枚举请求",
+        "重复 request_id",
+        "超时重试请求"
+      ],
+      "steps": [
+        "发送缺失必填字段请求",
+        "发送非法枚举请求",
+        "使用相同 request_id 重复提交",
+        "查询业务数据和日志"
+      ],
+      "expected_result": "系统返回明确错误码或幂等结果，不产生重复订单、重复扣减或错误状态。",
+      "assertions": [
+        "错误码明确且可被调用方处理",
+        "重复请求只产生一次业务结果",
+        "无重复扣减或重复状态流转",
+        "审计日志记录幂等命中"
+      ],
+      "negative_or_boundary": true,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "接口自动化框架",
+        "suite": "negative-idempotent-regression",
+        "reason": "负向和幂等场景应长期回归"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-171a8593"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+          "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+          "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+          "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+          "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。"
+        ]
+      },
+      "review_notes": [
+        "确认幂等键字段和重复提交判定窗口"
+      ],
+      "test_data_refs": [
+        "缺失必填字段请求",
+        "非法枚举请求",
+        "重复 request_id",
+        "超时重试请求"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 86,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-12 11:28:40",
+      "updated_at": "2026-06-12 11:28:40"
+    },
+    {
+      "id": "TC-1ad867d1",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-171a8593",
+      "title": "失败后状态与数据回滚验证",
+      "objective": "验证流程中任一核心依赖失败后，订单、库存、优惠、支付相关状态可回滚或进入可补偿状态。",
+      "case_type": "e2e",
+      "priority": "P1",
+      "risk_level": "L3",
+      "affected_systems": [
+        "订单服务",
+        "优惠服务",
+        "库存服务",
+        "支付校验服务"
+      ],
+      "precondition": "可模拟下游失败，具备数据库、消息和日志观测权限。",
+      "test_data": [
+        "正常订单",
+        "可售库存",
+        "可用优惠",
+        "下游失败注入开关"
+      ],
+      "steps": [
+        "创建订单并进入核心流程",
+        "注入下游失败",
+        "观察订单状态和补偿任务",
+        "恢复依赖后验证最终状态"
+      ],
+      "expected_result": "失败后业务状态一致，补偿任务可追踪，不允许进入不可恢复中间态。",
+      "assertions": [
+        "订单未进入错误终态",
+        "库存和优惠占用被释放或可补偿",
+        "补偿任务有唯一流水",
+        "告警和日志可定位失败原因"
+      ],
+      "negative_or_boundary": true,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "E2E 自动化框架",
+        "suite": "rollback-compensation-regression",
+        "reason": "L3/L4 必须覆盖回滚补偿"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-171a8593"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+          "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+          "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+          "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+          "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。"
+        ]
+      },
+      "review_notes": [
+        "确认失败注入方式和可观测数据表"
+      ],
+      "test_data_refs": [
+        "正常订单",
+        "可售库存",
+        "可用优惠",
+        "下游失败注入开关"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 86,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-12 11:28:40",
+      "updated_at": "2026-06-12 11:28:40"
+    },
+    {
+      "id": "TC-24366191",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-171a8593",
+      "title": "全场券与商品券叠加后应付金额计算正确",
+      "objective": "验证当前真实业务中的全场券和商品券叠加规则，确保结算金额准确。",
+      "case_type": "api",
+      "priority": "P0",
+      "risk_level": "L3",
+      "affected_systems": [
+        "优惠服务",
+        "订单服务",
+        "支付校验服务"
+      ],
+      "precondition": "商品 SKU-10086 支持商品券减 15，订单满足全场券满 199 减 20。",
+      "test_data": [
+        "SKU-10086 商品金额 219",
+        "商品券减 15",
+        "全场券满 199 减 20",
+        "普通会员测试账号"
+      ],
+      "steps": [
+        "创建包含 SKU-10086 的订单",
+        "选择商品券",
+        "选择全场券",
+        "提交结算",
+        "查询结算结果和优惠明细"
+      ],
+      "expected_result": "应付金额等于商品金额减商品券优惠减全场券优惠，优惠明细和支付前金额一致。",
+      "assertions": [
+        "payable_amount = 219 - 15 - 20 = 184",
+        "优惠明细包含商品券和全场券",
+        "支付前金额校验通过",
+        "不存在平台券或店铺券字段"
+      ],
+      "negative_or_boundary": false,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "接口自动化框架",
+        "suite": "order-core-risk-regression",
+        "reason": "核心金额规则必须自动化回归"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-171a8593"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+          "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+          "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+          "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+          "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。"
+        ]
+      },
+      "review_notes": [
+        "确认商品券和全场券叠加顺序是否已由产品确认"
+      ],
+      "test_data_refs": [
+        "SKU-10086 商品金额 219",
+        "商品券减 15",
+        "全场券满 199 减 20",
+        "普通会员测试账号"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-12 11:28:40",
+      "updated_at": "2026-06-12 11:28:40"
+    },
+    {
+      "id": "TC-faff95c0",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-171a8593",
+      "title": "支付前金额与结算金额不一致时阻断支付",
+      "objective": "验证支付前金额一致性门禁，防止 AI 修改结算或支付代码后产生资金风险。",
+      "case_type": "e2e",
+      "priority": "P0",
+      "risk_level": "L3",
+      "affected_systems": [
+        "订单服务",
+        "支付校验服务"
+      ],
+      "precondition": "订单已完成结算，应付金额为 184，可模拟支付请求金额。",
+      "test_data": [
+        "已结算订单 payable_amount=184",
+        "支付请求 amount=185",
+        "支付前校验接口"
+      ],
+      "steps": [
+        "创建订单并完成优惠结算",
+        "发起支付前校验",
+        "传入不一致支付金额 185",
+        "查询订单状态和支付审计日志"
+      ],
+      "expected_result": "支付被阻断，订单状态不进入支付中，返回明确金额不一致错误。",
+      "assertions": [
+        "支付校验接口返回金额不一致错误码",
+        "订单状态不进入支付中",
+        "支付网关未创建支付单",
+        "审计日志记录结算金额和请求金额"
+      ],
+      "negative_or_boundary": true,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "E2E 自动化框架",
+        "suite": "payment-guard-regression",
+        "reason": "资金风险 P0 场景必须自动化"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-171a8593"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+          "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+          "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+          "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+          "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。"
+        ]
+      },
+      "review_notes": [
+        "确认金额精度、四舍五入和币种字段断言"
+      ],
+      "test_data_refs": [
+        "已结算订单 payable_amount=184",
+        "支付请求 amount=185",
+        "支付前校验接口"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-12 11:28:40",
+      "updated_at": "2026-06-12 11:28:40"
+    },
+    {
+      "id": "TC-de2350e0",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-171a8593",
+      "title": "优惠服务超时时订单不得进入支付",
+      "objective": "验证优惠依赖超时或不可用时，订单不会绕过优惠计算直接进入支付。",
+      "case_type": "chaos",
+      "priority": "P0",
+      "risk_level": "L3",
+      "affected_systems": [
+        "订单服务",
+        "优惠服务",
+        "支付校验服务"
+      ],
+      "precondition": "可通过混沌平台注入优惠服务超时或不可用故障。",
+      "test_data": [
+        "满足全场券和商品券条件的订单",
+        "优惠服务超时注入规则",
+        "Trace 查询条件"
+      ],
+      "steps": [
+        "注入优惠服务超时",
+        "提交订单结算",
+        "尝试发起支付",
+        "查询订单状态、日志、Trace 和告警"
+      ],
+      "expected_result": "结算失败或进入可重试状态，不允许支付，告警和 Trace 可定位优惠服务超时。",
+      "assertions": [
+        "订单未进入待支付或支付中",
+        "返回明确的优惠计算失败或可重试错误",
+        "触发优惠服务超时告警",
+        "Trace 标记下游超时"
+      ],
+      "negative_or_boundary": true,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "混沌工程平台",
+        "suite": "coupon-timeout-chaos",
+        "reason": "L3 核心交易链路需要混沌验证"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-171a8593"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+          "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+          "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+          "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+          "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。"
+        ]
+      },
+      "review_notes": [
+        "确认故障注入窗口和恢复后补偿行为"
+      ],
+      "test_data_refs": [
+        "满足全场券和商品券条件的订单",
+        "优惠服务超时注入规则",
+        "Trace 查询条件"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-12 11:28:40",
+      "updated_at": "2026-06-12 11:28:40"
+    },
+    {
+      "id": "TC-e06b3efa",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-171a8593",
+      "title": "库存并发扣减不超卖",
+      "objective": "验证优惠叠加场景下并发下单不会绕过库存扣减保护。",
+      "case_type": "performance",
+      "priority": "P0",
+      "risk_level": "L3",
+      "affected_systems": [
+        "订单服务",
+        "库存服务",
+        "优惠服务"
+      ],
+      "precondition": "SKU-10086 可售库存固定为 10，具备并发压测和库存查询能力。",
+      "test_data": [
+        "SKU-10086 库存 10",
+        "并发用户 50",
+        "全场券和商品券可用"
+      ],
+      "steps": [
+        "初始化库存为 10",
+        "构造 50 个并发下单请求",
+        "执行并发请求",
+        "查询订单成功数、库存余量和失败原因"
+      ],
+      "expected_result": "库存扣减不超过可售库存，超出请求返回库存不足或排队失败。",
+      "assertions": [
+        "成功订单数不超过 10",
+        "库存余量不为负数",
+        "失败订单返回库存不足或明确失败原因",
+        "无重复扣减消息"
+      ],
+      "negative_or_boundary": true,
+      "automation_recommendation": {
+        "recommended": true,
+        "framework": "性能测试平台",
+        "suite": "inventory-concurrency-baseline",
+        "reason": "库存并发属于核心容量和一致性风险"
+      },
+      "traceability": {
+        "requirement_ids": [
+          "REQ-171a8593"
+        ],
+        "pr_ids": [],
+        "risk_ids": [
+          "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+          "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+          "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。"
+        ],
+        "defect_ids": [],
+        "rules": [
+          "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+          "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。",
+          "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。"
+        ]
+      },
+      "review_notes": [
+        "确认压测环境隔离和库存初始化方式"
+      ],
+      "test_data_refs": [
+        "SKU-10086 库存 10",
+        "并发用户 50",
+        "全场券和商品券可用"
+      ],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "quality_score": 92,
+      "source_type": "agent_generated",
+      "generation_skill": "professional-test-case-generation-skill/v1",
+      "status": "candidate",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner",
+      "created_at": "2026-06-12 11:28:40",
+      "updated_at": "2026-06-12 11:28:40"
+    },
+    {
+      "id": "TC-db4e5576",
+      "project_id": "P-1c205b1e",
+      "requirement_id": "REQ-f753b797",
+      "title": "需求验收",
+      "case_type": "uat",
+      "priority": "P0",
+      "risk_level": "L2",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验核心业务规则是否符合 PRD",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-12 10:41:36",
+      "updated_at": "2026-06-12 10:41:36",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-7c82125b",
+      "project_id": "P-1c205b1e",
+      "requirement_id": "REQ-f753b797",
+      "title": "接口回归",
+      "case_type": "api",
+      "priority": "P0",
+      "risk_level": "L2",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验核心接口在正常参数下返回正确结果",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-12 10:41:36",
+      "updated_at": "2026-06-12 10:41:36",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-84146349",
+      "project_id": "P-1c205b1e",
+      "requirement_id": "REQ-f753b797",
+      "title": "异常链路",
+      "case_type": "api",
+      "priority": "P1",
+      "risk_level": "L2",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验异常参数、超时、重复提交的处理",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-12 10:41:36",
+      "updated_at": "2026-06-12 10:41:36",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-b006fda2",
+      "project_id": "P-1c205b1e",
+      "requirement_id": "REQ-f753b797",
+      "title": "回滚验证",
+      "case_type": "e2e",
+      "priority": "P1",
+      "risk_level": "L2",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验失败后数据与状态可回滚",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-12 10:41:36",
+      "updated_at": "2026-06-12 10:41:36",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-b3b435d6",
+      "project_id": "P-1c205b1e",
+      "requirement_id": "REQ-f753b797",
+      "title": "全场券与商品券叠加",
+      "case_type": "api",
+      "priority": "P0",
+      "risk_level": "L2",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验全场券和商品券叠加后的应付金额",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-12 10:41:36",
+      "updated_at": "2026-06-12 10:41:36",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-327156d6",
+      "project_id": "P-1c205b1e",
+      "requirement_id": "REQ-f753b797",
+      "title": "支付前金额一致性",
+      "case_type": "e2e",
+      "priority": "P0",
+      "risk_level": "L2",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验支付金额与结算金额不一致时阻断支付",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-12 10:41:36",
+      "updated_at": "2026-06-12 10:41:36",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-ec82b43b",
+      "project_id": "P-1c205b1e",
+      "requirement_id": "REQ-f753b797",
+      "title": "库存并发扣减",
+      "case_type": "performance",
+      "priority": "P0",
+      "risk_level": "L2",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验并发下单不超卖",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-12 10:41:36",
+      "updated_at": "2026-06-12 10:41:36",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-077a3c11",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-171a8593",
+      "title": "需求验收",
+      "case_type": "uat",
+      "priority": "P0",
+      "risk_level": "L3",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验核心业务规则是否符合 PRD",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "接口自动化框架",
+        "suite": "order-core-risk-regression",
+        "case_key": "AUTO-TC-077a3c11"
+      },
+      "source_type": "agent_generated",
+      "status": "baselined",
+      "created_at": "2026-06-12 10:05:16",
+      "updated_at": "2026-06-12 11:06:59",
+      "review_status": "approved",
+      "review_comments": [
+        {
+          "by": "QA Owner",
+          "action": "approve",
+          "comment": "Review 通过：步骤、期望和风险覆盖满足入库要求。",
+          "created_at": "2026-06-12 10:52:55"
+        },
+        {
+          "by": "QA Owner",
+          "action": "approve",
+          "comment": "Review 通过：步骤、期望和风险覆盖满足入库要求。",
+          "created_at": "2026-06-12 11:06:42"
+        }
+      ],
+      "library_status": "in_library",
+      "version": "v1.0",
+      "owner": "QA Owner",
+      "reviewed_by": "QA Owner",
+      "automation_status": "bound",
+      "library_id": "LIB-a90cda9b",
+      "baselined_by": "QA Owner",
+      "baselined_at": "2026-06-12 11:06:49"
+    },
+    {
+      "id": "TC-db32ed05",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-171a8593",
+      "title": "接口回归",
+      "case_type": "api",
+      "priority": "P0",
+      "risk_level": "L3",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验核心接口在正常参数下返回正确结果",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-12 10:05:16",
+      "updated_at": "2026-06-12 10:05:16",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-ee9b5a3a",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-171a8593",
+      "title": "异常链路",
+      "case_type": "api",
+      "priority": "P1",
+      "risk_level": "L3",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验异常参数、超时、重复提交的处理",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-12 10:05:16",
+      "updated_at": "2026-06-12 10:05:16",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-50b6a9e0",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-171a8593",
+      "title": "回滚验证",
+      "case_type": "e2e",
+      "priority": "P1",
+      "risk_level": "L3",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验失败后数据与状态可回滚",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-12 10:05:16",
+      "updated_at": "2026-06-12 10:05:16",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-6b2cf75f",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-171a8593",
+      "title": "全场券与商品券叠加",
+      "case_type": "api",
+      "priority": "P0",
+      "risk_level": "L3",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验全场券和商品券叠加后的应付金额",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-12 10:05:16",
+      "updated_at": "2026-06-12 10:05:16",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-a3f7d382",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-171a8593",
+      "title": "支付前金额一致性",
+      "case_type": "e2e",
+      "priority": "P0",
+      "risk_level": "L3",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验支付金额与结算金额不一致时阻断支付",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-12 10:05:16",
+      "updated_at": "2026-06-12 10:05:16",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-4973cb46",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-171a8593",
+      "title": "库存并发扣减",
+      "case_type": "performance",
+      "priority": "P0",
+      "risk_level": "L3",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验并发下单不超卖",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-12 10:05:16",
+      "updated_at": "2026-06-12 10:05:16",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-15fc0254",
+      "project_id": "P-2026-002",
+      "requirement_id": "REQ-0d615908",
+      "title": "需求验收",
+      "case_type": "uat",
+      "priority": "P0",
+      "risk_level": "L4",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验核心业务规则是否符合 PRD",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-11 19:14:57",
+      "updated_at": "2026-06-11 19:14:57",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-61097f0f",
+      "project_id": "P-2026-002",
+      "requirement_id": "REQ-0d615908",
+      "title": "接口回归",
+      "case_type": "api",
+      "priority": "P0",
+      "risk_level": "L4",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验核心接口在正常参数下返回正确结果",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-11 19:14:57",
+      "updated_at": "2026-06-11 19:14:57",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-afbb9261",
+      "project_id": "P-2026-002",
+      "requirement_id": "REQ-0d615908",
+      "title": "异常链路",
+      "case_type": "api",
+      "priority": "P1",
+      "risk_level": "L4",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验异常参数、超时、重复提交的处理",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-11 19:14:57",
+      "updated_at": "2026-06-11 19:14:57",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-b80b0762",
+      "project_id": "P-2026-002",
+      "requirement_id": "REQ-0d615908",
+      "title": "回滚验证",
+      "case_type": "e2e",
+      "priority": "P1",
+      "risk_level": "L4",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验失败后数据与状态可回滚",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-11 19:14:57",
+      "updated_at": "2026-06-11 19:14:57",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-c890d623",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-81fabe23",
+      "title": "需求验收",
+      "case_type": "uat",
+      "priority": "P0",
+      "risk_level": "L3",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验核心业务规则是否符合 PRD",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-11 19:13:00",
+      "updated_at": "2026-06-11 19:13:00",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-55047026",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-81fabe23",
+      "title": "接口回归",
+      "case_type": "api",
+      "priority": "P0",
+      "risk_level": "L3",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验核心接口在正常参数下返回正确结果",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-11 19:13:00",
+      "updated_at": "2026-06-11 19:13:00",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-1d12e4de",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-81fabe23",
+      "title": "异常链路",
+      "case_type": "api",
+      "priority": "P1",
+      "risk_level": "L3",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验异常参数、超时、重复提交的处理",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-11 19:13:00",
+      "updated_at": "2026-06-11 19:13:00",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-4ca9f071",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-81fabe23",
+      "title": "回滚验证",
+      "case_type": "e2e",
+      "priority": "P1",
+      "risk_level": "L3",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验失败后数据与状态可回滚",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-11 19:13:00",
+      "updated_at": "2026-06-11 19:13:00",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-7c3c6809",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-81fabe23",
+      "title": "全场券与商品券叠加",
+      "case_type": "api",
+      "priority": "P0",
+      "risk_level": "L3",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验全场券和商品券叠加后的应付金额",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-11 19:13:00",
+      "updated_at": "2026-06-11 19:13:00",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-2a209c0d",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-81fabe23",
+      "title": "支付前金额一致性",
+      "case_type": "e2e",
+      "priority": "P0",
+      "risk_level": "L3",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验支付金额与结算金额不一致时阻断支付",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-11 19:13:00",
+      "updated_at": "2026-06-11 19:13:00",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    },
+    {
+      "id": "TC-565e40a5",
+      "project_id": "P-2026-001",
+      "requirement_id": "REQ-81fabe23",
+      "title": "库存并发扣减",
+      "case_type": "performance",
+      "priority": "P0",
+      "risk_level": "L3",
+      "precondition": "项目测试环境可用，测试数据已准备。",
+      "steps": [
+        "准备测试数据",
+        "执行测试动作",
+        "校验结果与日志",
+        "记录证据"
+      ],
+      "expected_result": "校验并发下单不超卖",
+      "test_data_refs": [],
+      "automation_binding": {
+        "framework": "",
+        "suite": "",
+        "case_key": ""
+      },
+      "source_type": "agent_generated",
+      "status": "candidate",
+      "created_at": "2026-06-11 19:13:00",
+      "updated_at": "2026-06-11 19:13:00",
+      "review_status": "pending",
+      "review_comments": [],
+      "library_status": "not_in_library",
+      "version": "v0.1",
+      "owner": "QA Owner"
+    }
+  ],
+  "test_plans": [],
+  "executions": [
+    {
+      "id": "AUTO-6da51123",
+      "project_id": "P-2026-001",
+      "execution_type": "api_automation",
+      "suite": "order-core-risk-regression",
+      "triggered_by": "test-orchestration-agent",
+      "total_count": 14,
+      "passed_count": 12,
+      "failed_count": 2,
+      "status": "failed",
+      "report_url": "https://auto.example.com/reports/demo",
+      "logs_url": "https://auto.example.com/logs/demo",
+      "started_at": "2026-06-12 10:05:16",
+      "finished_at": "2026-06-12 10:05:16"
+    },
+    {
+      "id": "AUTO-b6294b7b",
+      "project_id": "P-2026-002",
+      "execution_type": "api_automation",
+      "suite": "risk-based-regression",
+      "triggered_by": "test-orchestration-agent",
+      "total_count": 8,
+      "passed_count": 6,
+      "failed_count": 2,
+      "status": "failed",
+      "report_url": "https://auto.example.com/reports/demo",
+      "logs_url": "https://auto.example.com/logs/demo",
+      "started_at": "2026-06-11 19:15:13",
+      "finished_at": "2026-06-11 19:15:13"
+    },
+    {
+      "id": "AUTO-781227ad",
+      "project_id": "P-2026-002",
+      "execution_type": "api_automation",
+      "suite": "risk-based-regression",
+      "triggered_by": "test-orchestration-agent",
+      "total_count": 8,
+      "passed_count": 6,
+      "failed_count": 2,
+      "status": "failed",
+      "report_url": "https://auto.example.com/reports/demo",
+      "logs_url": "https://auto.example.com/logs/demo",
+      "started_at": "2026-06-11 19:15:08",
+      "finished_at": "2026-06-11 19:15:08"
+    },
+    {
+      "id": "AUTO-3a8ee3fa",
+      "project_id": "P-2026-001",
+      "execution_type": "api_automation",
+      "suite": "order-coupon-regression",
+      "triggered_by": "test-orchestration-agent",
+      "total_count": 8,
+      "passed_count": 6,
+      "failed_count": 2,
+      "status": "failed",
+      "report_url": "https://auto.example.com/reports/demo",
+      "logs_url": "https://auto.example.com/logs/demo",
+      "started_at": "2026-06-11 19:13:10",
+      "finished_at": "2026-06-11 19:13:10"
+    }
+  ],
+  "release_gates": [
+    {
+      "id": "REL-eb4e9e27",
+      "project_id": "P-1c205b1e",
+      "risk_level": "L2",
+      "decision": "passed",
+      "evidence_score": 100,
+      "blockers": [],
+      "evidence_count": 0,
+      "evaluated_at": "2026-06-12 10:07:16"
+    },
+    {
+      "id": "REL-451b70b9",
+      "project_id": "P-2026-001",
+      "risk_level": "L3",
+      "decision": "blocked",
+      "evidence_score": 40,
+      "blockers": [
+        "接口自动化 6 条失败",
+        "支付前金额一致性证据缺失",
+        "存在 PR 门禁阻断",
+        "存在自动化执行失败"
+      ],
+      "evidence_count": 3,
+      "evaluated_at": "2026-06-11 19:13:10"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "EVD-93429ca4",
+      "project_id": "P-2026-001",
+      "evidence_type": "requirement",
+      "source_system": "platform",
+      "title": "PRD 解析结果",
+      "summary": "目标：冒烟验证级联导入。",
+      "status": "ready",
+      "uri": "",
+      "collected_at": "2026-06-15 15:42:50"
+    },
+    {
+      "id": "EVD-4f23d115",
+      "project_id": "P-2026-001",
+      "evidence_type": "sonar",
+      "source_system": "sonar",
+      "title": "Sonar 扫描结果",
+      "summary": "Sonar Quality Gate ERROR；AI 生成比例较高，需要加强单测和 Review；变更文件较多，需要拆分风险或补充影响面说明",
+      "status": "blocked",
+      "uri": "",
+      "collected_at": "2026-06-15 15:26:51"
+    },
+    {
+      "id": "EVD-48303a8f",
+      "project_id": "P-2026-001",
+      "evidence_type": "sonar",
+      "source_system": "sonar",
+      "title": "Sonar 扫描结果",
+      "summary": "Sonar Quality Gate ERROR；AI 生成比例较高，需要加强单测和 Review；变更文件较多，需要拆分风险或补充影响面说明",
+      "status": "blocked",
+      "uri": "",
+      "collected_at": "2026-06-15 15:26:48"
+    },
+    {
+      "id": "EVD-8e4be779",
+      "project_id": "P-2026-001",
+      "evidence_type": "requirement",
+      "source_system": "platform",
+      "title": "PRD 解析结果",
+      "summary": "目标：支持全场券与商品券叠加，结算金额必须准确。",
+      "status": "ready",
+      "uri": "",
+      "collected_at": "2026-06-15 15:26:11"
+    },
+    {
+      "id": "EVD-edf7702e",
+      "project_id": "P-2026-001",
+      "evidence_type": "requirement",
+      "source_system": "platform",
+      "title": "PRD 解析结果",
+      "summary": "目标：支持全场券与商品券叠加，结算金额必须准确。",
+      "status": "ready",
+      "uri": "",
+      "collected_at": "2026-06-15 15:25:50"
+    },
+    {
+      "id": "EVD-05c68a69",
+      "project_id": "P-2026-001",
+      "evidence_type": "test_data",
+      "source_system": "data_bank",
+      "source_id": "TOOL-734c8559",
+      "title": "数据银行 归一化证据",
+      "summary": "数据任务已创建：DATASET-ORDER-COUPON-001",
+      "status": "ready",
+      "result": "ready",
+      "metrics": {
+        "data_set_ref": "DATASET-ORDER-COUPON-001",
+        "templates": [
+          "全场券",
+          "商品券",
+          "库存并发"
+        ]
+      },
+      "uri": "DATA_BANK-1781508289",
+      "collected_at": "2026-06-15 15:24:49"
+    },
+    {
+      "id": "EVD-c24b1087",
+      "project_id": "P-2026-001",
+      "evidence_type": "test_case_library",
+      "source_system": "quality-platform",
+      "title": "测试用例入库",
+      "summary": "需求验收 已入库，版本 v1.0",
+      "status": "ready",
+      "uri": "LIB-a90cda9b",
+      "collected_at": "2026-06-12 11:06:49"
+    },
+    {
+      "id": "EVD-57673674",
+      "project_id": "P-1c205b1e",
+      "evidence_type": "requirement",
+      "source_system": "platform",
+      "title": "PRD 解析结果",
+      "summary": "目标：支持全场券与商品券叠加，结算金额必须准确。",
+      "status": "ready",
+      "uri": "",
+      "collected_at": "2026-06-12 10:38:30"
+    },
+    {
+      "id": "EVD-46b54cdd",
+      "project_id": "P-2026-001",
+      "evidence_type": "automation",
+      "source_system": "automation",
+      "title": "自动化执行结果",
+      "summary": "12/14 passed",
+      "status": "failed",
+      "uri": "https://auto.example.com/reports/demo",
+      "collected_at": "2026-06-12 10:05:16"
+    },
+    {
+      "id": "EVD-7b4f35e1",
+      "project_id": "P-2026-001",
+      "evidence_type": "sonar",
+      "source_system": "sonar",
+      "title": "Sonar 扫描结果",
+      "summary": "Sonar Quality Gate ERROR；AI 生成比例较高，需要加强单测和 Review；变更文件较多，需要拆分风险或补充影响面说明",
+      "status": "blocked",
+      "uri": "",
+      "collected_at": "2026-06-12 10:05:16"
+    },
+    {
+      "id": "EVD-82a655a5",
+      "project_id": "P-2026-001",
+      "evidence_type": "requirement",
+      "source_system": "platform",
+      "title": "PRD 解析结果",
+      "summary": "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括订单服务、优惠服务、库存服务、支付校验服务。",
+      "status": "ready",
+      "uri": "",
+      "collected_at": "2026-06-12 10:04:55"
+    },
+    {
+      "id": "EVD-68d06952",
+      "project_id": "P-2026-001",
+      "evidence_type": "requirement",
+      "source_system": "platform",
+      "title": "PRD 解析结果",
+      "summary": "目标：从飞书文档《订单交易核心链路 PRD》导入 订单交易优惠规则改造 的需求，影响系统包括交易。",
+      "status": "ready",
+      "uri": "",
+      "collected_at": "2026-06-12 09:59:36"
+    },
+    {
+      "id": "EVD-c480ff1b",
+      "project_id": "P-2026-002",
+      "evidence_type": "automation",
+      "source_system": "automation",
+      "title": "自动化执行结果",
+      "summary": "6/8 passed",
+      "status": "failed",
+      "uri": "https://auto.example.com/reports/demo",
+      "collected_at": "2026-06-11 19:15:13"
+    },
+    {
+      "id": "EVD-c6bd58a2",
+      "project_id": "P-2026-002",
+      "evidence_type": "automation",
+      "source_system": "automation",
+      "title": "自动化执行结果",
+      "summary": "6/8 passed",
+      "status": "failed",
+      "uri": "https://auto.example.com/reports/demo",
+      "collected_at": "2026-06-11 19:15:08"
+    },
+    {
+      "id": "EVD-bd3685c1",
+      "project_id": "P-2026-002",
+      "evidence_type": "requirement",
+      "source_system": "platform",
+      "title": "PRD 解析结果",
+      "summary": "目标：支持全场券与商品券叠加，结算金额必须准确。",
+      "status": "ready",
+      "uri": "",
+      "collected_at": "2026-06-11 19:14:41"
+    },
+    {
+      "id": "EVD-a3ed5ac2",
+      "project_id": "P-2026-002",
+      "evidence_type": "requirement",
+      "source_system": "platform",
+      "title": "PRD 解析结果",
+      "summary": "目标：支持全场券与商品券叠加，结算金额必须准确。",
+      "status": "ready",
+      "uri": "",
+      "collected_at": "2026-06-11 19:14:18"
+    },
+    {
+      "id": "EVD-9fb0f539",
+      "project_id": "P-2026-001",
+      "evidence_type": "automation",
+      "source_system": "automation",
+      "title": "自动化执行结果",
+      "summary": "6/8 passed",
+      "status": "failed",
+      "uri": "https://auto.example.com/reports/demo",
+      "collected_at": "2026-06-11 19:13:10"
+    },
+    {
+      "id": "EVD-a5137f8c",
+      "project_id": "P-2026-001",
+      "evidence_type": "sonar",
+      "source_system": "sonar",
+      "title": "Sonar 扫描结果",
+      "summary": "Sonar Quality Gate 未通过，需修复阻断项。",
+      "status": "blocked",
+      "uri": "",
+      "collected_at": "2026-06-11 19:13:10"
+    },
+    {
+      "id": "EVD-fa508141",
+      "project_id": "P-2026-001",
+      "evidence_type": "requirement",
+      "source_system": "platform",
+      "title": "PRD 解析结果",
+      "summary": "目标：支持全场券与商品券叠加，结算金额必须准确。",
+      "status": "ready",
+      "uri": "",
+      "collected_at": "2026-06-11 19:13:00"
+    }
+  ],
+  "agents": [
+    {
+      "id": "requirement-agent",
+      "name": "需求澄清 Agent",
+      "stage": "需求澄清",
+      "role": "产品 Owner",
+      "version": "v1.0.0",
+      "status": "active",
+      "system_prompt": "抽取 PRD 中的业务目标、业务规则、验收标准、歧义点和风险提示，禁止编造不存在的业务概念。",
+      "input_schema": {
+        "required": [
+          "project_id",
+          "prd_text"
+        ]
+      },
+      "output_schema": {
+        "required": [
+          "business_goal",
+          "rules",
+          "acceptance_criteria",
+          "ambiguities",
+          "risk_hints"
+        ]
+      },
+      "tool_permissions": [
+        {
+          "tool": "PRD Parser",
+          "access": "read"
+        }
+      ],
+      "policy_rules": [
+        {
+          "id": "REQ-001",
+          "rule": "歧义点未确认不得进入开发",
+          "severity": "major"
+        }
+      ],
+      "eval_cases": [
+        {
+          "id": "coupon-prd",
+          "expected": "必须识别全场券、商品券和支付前金额一致性"
+        }
+      ],
+      "capabilities": [
+        "多源 PRD 解析",
+        "业务规则卡生成",
+        "歧义识别",
+        "验收标准补全",
+        "需求版本差异分析"
+      ],
+      "context_policy": {
+        "scope": "project",
+        "least_privilege": true,
+        "allowed_context": [
+          "project",
+          "systems",
+          "repositories",
+          "requirements",
+          "prs",
+          "quality_metrics",
+          "evidence"
+        ],
+        "masked_fields": [
+          "token",
+          "secret",
+          "password"
+        ],
+        "max_context_items": 80
+      },
+      "maintenance": {
+        "change_process": "Owner 提交变更，平台完成回归评测，通过后灰度启用。",
+        "eval_frequency": "weekly",
+        "rollback_version": "v0.9.0",
+        "last_evaluated_at": "2026-06-12 09:59:36"
+      },
+      "owner": "产品 Owner"
+    },
+    {
+      "id": "pr-diff-agent",
+      "name": "PR Diff Agent",
+      "stage": "PR 门禁",
+      "role": "研发 Owner + QA Owner",
+      "version": "v1.0.0",
+      "status": "active",
+      "system_prompt": "识别 PR 影响范围、Sonar 阻断项、覆盖率缺口、AI 生成代码风险和必跑测试集。",
+      "input_schema": {
+        "required": [
+          "project_id",
+          "pr_url",
+          "sonar_result"
+        ]
+      },
+      "output_schema": {
+        "required": [
+          "risk_summary",
+          "required_tests",
+          "blockers",
+          "decision"
+        ]
+      },
+      "tool_permissions": [
+        {
+          "tool": "Git",
+          "access": "read"
+        },
+        {
+          "tool": "Sonar",
+          "access": "read"
+        }
+      ],
+      "policy_rules": [
+        {
+          "id": "PR-001",
+          "rule": "Sonar Quality Gate ERROR 必须阻断",
+          "severity": "blocker"
+        }
+      ],
+      "eval_cases": [
+        {
+          "id": "sonar-error",
+          "expected": "Sonar ERROR 必须输出 block"
+        }
+      ],
+      "capabilities": [
+        "多仓库 PR 汇总",
+        "Diff 风险识别",
+        "Sonar/SCA/SAST 汇聚",
+        "覆盖率基线比对",
+        "必跑测试推荐"
+      ],
+      "context_policy": {
+        "scope": "project",
+        "least_privilege": true,
+        "allowed_context": [
+          "project",
+          "systems",
+          "repositories",
+          "requirements",
+          "prs",
+          "quality_metrics",
+          "evidence"
+        ],
+        "masked_fields": [
+          "token",
+          "secret",
+          "password"
+        ],
+        "max_context_items": 80
+      },
+      "maintenance": {
+        "change_process": "Owner 提交变更，平台完成回归评测，通过后灰度启用。",
+        "eval_frequency": "weekly",
+        "rollback_version": "v0.9.0",
+        "last_evaluated_at": "2026-06-12 09:59:36"
+      },
+      "owner": "研发 Owner + QA Owner"
+    },
+    {
+      "id": "test-orchestration-agent",
+      "name": "测试编排 Agent",
+      "stage": "测试验证",
+      "role": "QA Owner",
+      "version": "v1.0.0",
+      "status": "active",
+      "system_prompt": "基于需求规则卡、PR 风险摘要和质量指标生成测试策略、用例候选、数据任务、自动化执行计划和门禁建议。",
+      "input_schema": {
+        "required": [
+          "project_id",
+          "requirement_card",
+          "pr_risk",
+          "quality_metrics"
+        ]
+      },
+      "output_schema": {
+        "required": [
+          "test_cases",
+          "data_plan",
+          "automation_plan",
+          "gate_decision"
+        ]
+      },
+      "tool_permissions": [
+        {
+          "tool": "数据银行",
+          "access": "read_write"
+        },
+        {
+          "tool": "自动化框架",
+          "access": "execute"
+        },
+        {
+          "tool": "性能平台",
+          "access": "execute",
+          "approval_required": true
+        }
+      ],
+      "policy_rules": [
+        {
+          "id": "TEST-L3-001",
+          "rule": "L3/L4 必须覆盖核心链路、异常链路、回滚链路",
+          "severity": "blocker"
+        },
+        {
+          "id": "TEST-PAY-001",
+          "rule": "支付前金额一致性缺失必须阻断",
+          "severity": "blocker"
+        }
+      ],
+      "eval_cases": [
+        {
+          "id": "coupon-stack",
+          "expected": "全场券+商品券叠加缺支付证据时必须 block"
+        }
+      ],
+      "capabilities": [
+        "风险测试策略",
+        "测试用例生成",
+        "数据银行任务",
+        "自动化套件推荐",
+        "覆盖缺口分析"
+      ],
+      "context_policy": {
+        "scope": "project",
+        "least_privilege": true,
+        "allowed_context": [
+          "project",
+          "systems",
+          "repositories",
+          "requirements",
+          "prs",
+          "quality_metrics",
+          "evidence"
+        ],
+        "masked_fields": [
+          "token",
+          "secret",
+          "password"
+        ],
+        "max_context_items": 80
+      },
+      "maintenance": {
+        "change_process": "Owner 提交变更，平台完成回归评测，通过后灰度启用。",
+        "eval_frequency": "weekly",
+        "rollback_version": "v0.9.0",
+        "last_evaluated_at": "2026-06-12 09:59:36"
+      },
+      "owner": "QA Owner"
+    },
+    {
+      "id": "release-decision-agent",
+      "name": "发布决策 Agent",
+      "stage": "发布决策",
+      "role": "发布经理",
+      "version": "v1.0.0",
+      "status": "active",
+      "system_prompt": "汇总需求、PR、Sonar、自动化、UAT、监控、回滚和审批证据，给出发布准入结论。",
+      "input_schema": {
+        "required": [
+          "project_id",
+          "evidence"
+        ]
+      },
+      "output_schema": {
+        "required": [
+          "decision",
+          "blockers",
+          "approvals",
+          "report"
+        ]
+      },
+      "tool_permissions": [
+        {
+          "tool": "发布系统",
+          "access": "read"
+        },
+        {
+          "tool": "监控平台",
+          "access": "read"
+        }
+      ],
+      "policy_rules": [
+        {
+          "id": "REL-001",
+          "rule": "阻断项未关闭不得全量发布",
+          "severity": "blocker"
+        }
+      ],
+      "eval_cases": [
+        {
+          "id": "release-blocker",
+          "expected": "存在 blocker 必须阻断"
+        }
+      ],
+      "capabilities": [
+        "证据完整性检查",
+        "灰度计划检查",
+        "回滚演练校验",
+        "多仓库门禁汇总",
+        "发布报告生成"
+      ],
+      "context_policy": {
+        "scope": "project",
+        "least_privilege": true,
+        "allowed_context": [
+          "project",
+          "systems",
+          "repositories",
+          "requirements",
+          "prs",
+          "quality_metrics",
+          "evidence"
+        ],
+        "masked_fields": [
+          "token",
+          "secret",
+          "password"
+        ],
+        "max_context_items": 80
+      },
+      "maintenance": {
+        "change_process": "Owner 提交变更，平台完成回归评测，通过后灰度启用。",
+        "eval_frequency": "weekly",
+        "rollback_version": "v0.9.0",
+        "last_evaluated_at": "2026-06-12 09:59:36"
+      },
+      "owner": "发布经理"
+    },
+    {
+      "id": "architecture-agent",
+      "name": "方案评审 Agent",
+      "stage": "方案评审",
+      "role": "架构 Owner",
+      "version": "v1.0.0",
+      "status": "active",
+      "owner": "架构 Owner",
+      "system_prompt": "基于需求和系统影响面识别接口契约、数据一致性、容量、降级、回滚和跨系统依赖风险。",
+      "capabilities": [
+        "系统影响面分析",
+        "接口契约检查",
+        "容量风险识别",
+        "回滚方案校验",
+        "架构评审清单"
+      ],
+      "context_policy": {
+        "scope": "project",
+        "least_privilege": true,
+        "allowed_context": [
+          "project",
+          "systems",
+          "repositories",
+          "requirements",
+          "prs",
+          "quality_metrics",
+          "evidence"
+        ],
+        "masked_fields": [
+          "token",
+          "secret",
+          "password"
+        ],
+        "max_context_items": 80
+      },
+      "input_schema": {
+        "required": [
+          "project_id",
+          "stage_context"
+        ]
+      },
+      "output_schema": {
+        "required": [
+          "decision",
+          "findings",
+          "actions",
+          "evidence_refs"
+        ]
+      },
+      "tool_permissions": [
+        {
+          "tool": "API Catalog",
+          "access": "read"
+        },
+        {
+          "tool": "CMDB",
+          "access": "read"
+        },
+        {
+          "tool": "Architecture Review",
+          "access": "write"
+        }
+      ],
+      "policy_rules": [
+        {
+          "id": "ARCH-L3-001",
+          "rule": "L3/L4 必须完成跨系统影响面和回滚方案评审",
+          "severity": "blocker"
+        }
+      ],
+      "eval_cases": [
+        {
+          "id": "multi-system-order",
+          "expected": "订单、优惠、库存、支付任一核心系统缺少 Owner 必须提示",
+          "last_score": 0.92
+        }
+      ],
+      "maintenance": {
+        "change_process": "Owner 提交变更，平台完成回归评测，通过后灰度启用。",
+        "eval_frequency": "weekly",
+        "rollback_version": "v0.9.0",
+        "last_evaluated_at": "2026-06-12 09:59:36"
+      }
+    },
+    {
+      "id": "coding-agent",
+      "name": "AI 编码协同 Agent",
+      "stage": "AI 编码",
+      "role": "研发 Owner",
+      "version": "v1.0.0",
+      "status": "active",
+      "owner": "研发 Owner",
+      "system_prompt": "约束 AI Coding 在授权仓库和模块内工作，输出自检说明、单测建议和变更风险，不越权修改无关模块。",
+      "capabilities": [
+        "代码上下文构建",
+        "编码约束检查",
+        "单测建议",
+        "变更自检",
+        "代码影响面标注"
+      ],
+      "context_policy": {
+        "scope": "project",
+        "least_privilege": true,
+        "allowed_context": [
+          "project",
+          "systems",
+          "repositories",
+          "requirements",
+          "prs",
+          "quality_metrics",
+          "evidence"
+        ],
+        "masked_fields": [
+          "token",
+          "secret",
+          "password"
+        ],
+        "max_context_items": 80
+      },
+      "input_schema": {
+        "required": [
+          "project_id",
+          "stage_context"
+        ]
+      },
+      "output_schema": {
+        "required": [
+          "decision",
+          "findings",
+          "actions",
+          "evidence_refs"
+        ]
+      },
+      "tool_permissions": [
+        {
+          "tool": "Git",
+          "access": "read"
+        },
+        {
+          "tool": "CI",
+          "access": "read"
+        },
+        {
+          "tool": "Unit Test",
+          "access": "execute"
+        }
+      ],
+      "policy_rules": [
+        {
+          "id": "CODE-001",
+          "rule": "AI 生成代码必须声明影响模块、测试证据和未覆盖风险",
+          "severity": "major"
+        }
+      ],
+      "eval_cases": [
+        {
+          "id": "ai-change-scope",
+          "expected": "跨仓库变更必须输出每个仓库的影响范围",
+          "last_score": 0.92
+        }
+      ],
+      "maintenance": {
+        "change_process": "Owner 提交变更，平台完成回归评测，通过后灰度启用。",
+        "eval_frequency": "weekly",
+        "rollback_version": "v0.9.0",
+        "last_evaluated_at": "2026-06-12 09:59:36"
+      }
+    },
+    {
+      "id": "uat-agent",
+      "name": "UAT 验收 Agent",
+      "stage": "UAT 验收",
+      "role": "业务 Owner",
+      "version": "v1.0.0",
+      "status": "active",
+      "owner": "业务 Owner",
+      "system_prompt": "把需求规则卡转成业务验收清单，汇聚 UAT 结果、业务反馈和上线前遗留风险。",
+      "capabilities": [
+        "业务验收清单",
+        "UAT 证据汇总",
+        "业务反馈归因",
+        "遗留风险确认"
+      ],
+      "context_policy": {
+        "scope": "project",
+        "least_privilege": true,
+        "allowed_context": [
+          "project",
+          "systems",
+          "repositories",
+          "requirements",
+          "prs",
+          "quality_metrics",
+          "evidence"
+        ],
+        "masked_fields": [
+          "token",
+          "secret",
+          "password"
+        ],
+        "max_context_items": 80
+      },
+      "input_schema": {
+        "required": [
+          "project_id",
+          "stage_context"
+        ]
+      },
+      "output_schema": {
+        "required": [
+          "decision",
+          "findings",
+          "actions",
+          "evidence_refs"
+        ]
+      },
+      "tool_permissions": [
+        {
+          "tool": "UAT Platform",
+          "access": "read_write"
+        },
+        {
+          "tool": "Defect",
+          "access": "read_write"
+        }
+      ],
+      "policy_rules": [
+        {
+          "id": "UAT-001",
+          "rule": "核心验收项未通过不得进入发布决策",
+          "severity": "blocker"
+        }
+      ],
+      "eval_cases": [
+        {
+          "id": "uat-coupon",
+          "expected": "支付金额类验收失败必须阻断",
+          "last_score": 0.92
+        }
+      ],
+      "maintenance": {
+        "change_process": "Owner 提交变更，平台完成回归评测，通过后灰度启用。",
+        "eval_frequency": "weekly",
+        "rollback_version": "v0.9.0",
+        "last_evaluated_at": "2026-06-12 09:59:36"
+      }
+    },
+    {
+      "id": "retrospective-agent",
+      "name": "复盘沉淀 Agent",
+      "stage": "复盘沉淀",
+      "role": "质量平台 Owner",
+      "version": "v1.0.0",
+      "status": "active",
+      "owner": "质量平台 Owner",
+      "system_prompt": "沉淀缺陷模式、门禁误报漏报、Agent 评测样例和组织级质量改进项。",
+      "capabilities": [
+        "缺陷模式挖掘",
+        "策略调优建议",
+        "Agent 评测样例生成",
+        "知识库沉淀",
+        "组织指标趋势"
+      ],
+      "context_policy": {
+        "scope": "project",
+        "least_privilege": true,
+        "allowed_context": [
+          "project",
+          "systems",
+          "repositories",
+          "requirements",
+          "prs",
+          "quality_metrics",
+          "evidence"
+        ],
+        "masked_fields": [
+          "token",
+          "secret",
+          "password"
+        ],
+        "max_context_items": 80
+      },
+      "input_schema": {
+        "required": [
+          "project_id",
+          "stage_context"
+        ]
+      },
+      "output_schema": {
+        "required": [
+          "decision",
+          "findings",
+          "actions",
+          "evidence_refs"
+        ]
+      },
+      "tool_permissions": [
+        {
+          "tool": "Defect",
+          "access": "read"
+        },
+        {
+          "tool": "Knowledge Base",
+          "access": "write"
+        },
+        {
+          "tool": "Metrics",
+          "access": "read"
+        }
+      ],
+      "policy_rules": [
+        {
+          "id": "RETRO-001",
+          "rule": "P0/P1 问题必须形成策略或用例资产",
+          "severity": "major"
+        }
+      ],
+      "eval_cases": [
+        {
+          "id": "retro-p1",
+          "expected": "P1 线上问题必须生成改进动作",
+          "last_score": 0.92
+        }
+      ],
+      "maintenance": {
+        "change_process": "Owner 提交变更，平台完成回归评测，通过后灰度启用。",
+        "eval_frequency": "weekly",
+        "rollback_version": "v0.9.0",
+        "last_evaluated_at": "2026-06-12 09:59:36"
+      }
+    }
+  ],
+  "integrations": [
+    {
+      "id": "sonar-main",
+      "type": "sonar",
+      "name": "SonarQube",
+      "base_url": "https://sonar.example.com",
+      "enabled": true,
+      "health_status": "ok",
+      "last_checked_at": "2026-06-11 19:12:34",
+      "category": "静态扫描",
+      "integration_mode": "Pull API + Link/Register",
+      "reserved_capabilities": [
+        "Quality Gate 拉取",
+        "issues 拉取",
+        "coverage 基线对比"
+      ],
+      "normalized_objects": [
+        "SonarResult",
+        "QualityEvidence"
+      ],
+      "config": {
+        "project_key_field": "sonar_project_key",
+        "auth_type": "token_ref"
+      }
+    },
+    {
+      "id": "auto-main",
+      "type": "automation",
+      "name": "接口自动化平台",
+      "base_url": "https://auto.example.com",
+      "enabled": true,
+      "health_status": "ok",
+      "last_checked_at": "2026-06-11 19:12:34",
+      "category": "自动化测试",
+      "integration_mode": "Trigger API + Webhook API",
+      "reserved_capabilities": [
+        "触发执行",
+        "结果回调",
+        "失败用例归一化"
+      ],
+      "normalized_objects": [
+        "TestExecution",
+        "QualityEvidence"
+      ],
+      "config": {
+        "webhook_path": "/api/webhooks/automation/auto-main",
+        "auth_type": "token_ref"
+      }
+    },
+    {
+      "id": "data-bank",
+      "type": "data_bank",
+      "name": "数据银行",
+      "base_url": "https://data.example.com",
+      "enabled": true,
+      "health_status": "ok",
+      "last_checked_at": "2026-06-11 19:12:34",
+      "category": "测试数据",
+      "integration_mode": "Trigger API + Link/Register",
+      "reserved_capabilities": [
+        "创建数据任务",
+        "回写数据集引用",
+        "测试数据模板"
+      ],
+      "normalized_objects": [
+        "QualityEvidence"
+      ],
+      "config": {
+        "auth_type": "token_ref"
+      }
+    },
+    {
+      "id": "git-main",
+      "type": "git",
+      "category": "代码托管",
+      "name": "企业 GitLab",
+      "base_url": "https://git.example.com",
+      "enabled": true,
+      "health_status": "ok",
+      "last_checked_at": "2026-06-15 15:20:40",
+      "integration_mode": "Link/Register",
+      "reserved_capabilities": [
+        "PR Webhook",
+        "Diff 拉取",
+        "Reviewer 状态"
+      ],
+      "normalized_objects": [
+        "PullRequest",
+        "QualityEvidence"
+      ],
+      "config": {
+        "webhook_path": "/api/webhooks/git/git-main",
+        "auth_type": "token_ref"
+      }
+    },
+    {
+      "id": "ci-main",
+      "type": "ci",
+      "category": "CI/CD",
+      "name": "企业流水线",
+      "base_url": "https://ci.example.com",
+      "enabled": true,
+      "health_status": "manual_ready",
+      "last_checked_at": "2026-06-15 15:20:40",
+      "integration_mode": "Webhook API + Link/Register",
+      "reserved_capabilities": [
+        "构建回调",
+        "单测结果",
+        "覆盖率报告"
+      ],
+      "normalized_objects": [
+        "QualityEvidence"
+      ],
+      "config": {
+        "webhook_path": "/api/webhooks/ci/ci-main",
+        "auth_type": "webhook_secret_ref"
+      }
+    },
+    {
+      "id": "perf-main",
+      "type": "performance",
+      "category": "性能平台",
+      "name": "性能测试平台",
+      "base_url": "https://perf.example.com",
+      "enabled": true,
+      "health_status": "manual_ready",
+      "last_checked_at": "2026-06-15 15:20:40",
+      "integration_mode": "Trigger API + Pull API",
+      "reserved_capabilities": [
+        "触发压测",
+        "P95/吞吐拉取",
+        "基线对比"
+      ],
+      "normalized_objects": [
+        "QualityEvidence"
+      ],
+      "config": {
+        "auth_type": "token_ref"
+      }
+    },
+    {
+      "id": "chaos-main",
+      "type": "chaos",
+      "category": "混沌工程",
+      "name": "混沌工程平台",
+      "base_url": "https://chaos.example.com",
+      "enabled": true,
+      "health_status": "manual_ready",
+      "last_checked_at": "2026-06-15 15:20:40",
+      "integration_mode": "Trigger API + Link/Register",
+      "reserved_capabilities": [
+        "故障注入",
+        "恢复时间回收",
+        "告警证据"
+      ],
+      "normalized_objects": [
+        "QualityEvidence"
+      ],
+      "config": {
+        "auth_type": "token_ref"
+      }
+    },
+    {
+      "id": "defect-main",
+      "type": "defect",
+      "category": "缺陷/事故/监控",
+      "name": "缺陷与事故平台",
+      "base_url": "https://defect.example.com",
+      "enabled": true,
+      "health_status": "manual_ready",
+      "last_checked_at": "2026-06-15 15:20:40",
+      "integration_mode": "Pull API + Link/Register",
+      "reserved_capabilities": [
+        "缺陷状态同步",
+        "逃逸缺陷反哺",
+        "Agent Eval Case"
+      ],
+      "normalized_objects": [
+        "DefectItem",
+        "QualityEvidence"
+      ],
+      "config": {
+        "auth_type": "token_ref"
+      }
+    },
+    {
+      "id": "doc-main",
+      "type": "document",
+      "category": "文档/需求",
+      "name": "飞书/Confluence/Jira",
+      "base_url": "https://docs.example.com",
+      "enabled": true,
+      "health_status": "manual_ready",
+      "last_checked_at": "2026-06-15 15:20:40",
+      "integration_mode": "Pull API + Link/Register",
+      "reserved_capabilities": [
+        "正文拉取",
+        "版本变更检测",
+        "规则卡差异分析"
+      ],
+      "normalized_objects": [
+        "RequirementSource"
+      ],
+      "config": {
+        "auth_type": "oauth_ref"
+      }
+    }
+  ],
+  "policies": [
+    {
+      "id": "PR-L3-001",
+      "name": "L3 PR 强门禁",
+      "scope": {
+        "risk_level": [
+          "L3",
+          "L4"
+        ]
+      },
+      "rules": [
+        "Sonar Quality Gate 必须通过",
+        "单测覆盖率不得低于基线",
+        "核心接口自动化必须通过",
+        "失败用例必须归因"
+      ],
+      "decision": "block_if_any_failed"
+    },
+    {
+      "id": "REL-L4-001",
+      "name": "L4 发布最高门禁",
+      "scope": {
+        "risk_level": [
+          "L4"
+        ]
+      },
+      "rules": [
+        "架构审批",
+        "回滚演练",
+        "混沌验证",
+        "质量委员会审批"
+      ],
+      "decision": "manual_approval_required"
+    }
+  ],
+  "audit_logs": [
+    {
+      "id": "AUD-53cc205b",
+      "action": "test_cases.generate",
+      "target": "P-1c205b1e",
+      "detail": "8 cases",
+      "operator": "local-user",
+      "created_at": "2026-06-15 15:49:09"
+    },
+    {
+      "id": "AUD-0fcdcb72",
+      "action": "requirement.import",
+      "target": "REQ-364a741f",
+      "detail": "P-2026-001 / feishu",
+      "operator": "local-user",
+      "created_at": "2026-06-15 15:42:50"
+    },
+    {
+      "id": "AUD-0856c20f",
+      "action": "test_cases.generate",
+      "target": "P-2026-001",
+      "detail": "8 cases",
+      "operator": "local-user",
+      "created_at": "2026-06-15 15:26:59"
+    },
+    {
+      "id": "AUD-860b7ba7",
+      "action": "sonar.collect",
+      "target": "SONAR-5e73066c",
+      "detail": "PR-3065cfe4",
+      "operator": "local-user",
+      "created_at": "2026-06-15 15:26:51"
+    },
+    {
+      "id": "AUD-c3059ff8",
+      "action": "sonar.collect",
+      "target": "SONAR-0f966bfe",
+      "detail": "PR-3065cfe4",
+      "operator": "local-user",
+      "created_at": "2026-06-15 15:26:48"
+    },
+    {
+      "id": "AUD-ec032229",
+      "action": "requirement.import",
+      "target": "REQ-5b24a4b8",
+      "detail": "P-2026-001 / paste",
+      "operator": "local-user",
+      "created_at": "2026-06-15 15:26:11"
+    },
+    {
+      "id": "AUD-12379cbc",
+      "action": "requirement.confirm",
+      "target": "REQ-81fabe23",
+      "detail": "Product Owner",
+      "operator": "local-user",
+      "created_at": "2026-06-15 15:26:06"
+    },
+    {
+      "id": "AUD-a2475fb7",
+      "action": "requirement.confirm",
+      "target": "REQ-f982cde3",
+      "detail": "Product Owner",
+      "operator": "local-user",
+      "created_at": "2026-06-15 15:26:04"
+    },
+    {
+      "id": "AUD-8748e6bc",
+      "action": "requirement.confirm",
+      "target": "REQ-171a8593",
+      "detail": "Product Owner",
+      "operator": "local-user",
+      "created_at": "2026-06-15 15:26:01"
+    },
+    {
+      "id": "AUD-c855b278",
+      "action": "requirement.confirm",
+      "target": "REQ-1a88ba28",
+      "detail": "Product Owner",
+      "operator": "local-user",
+      "created_at": "2026-06-15 15:25:58"
+    },
+    {
+      "id": "AUD-eca4adf8",
+      "action": "requirement.import",
+      "target": "REQ-1a88ba28",
+      "detail": "P-2026-001 / paste",
+      "operator": "local-user",
+      "created_at": "2026-06-15 15:25:50"
+    },
+    {
+      "id": "AUD-afc6a7b4",
+      "action": "integration.tool_run",
+      "target": "data-bank",
+      "detail": "TOOL-734c8559",
+      "operator": "local-user",
+      "created_at": "2026-06-15 15:24:49"
+    },
+    {
+      "id": "AUD-939b9eaf",
+      "action": "webhook.process",
+      "target": "ci-main",
+      "detail": "pipeline.finished",
+      "operator": "local-user",
+      "created_at": "2026-06-15 15:20:40"
+    },
+    {
+      "id": "AUD-c3ba4fa8",
+      "action": "test_cases.generate",
+      "target": "P-2026-001",
+      "detail": "8 cases",
+      "operator": "local-user",
+      "created_at": "2026-06-12 11:28:40"
+    },
+    {
+      "id": "AUD-d19337e0",
+      "action": "test_case.bind_automation",
+      "target": "TC-077a3c11",
+      "detail": "order-core-risk-regression",
+      "operator": "local-user",
+      "created_at": "2026-06-12 11:06:59"
+    },
+    {
+      "id": "AUD-5635c92c",
+      "action": "test_case.library",
+      "target": "TC-077a3c11",
+      "detail": "LIB-a90cda9b",
+      "operator": "local-user",
+      "created_at": "2026-06-12 11:06:49"
+    },
+    {
+      "id": "AUD-18b47e5d",
+      "action": "test_case.review",
+      "target": "TC-077a3c11",
+      "detail": "reviewed / QA Owner",
+      "operator": "local-user",
+      "created_at": "2026-06-12 11:06:42"
+    },
+    {
+      "id": "AUD-612993b9",
+      "action": "test_case.bind_automation",
+      "target": "TC-077a3c11",
+      "detail": "order-core-risk-regression",
+      "operator": "local-user",
+      "created_at": "2026-06-12 10:53:06"
+    },
+    {
+      "id": "AUD-0b0f2a39",
+      "action": "test_case.review",
+      "target": "TC-077a3c11",
+      "detail": "reviewed / QA Owner",
+      "operator": "local-user",
+      "created_at": "2026-06-12 10:52:55"
+    },
+    {
+      "id": "AUD-0e5b92f9",
+      "action": "test_cases.generate",
+      "target": "P-1c205b1e",
+      "detail": "7 cases",
+      "operator": "local-user",
+      "created_at": "2026-06-12 10:41:36"
+    },
+    {
+      "id": "AUD-3ec01d37",
+      "action": "requirement.import",
+      "target": "REQ-f753b797",
+      "detail": "P-1c205b1e / file",
+      "operator": "local-user",
+      "created_at": "2026-06-12 10:38:30"
+    },
+    {
+      "id": "AUD-981c14cf",
+      "action": "release_gate.evaluate",
+      "target": "REL-eb4e9e27",
+      "detail": "passed",
+      "operator": "local-user",
+      "created_at": "2026-06-12 10:07:16"
+    },
+    {
+      "id": "AUD-99f70112",
+      "action": "automation.run",
+      "target": "AUTO-6da51123",
+      "detail": "P-2026-001",
+      "operator": "local-user",
+      "created_at": "2026-06-12 10:05:16"
+    },
+    {
+      "id": "AUD-3ae1d3f5",
+      "action": "test_cases.generate",
+      "target": "P-2026-001",
+      "detail": "7 cases",
+      "operator": "local-user",
+      "created_at": "2026-06-12 10:05:16"
+    },
+    {
+      "id": "AUD-92e564fa",
+      "action": "sonar.collect",
+      "target": "SONAR-cdb330f8",
+      "detail": "PR-3065cfe4",
+      "operator": "local-user",
+      "created_at": "2026-06-12 10:05:16"
+    },
+    {
+      "id": "AUD-c0bc0414",
+      "action": "pr.register",
+      "target": "PR-3065cfe4",
+      "detail": "P-2026-001",
+      "operator": "local-user",
+      "created_at": "2026-06-12 10:05:03"
+    },
+    {
+      "id": "AUD-f135c9b3",
+      "action": "requirement.import",
+      "target": "REQ-171a8593",
+      "detail": "P-2026-001 / feishu",
+      "operator": "local-user",
+      "created_at": "2026-06-12 10:04:55"
+    },
+    {
+      "id": "AUD-51ba50a5",
+      "action": "requirement.import",
+      "target": "REQ-f982cde3",
+      "detail": "P-2026-001 / feishu",
+      "operator": "local-user",
+      "created_at": "2026-06-12 09:59:36"
+    },
+    {
+      "id": "AUD-354d8c3a",
+      "action": "project.create",
+      "target": "P-1c205b1e",
+      "detail": "新订单链路质量保障项目",
+      "operator": "local-user",
+      "created_at": "2026-06-11 19:16:10"
+    },
+    {
+      "id": "AUD-6ca07db9",
+      "action": "automation.run",
+      "target": "AUTO-b6294b7b",
+      "detail": "P-2026-002",
+      "operator": "local-user",
+      "created_at": "2026-06-11 19:15:13"
+    },
+    {
+      "id": "AUD-bdaca495",
+      "action": "automation.run",
+      "target": "AUTO-781227ad",
+      "detail": "P-2026-002",
+      "operator": "local-user",
+      "created_at": "2026-06-11 19:15:08"
+    },
+    {
+      "id": "AUD-4bde8139",
+      "action": "test_cases.generate",
+      "target": "P-2026-002",
+      "detail": "4 cases",
+      "operator": "local-user",
+      "created_at": "2026-06-11 19:14:57"
+    },
+    {
+      "id": "AUD-2b187f78",
+      "action": "requirement.import",
+      "target": "REQ-0d615908",
+      "detail": "P-2026-002",
+      "operator": "local-user",
+      "created_at": "2026-06-11 19:14:41"
+    },
+    {
+      "id": "AUD-b8197cbb",
+      "action": "requirement.import",
+      "target": "REQ-3d5e6edb",
+      "detail": "P-2026-002",
+      "operator": "local-user",
+      "created_at": "2026-06-11 19:14:18"
+    },
+    {
+      "id": "AUD-e8db0ac4",
+      "action": "release_gate.evaluate",
+      "target": "REL-451b70b9",
+      "detail": "blocked",
+      "operator": "local-user",
+      "created_at": "2026-06-11 19:13:10"
+    },
+    {
+      "id": "AUD-6d57c665",
+      "action": "automation.run",
+      "target": "AUTO-3a8ee3fa",
+      "detail": "P-2026-001",
+      "operator": "local-user",
+      "created_at": "2026-06-11 19:13:10"
+    },
+    {
+      "id": "AUD-bd45a9d2",
+      "action": "sonar.collect",
+      "target": "SONAR-6a1d4bc9",
+      "detail": "PR-3ea459b9",
+      "operator": "local-user",
+      "created_at": "2026-06-11 19:13:10"
+    },
+    {
+      "id": "AUD-4dd5b417",
+      "action": "test_cases.generate",
+      "target": "P-2026-001",
+      "detail": "7 cases",
+      "operator": "local-user",
+      "created_at": "2026-06-11 19:13:00"
+    },
+    {
+      "id": "AUD-14e6c2cb",
+      "action": "pr.register",
+      "target": "PR-3ea459b9",
+      "detail": "P-2026-001",
+      "operator": "local-user",
+      "created_at": "2026-06-11 19:13:00"
+    },
+    {
+      "id": "AUD-3744a649",
+      "action": "requirement.import",
+      "target": "REQ-81fabe23",
+      "detail": "P-2026-001",
+      "operator": "local-user",
+      "created_at": "2026-06-11 19:13:00"
+    }
+  ],
+  "requirement_sources": [
+    {
+      "id": "SRC-90c2a3a7",
+      "project_id": "P-2026-001",
+      "source_type": "feishu",
+      "source_category": "协作文档",
+      "source_provider": "飞书文档",
+      "import_action": "register_link",
+      "source_category_id": "",
+      "source_provider_id": "",
+      "import_mode": "feishu",
+      "source_name": "验收冒烟 PRD",
+      "source_url": "https://feishu.example.com/docx/smoke",
+      "file_name": "",
+      "external_provider": "feishu",
+      "external_doc_id": "smoke",
+      "version": "v1",
+      "content_hash": "7832742921988232651",
+      "parse_status": "parsed",
+      "permission_status": "verified",
+      "imported_at": "2026-06-15 15:42:50"
+    },
+    {
+      "id": "SRC-417e27cf",
+      "project_id": "P-2026-001",
+      "source_type": "paste",
+      "import_mode": "paste",
+      "source_name": "订单优惠 PRD v1.0",
+      "source_url": "",
+      "file_name": "",
+      "external_provider": "paste",
+      "external_doc_id": "",
+      "version": "v1",
+      "content_hash": "469569066680868643",
+      "parse_status": "parsed",
+      "permission_status": "local",
+      "imported_at": "2026-06-15 15:26:11"
+    },
+    {
+      "id": "SRC-132f2ca2",
+      "project_id": "P-2026-001",
+      "source_type": "paste",
+      "import_mode": "paste",
+      "source_name": "订单优惠 PRD v1.0",
+      "source_url": "",
+      "file_name": "",
+      "external_provider": "paste",
+      "external_doc_id": "",
+      "version": "v1",
+      "content_hash": "469569066680868643",
+      "parse_status": "parsed",
+      "permission_status": "local",
+      "imported_at": "2026-06-15 15:25:50"
+    },
+    {
+      "id": "SRC-68d4b29b",
+      "project_id": "P-1c205b1e",
+      "source_type": "file",
+      "import_mode": "file",
+      "source_name": "订单优惠 PRD v1.0",
+      "source_url": "",
+      "file_name": "",
+      "external_provider": "file",
+      "external_doc_id": "",
+      "version": "v1",
+      "content_hash": "3579256746248288853",
+      "parse_status": "parsed",
+      "permission_status": "local",
+      "imported_at": "2026-06-12 10:38:30"
+    },
+    {
+      "id": "SRC-783469b3",
+      "project_id": "P-2026-001",
+      "source_type": "feishu",
+      "import_mode": "feishu",
+      "source_name": "订单交易核心链路 PRD",
+      "source_url": "https://feishu.example.com/docx/order-core-chain",
+      "file_name": "",
+      "external_provider": "",
+      "external_doc_id": "",
+      "version": "v1",
+      "content_hash": "1722579932612037563",
+      "parse_status": "parsed",
+      "permission_status": "verified",
+      "imported_at": "2026-06-12 10:04:55"
+    },
+    {
+      "id": "SRC-23a83128",
+      "project_id": "P-2026-001",
+      "source_type": "feishu",
+      "import_mode": "feishu",
+      "source_name": "订单交易核心链路 PRD",
+      "source_url": "https://feishu.example.com/docx/order-core-chain",
+      "file_name": "",
+      "external_provider": "",
+      "external_doc_id": "",
+      "version": "v1",
+      "content_hash": "5872094019153580296",
+      "parse_status": "parsed",
+      "permission_status": "verified",
+      "imported_at": "2026-06-12 09:59:36"
+    }
+  ],
+  "agent_runs": [],
+  "quality_metrics": [
+    {
+      "project_id": "P-2026-001",
+      "metric": "sonar_gate_pass_rate",
+      "value": 0.73,
+      "target": 0.95,
+      "status": "warning"
+    },
+    {
+      "project_id": "P-2026-001",
+      "metric": "unit_coverage",
+      "value": 0.78,
+      "target": 0.8,
+      "status": "warning"
+    },
+    {
+      "project_id": "P-2026-001",
+      "metric": "api_automation_pass_rate",
+      "value": 0.88,
+      "target": 0.98,
+      "status": "failed"
+    },
+    {
+      "project_id": "P-2026-001",
+      "metric": "api_p95_latency_ms",
+      "value": 420,
+      "target": 300,
+      "status": "failed"
+    },
+    {
+      "project_id": "P-2026-001",
+      "metric": "legacy_defects",
+      "value": 5,
+      "target": 0,
+      "status": "warning"
+    },
+    {
+      "project_id": "P-2026-002",
+      "metric": "sonar_gate_pass_rate",
+      "value": 0.69,
+      "target": 0.95,
+      "status": "failed"
+    },
+    {
+      "project_id": "P-2026-002",
+      "metric": "automation_coverage",
+      "value": 0.64,
+      "target": 0.9,
+      "status": "failed"
+    }
+  ],
+  "external_mappings": [
+    {
+      "id": "MAP-pr-128",
+      "integration_id": "git-main",
+      "external_system": "GitLab",
+      "external_object_type": "merge_request",
+      "external_object_id": "order-service!128",
+      "internal_object_type": "PullRequest",
+      "internal_object_id": "pending-pr",
+      "external_url": "https://git.example.com/order/order-service/pull/128",
+      "last_synced_at": "2026-06-15 15:20:40"
+    },
+    {
+      "id": "MAP-doc-prd",
+      "integration_id": "doc-main",
+      "external_system": "Feishu",
+      "external_object_type": "docx",
+      "external_object_id": "order-coupon-prd",
+      "internal_object_type": "RequirementSource",
+      "internal_object_id": "pending-source",
+      "external_url": "https://feishu.example.com/docx/order-coupon-prd",
+      "last_synced_at": "2026-06-15 15:20:40"
+    }
+  ],
+  "webhook_events": [
+    {
+      "id": "WH-64fb6562",
+      "integration_id": "ci-main",
+      "event_type": "pipeline.finished",
+      "external_event_id": "evt-1781508040",
+      "payload": {
+        "event_type": "pipeline.finished",
+        "summary": "smoke webhook"
+      },
+      "signature_valid": true,
+      "process_status": "processed",
+      "summary": "smoke webhook",
+      "received_at": "2026-06-15 15:20:40",
+      "processed_at": "2026-06-15 15:20:40"
+    },
+    {
+      "id": "WH-ci-demo",
+      "integration_id": "ci-main",
+      "event_type": "pipeline.finished",
+      "external_event_id": "pipe-20260615-001",
+      "process_status": "processed",
+      "signature_valid": true,
+      "summary": "订单服务流水线完成，单测通过率 96%",
+      "received_at": "2026-06-15 15:20:40",
+      "processed_at": "2026-06-15 15:20:40"
+    }
+  ],
+  "sync_jobs": [
+    {
+      "id": "SYNC-sonar-demo",
+      "integration_id": "sonar-main",
+      "sync_type": "pull_quality_gate",
+      "target_type": "project",
+      "target_id": "P-2026-001",
+      "status": "completed",
+      "cursor_value": "analysis-20260615",
+      "error_message": "",
+      "started_at": "2026-06-15 15:20:40",
+      "finished_at": "2026-06-15 15:20:40",
+      "created_by": "quality-platform"
+    }
+  ],
+  "tool_runs": [
+    {
+      "id": "TOOL-734c8559",
+      "integration_id": "data-bank",
+      "tool_type": "data_bank",
+      "project_id": "P-2026-001",
+      "request": {
+        "source": "quality-platform"
+      },
+      "external_task_id": "DATA_BANK-1781508289",
+      "status": "completed",
+      "result": {
+        "data_set_ref": "DATASET-ORDER-COUPON-001",
+        "templates": [
+          "全场券",
+          "商品券",
+          "库存并发"
+        ]
+      },
+      "evidence_id": "EVD-05c68a69",
+      "triggered_by": "local-user",
+      "started_at": "2026-06-15 15:24:49",
+      "finished_at": "2026-06-15 15:24:49"
+    },
+    {
+      "id": "TOOL-auto-demo",
+      "integration_id": "auto-main",
+      "tool_type": "automation",
+      "project_id": "P-2026-001",
+      "request": {
+        "suite": "order-core-risk-regression"
+      },
+      "external_task_id": "AUTO-20260615-001",
+      "status": "completed",
+      "result": {
+        "total": 42,
+        "passed": 36,
+        "failed": 6
+      },
+      "evidence_id": "",
+      "triggered_by": "test-orchestration-agent",
+      "started_at": "2026-06-15 15:20:40",
+      "finished_at": "2026-06-15 15:20:40"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "version": "1.0",
+  "name": "AI Coding SDLC Quality Policy",
+  "risk_levels": ["low", "medium", "high", "critical"],
+  "stages": [
+    {
+      "id": "requirements",
+      "name": "需求准入",
+      "goal": "确保 AI 编码前业务目标、验收标准和风险边界清晰。",
+      "owner": "Product Owner / Test Engineer",
+      "required_evidence": {
+        "low": ["business_goal", "acceptance_criteria"],
+        "medium": ["business_goal", "acceptance_criteria", "impact_scope"],
+        "high": ["business_goal", "acceptance_criteria", "impact_scope", "risk_assessment"],
+        "critical": ["business_goal", "acceptance_criteria", "impact_scope", "risk_assessment", "business_approval"]
+      }
+    },
+    {
+      "id": "design",
+      "name": "设计评审",
+      "goal": "在实现前识别架构、数据、安全和可回滚性风险。",
+      "owner": "Architect / Security / Test Engineer",
+      "required_evidence": {
+        "low": ["change_scope"],
+        "medium": ["change_scope", "interface_contract"],
+        "high": ["change_scope", "interface_contract", "rollback_strategy", "security_design_review"],
+        "critical": ["change_scope", "interface_contract", "rollback_strategy", "security_design_review", "data_recovery_plan"]
+      }
+    },
+    {
+      "id": "coding",
+      "name": "AI 编码约束",
+      "goal": "让 AI 生成范围、Prompt 假设和人工修改可追溯。",
+      "owner": "Developer",
+      "required_evidence": {
+        "low": ["ai_usage_notes", "human_review_notes"],
+        "medium": ["ai_usage_notes", "prompt_assumptions", "human_review_notes"],
+        "high": ["ai_usage_notes", "prompt_assumptions", "forbidden_scope", "human_review_notes"],
+        "critical": ["ai_usage_notes", "prompt_assumptions", "forbidden_scope", "human_review_notes", "pair_review_record"]
+      }
+    },
+    {
+      "id": "pr",
+      "name": "PR 准入",
+      "goal": "每个 AI 参与变更必须进入统一合并请求流程。",
+      "owner": "Developer / Reviewer",
+      "required_evidence": {
+        "low": ["pr_description", "changed_files", "test_notes"],
+        "medium": ["pr_description", "changed_files", "test_notes", "risk_level"],
+        "high": ["pr_description", "changed_files", "test_notes", "risk_level", "reviewer_approval"],
+        "critical": ["pr_description", "changed_files", "test_notes", "risk_level", "reviewer_approval", "release_approval"]
+      }
+    },
+    {
+      "id": "verification",
+      "name": "测试验证",
+      "goal": "按风险等级执行自动化测试、AI 辅助测试分析和人工测试确认。",
+      "owner": "Test Engineer",
+      "required_evidence": {
+        "low": ["unit_test_result", "static_scan_result", "secret_scan_result"],
+        "medium": ["unit_test_result", "integration_test_result", "contract_test_result", "static_scan_result", "secret_scan_result"],
+        "high": ["unit_test_result", "integration_test_result", "contract_test_result", "e2e_test_result", "security_test_result", "static_scan_result", "secret_scan_result", "ai_test_analysis"],
+        "critical": ["unit_test_result", "integration_test_result", "contract_test_result", "e2e_test_result", "security_test_result", "mutation_or_property_test", "static_scan_result", "secret_scan_result", "ai_test_analysis", "manual_test_signoff"]
+      }
+    },
+    {
+      "id": "security_supply_chain",
+      "name": "安全与供应链",
+      "goal": "阻止 AI 引入不安全代码、敏感信息、漏洞依赖和不可追溯产物。",
+      "owner": "Security / Platform",
+      "required_evidence": {
+        "low": ["secret_scan_result"],
+        "medium": ["secret_scan_result", "dependency_scan_result"],
+        "high": ["secret_scan_result", "dependency_scan_result", "sbom", "llm_threat_review"],
+        "critical": ["secret_scan_result", "dependency_scan_result", "sbom", "llm_threat_review", "build_provenance", "artifact_signature"]
+      }
+    },
+    {
+      "id": "release",
+      "name": "发布控制",
+      "goal": "高风险 AI 代码必须具备灰度、回滚、监控和审批机制。",
+      "owner": "Release Manager / SRE / Business Owner",
+      "required_evidence": {
+        "low": ["release_notes"],
+        "medium": ["release_notes", "rollback_plan"],
+        "high": ["release_notes", "rollback_plan", "monitoring_plan", "staged_rollout_plan"],
+        "critical": ["release_notes", "rollback_plan", "monitoring_plan", "staged_rollout_plan", "business_approval", "incident_response_plan"]
+      }
+    },
+    {
+      "id": "operate_learn",
+      "name": "运行与复盘",
+      "goal": "用线上指标和缺陷复盘持续优化测试、Prompt 和门禁。",
+      "owner": "Test Engineer / SRE / Engineering Manager",
+      "required_evidence": {
+        "low": ["quality_metrics"],
+        "medium": ["quality_metrics", "regression_feedback"],
+        "high": ["quality_metrics", "regression_feedback", "post_release_monitoring"],
+        "critical": ["quality_metrics", "regression_feedback", "post_release_monitoring", "post_release_review"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 时代研发协同与质量工程平台</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>AI 时代研发协同与质量工程平台</h1>
+      <p>面向产品、研发、测试、发布、业务验收的流程编排、工具集成、AI Agent 协同与质量风险治理平台</p>
+    </div>
+    <div class="top-actions">
+      <button id="sampleBtn" type="button">填充示例</button>
+      <button id="exportBtn" type="button">导出报告</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <nav class="steps" aria-label="能力域">
+      <button class="step active" data-target="agentlab">Agent 编排舱</button>
+      <button class="step" data-target="dashboard">总览</button>
+      <button class="step" data-target="simulator">场景模拟</button>
+      <button class="step" data-target="platform">平台蓝图</button>
+      <button class="step" data-target="collaboration">协同作业流</button>
+      <button class="step" data-target="agents">Agent 协同</button>
+      <button class="step" data-target="toolchain">工具集成</button>
+      <button class="step" data-target="sdlc">SDLC 全链路</button>
+      <button class="step" data-target="controls">控制框架</button>
+      <button class="step" data-target="change">变更准入</button>
+      <button class="step" data-target="risk">风险分级</button>
+      <button class="step" data-target="tests">测试策略</button>
+      <button class="step" data-target="security">安全供应链</button>
+      <button class="step" data-target="review">AI 评审</button>
+      <button class="step" data-target="metrics">度量看板</button>
+      <button class="step" data-target="report">报告</button>
+    </nav>
+
+    <section class="workspace">
+      <section id="agentlab" class="panel active">
+        <div class="panel-head">
+          <div>
+            <h2>AI Agent 全流程编排舱</h2>
+            <span class="hint">把需求到发布复盘的全流程交给 Agent 编排执行，平台负责约束、审计、证据和风险决策</span>
+          </div>
+          <span id="agentRunState" class="badge warn">待启动</span>
+        </div>
+
+        <div class="agent-controlbar">
+          <label>业务模拟场景
+            <select id="agentScenarioSelect"></select>
+          </label>
+          <label>执行模式
+            <select id="agentMode">
+              <option value="guarded">Guarded Autonomy：关键门禁需人工确认</option>
+              <option value="supervised">Supervised：每步执行后等待确认</option>
+              <option value="autonomous">Autonomous：低中风险自动推进</option>
+            </select>
+          </label>
+          <div class="agent-buttons">
+            <button id="startAgentRunBtn" type="button">启动 Agent 群</button>
+            <button id="nextAgentStepBtn" type="button">执行下一步</button>
+            <button id="autoAgentRunBtn" type="button">自动跑到门禁</button>
+            <button id="resetAgentRunBtn" type="button">重置</button>
+          </div>
+        </div>
+
+        <div class="agent-hero">
+          <div>
+            <span class="eyebrow">当前项目群</span>
+            <h3 id="agentImpactTitle">订单交易优惠规则变更</h3>
+            <p id="agentImpactSummary"></p>
+            <div id="agentImpactTags" class="tag-list"></div>
+          </div>
+          <div class="agent-scorecard">
+            <article><span>风险等级</span><strong id="agentRiskLevel">-</strong></article>
+            <article><span>Agent 进度</span><strong id="agentProgress">0/0</strong></article>
+            <article><span>证据完整度</span><strong id="agentEvidenceScore">0%</strong></article>
+            <article><span>发布建议</span><strong id="agentDecision">-</strong></article>
+          </div>
+        </div>
+
+        <div class="agent-workspace">
+          <section class="agent-main">
+            <div id="agentFlow" class="agent-flow"></div>
+            <div id="agentStepDetail" class="agent-step-detail"></div>
+          </section>
+          <aside class="agent-side">
+            <article>
+              <h3>跨团队依赖图</h3>
+              <div id="agentDependencyGraph" class="dependency-board"></div>
+            </article>
+            <article>
+              <h3>风险雷达</h3>
+              <div id="agentRiskRadar" class="risk-radar"></div>
+            </article>
+          </aside>
+        </div>
+
+        <div class="agent-panels">
+          <article>
+            <h3>Agent 生成产物</h3>
+            <div id="agentArtifacts" class="artifact-list"></div>
+          </article>
+          <article>
+            <h3>工具任务队列</h3>
+            <div id="agentToolQueue" class="tool-queue"></div>
+          </article>
+          <article>
+            <h3>Mock 测试数据</h3>
+            <div id="agentMockData" class="mock-data"></div>
+          </article>
+        </div>
+
+        <div class="agent-log-wrap">
+          <h3>执行日志</h3>
+          <div id="agentExecutionLog" class="execution-log"></div>
+        </div>
+      </section>
+
+      <section id="dashboard" class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>研发协同平台总览</h2>
+            <span class="hint">把 AI Coding 时代的软件变更纳入可评估、可验证、可追踪、可复盘的全研发协同体系</span>
+          </div>
+          <span id="readinessBadge" class="badge warn">Not ready</span>
+        </div>
+        <div class="summary-grid">
+          <article>
+            <span>风险等级</span>
+            <strong id="riskSummary">Low 5/25</strong>
+          </article>
+          <article>
+            <span>质量门禁</span>
+            <strong id="gateSummary">0/12</strong>
+          </article>
+          <article>
+            <span>测试充分度</span>
+            <strong id="testSummary">0%</strong>
+          </article>
+          <article>
+            <span>体系成熟度</span>
+            <strong id="maturitySummary">0%</strong>
+          </article>
+        </div>
+        <div class="flow">
+          <div>需求澄清</div>
+          <div>方案评审</div>
+          <div>AI 编码</div>
+          <div>PR 门禁</div>
+          <div>验证/UAT</div>
+          <div>发布复盘</div>
+        </div>
+        <div id="recommendations" class="recommendations"></div>
+      </section>
+
+      <section id="simulator" class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>端到端场景模拟</h2>
+            <span class="hint">选择一个真实研发场景，观察平台如何串联需求、设计、AI 编码、PR、验证、UAT、发布和复盘</span>
+          </div>
+          <span id="scenarioDecision" class="badge warn">请选择场景</span>
+        </div>
+
+        <div id="scenarioCards" class="scenario-grid"></div>
+
+        <div class="sim-layout">
+          <section class="sim-main">
+            <div class="sim-toolbar">
+              <div>
+                <strong id="scenarioTitle">未选择场景</strong>
+                <span id="scenarioMeta" class="hint"></span>
+              </div>
+              <button id="runScenarioBtn" type="button">运行模拟门禁</button>
+            </div>
+            <div id="scenarioFlow" class="stage-flow"></div>
+            <div id="stageDetail" class="stage-detail"></div>
+          </section>
+
+          <aside class="sim-side">
+            <div class="side-card">
+              <strong>重点风险</strong>
+              <div id="riskHotspots" class="tag-list"></div>
+            </div>
+            <div class="side-card">
+              <strong>跨团队依赖</strong>
+              <div id="dependencyList"></div>
+            </div>
+            <div class="side-card">
+              <strong>门禁结论</strong>
+              <div id="gateSimulation"></div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="sim-bottom">
+          <article>
+            <h3>AI Agent 输出</h3>
+            <div id="agentSimulation" class="mini-list"></div>
+          </article>
+          <article>
+            <h3>工具任务与证据</h3>
+            <div id="toolSimulation" class="mini-list"></div>
+          </article>
+          <article>
+            <h3>测试数据</h3>
+            <div id="dataSimulation" class="mini-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="platform" class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>平台蓝图</h2>
+            <span class="hint">从流程、工具、智能体、风险、证据、经营六层搭建研发协同操作系统</span>
+          </div>
+        </div>
+        <div class="capability-grid">
+          <article>
+            <strong>流程编排层</strong>
+            <span>阶段、责任人、准入准出、阻断、例外审批统一配置</span>
+          </article>
+          <article>
+            <strong>风险决策层</strong>
+            <span>按业务链路、数据影响、AI 不确定性、历史缺陷计算风险等级</span>
+          </article>
+          <article>
+            <strong>AI 协同层</strong>
+            <span>需求、方案、PR、测试、失败归因、复盘 Agent 辅助分析</span>
+          </article>
+          <article>
+            <strong>工具编排层</strong>
+            <span>接入数据银行、自动化、性能、混沌、Sonar、CI/CD、监控</span>
+          </article>
+          <article>
+            <strong>证据中心</strong>
+            <span>沉淀需求、代码、测试、UAT、发布和复盘证据</span>
+          </article>
+          <article>
+            <strong>研发经营层</strong>
+            <span>用 Lead Time、AI CFR、缺陷逃逸率、核心链路稳定性经营研发</span>
+          </article>
+        </div>
+        <div class="note">
+          <strong>平台定位</strong>
+          <p>不是 QA 工具箱，而是面向产品、研发、测试、发布、业务验收的统一协同生产系统。</p>
+        </div>
+      </section>
+
+      <section id="collaboration" class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>协同作业流</h2>
+            <span class="hint">同一变更在平台内完成需求澄清、方案评审、PR 门禁、测试验证、UAT、发布和复盘</span>
+          </div>
+        </div>
+        <div class="role-grid">
+          <article>
+            <strong>产品/业务</strong>
+            <p>提供业务目标、验收标准、UAT 口径，确认全场券、商品券等业务规则。</p>
+          </article>
+          <article>
+            <strong>研发</strong>
+            <p>提交技术方案、AI Coding 使用说明、PR、单测、自检和回滚方案。</p>
+          </article>
+          <article>
+            <strong>测试</strong>
+            <p>编排数据银行、接口自动化、E2E、性能、混沌和探索测试证据。</p>
+          </article>
+          <article>
+            <strong>发布/运维</strong>
+            <p>确认灰度、监控、告警、回滚、发布窗口和异常响应预案。</p>
+          </article>
+        </div>
+        <div class="timeline">
+          <span>需求</span><span>设计</span><span>编码</span><span>PR</span><span>验证</span><span>UAT</span><span>发布</span><span>复盘</span>
+        </div>
+      </section>
+
+      <section id="agents" class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>AI Agent 协同</h2>
+            <span class="hint">AI 负责分析、推荐和证据生成，人负责业务语义、风险裁决和例外审批</span>
+          </div>
+        </div>
+        <div class="catalog">
+          <article><h3>需求澄清 Agent</h3><p>抽取业务规则、验收点、歧义和影响链路。</p></article>
+          <article><h3>方案评审 Agent</h3><p>识别架构、接口、数据一致性、回滚和依赖风险。</p></article>
+          <article><h3>PR Diff Agent</h3><p>分析 Diff、影响服务、历史缺陷和风险等级建议。</p></article>
+          <article><h3>测试策略 Agent</h3><p>推荐测试范围、数据需求、回归集和 UAT 关注点。</p></article>
+          <article><h3>失败归因 Agent</h3><p>分析 CI、自动化、日志失败，给出疑似根因。</p></article>
+          <article><h3>复盘 Agent</h3><p>把逃逸缺陷转化为新增用例、门禁规则和知识库条目。</p></article>
+        </div>
+      </section>
+
+      <section id="toolchain" class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>工具集成</h2>
+            <span class="hint">复用现有平台能力，由协同平台统一触发、收集证据和生成门禁结论</span>
+          </div>
+        </div>
+        <div class="tool-grid">
+          <article><strong>数据银行</strong><span>自动准备全场券、商品券、库存、支付异常等测试数据</span></article>
+          <article><strong>自动化框架</strong><span>按风险推荐接口、E2E、回归测试集合</span></article>
+          <article><strong>性能平台</strong><span>验证下单、结算、支付前校验等核心接口 P95/P99</span></article>
+          <article><strong>混沌工程</strong><span>验证优惠、库存、支付依赖异常下的降级和恢复能力</span></article>
+          <article><strong>Sonar/覆盖率</strong><span>提供静态扫描、复杂度、漏洞、单测覆盖率变化</span></article>
+          <article><strong>监控/缺陷</strong><span>绑定发布监控，回收线上缺陷并反哺门禁</span></article>
+        </div>
+      </section>
+
+      <section id="sdlc" class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>SDLC 全链路协同控制</h2>
+            <span class="hint">从需求到运行复盘，每个阶段都有责任人、证据、AI 辅助和自动化门禁</span>
+          </div>
+        </div>
+        <div class="sdlc-map">
+          <article>
+            <strong>需求准入</strong>
+            <span>业务目标、验收标准、影响范围、风险评估</span>
+          </article>
+          <article>
+            <strong>设计评审</strong>
+            <span>接口契约、回滚策略、安全设计、数据恢复</span>
+          </article>
+          <article>
+            <strong>AI 编码约束</strong>
+            <span>AI 使用说明、Prompt 假设、禁止范围、人工复核</span>
+          </article>
+          <article>
+            <strong>PR 准入</strong>
+            <span>PR 描述、改动文件、测试说明、风险等级</span>
+          </article>
+          <article>
+            <strong>测试验证</strong>
+            <span>单元、集成、契约、E2E、安全、AI 测试分析</span>
+          </article>
+          <article>
+            <strong>安全供应链</strong>
+            <span>SAST、密钥扫描、SCA、SBOM、LLM 风险评审</span>
+          </article>
+          <article>
+            <strong>发布控制</strong>
+            <span>发布说明、回滚、监控、灰度、审批</span>
+          </article>
+          <article>
+            <strong>运行复盘</strong>
+            <span>质量指标、回归反馈、线上监控、缺陷复盘</span>
+          </article>
+        </div>
+        <div class="note">
+          <strong>可执行入口</strong>
+          <p>使用 <code>python3 scripts/sdlc_gate.py --manifest evidence/&lt;change&gt;.json</code> 按风险等级自动检查每个阶段证据是否齐全。</p>
+        </div>
+      </section>
+
+      <section id="controls" class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>控制框架</h2>
+            <span class="hint">把前面搭建的文档体系映射到行业实践和可执行证据</span>
+          </div>
+        </div>
+        <div id="controlCatalog" class="catalog"></div>
+      </section>
+
+      <section id="change" class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>变更准入</h2>
+            <span class="hint">AI 写代码之前先明确边界，AI 写完之后必须提交证据</span>
+          </div>
+        </div>
+        <div class="form-grid">
+          <label>变更标题<input id="title" type="text" placeholder="例如：新增订单权限校验"></label>
+          <label>业务目标<textarea id="businessGoal" rows="4"></textarea></label>
+          <label>AI 使用说明<textarea id="aiUsage" rows="4" placeholder="说明 AI 生成、人工修改、人工复核的范围"></textarea></label>
+          <label>禁止触碰范围<textarea id="forbiddenScope" rows="3" placeholder="例如：不得修改支付结算逻辑，不得引入新依赖"></textarea></label>
+          <label>验收标准<textarea id="acceptance" rows="5"></textarea></label>
+          <label>回滚方案<textarea id="rollback" rows="4"></textarea></label>
+          <label>剩余风险<textarea id="residualRisk" rows="4"></textarea></label>
+        </div>
+      </section>
+
+      <section id="risk" class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>风险分级</h2>
+            <span class="hint">风险决定门禁强度，高风险变更不能只看 happy path</span>
+          </div>
+          <span id="riskBadge" class="badge low">Low 5/25</span>
+        </div>
+        <div class="score-grid">
+          <label>用户影响<select id="userImpact"></select></label>
+          <label>数据影响<select id="dataImpact"></select></label>
+          <label>复杂度<select id="complexity"></select></label>
+          <label>可回滚性风险<select id="reversibility"></select></label>
+          <label>信心缺口<select id="confidence"></select></label>
+          <label>合规/隐私影响<select id="compliance"></select></label>
+          <label>AI 自主度<select id="agency"></select></label>
+          <label>供应链影响<select id="supplyChain"></select></label>
+        </div>
+        <div id="riskAdvice" class="note"></div>
+      </section>
+
+      <section id="tests" class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>测试策略</h2>
+            <span class="hint">从测试金字塔扩展到契约、变异、属性、可观测性和混沌/韧性验证</span>
+          </div>
+          <span id="testBadge" class="badge warn">0%</span>
+        </div>
+        <div class="checks" id="testChecks"></div>
+        <div class="form-grid">
+          <label>单元测试<textarea id="unitTests" rows="4"></textarea></label>
+          <label>集成/契约测试<textarea id="integrationTests" rows="4"></textarea></label>
+          <label>端到端/关键旅程<textarea id="e2eTests" rows="4"></textarea></label>
+          <label>安全/滥用场景<textarea id="securityTests" rows="4"></textarea></label>
+          <label>性能/容量/韧性<textarea id="performanceTests" rows="4"></textarea></label>
+          <label>人工探索测试<textarea id="manualChecks" rows="4"></textarea></label>
+        </div>
+      </section>
+
+      <section id="security" class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>安全与供应链</h2>
+            <span class="hint">覆盖 SSDF、SLSA、SBOM、签名、依赖治理和 AI 特有风险</span>
+          </div>
+          <span id="securityBadge" class="badge warn">0%</span>
+        </div>
+        <div class="checks" id="securityChecks"></div>
+      </section>
+
+      <section id="review" class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>AI 评审</h2>
+            <span class="hint">AI 可以辅助发现风险，但最终责任必须由人和门禁共同承担</span>
+          </div>
+        </div>
+        <div class="checks" id="reviewChecks"></div>
+        <div class="form-grid">
+          <label>AI 评审结论<textarea id="aiReviewNotes" rows="5" placeholder="记录 AI 发现的风险、建议补充的测试、可能的架构偏差"></textarea></label>
+          <label>人工复核结论<textarea id="humanReviewNotes" rows="5" placeholder="记录人工接受/驳回 AI 建议的原因"></textarea></label>
+        </div>
+      </section>
+
+      <section id="metrics" class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>度量看板</h2>
+            <span class="hint">用 DORA、缺陷逃逸和 AI 变更失败率持续校准质量体系</span>
+          </div>
+        </div>
+        <div class="metric-grid">
+          <label>变更前置时间/小时<input id="leadTime" type="number" min="0" value="0"></label>
+          <label>部署频率/周<input id="deployFrequency" type="number" min="0" value="0"></label>
+          <label>变更失败率/%<input id="changeFailRate" type="number" min="0" max="100" value="0"></label>
+          <label>失败部署恢复时间/小时<input id="recoveryTime" type="number" min="0" value="0"></label>
+          <label>部署返工率/%<input id="reworkRate" type="number" min="0" max="100" value="0"></label>
+          <label>缺陷逃逸数/周<input id="escapedDefects" type="number" min="0" value="0"></label>
+          <label>AI 变更失败率/%<input id="aiFailureRate" type="number" min="0" max="100" value="0"></label>
+          <label>自动化回归通过率/%<input id="regressionPassRate" type="number" min="0" max="100" value="0"></label>
+        </div>
+        <div id="metricAdvice" class="note"></div>
+      </section>
+
+      <section id="report" class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>报告</h2>
+            <span class="hint">报告可作为 PR 质量证据、发布评审材料和缺陷复盘输入</span>
+          </div>
+        </div>
+        <pre id="reportText"></pre>
+      </section>
+    </section>
+  </main>
+
+  <div id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>

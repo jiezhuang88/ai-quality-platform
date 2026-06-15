@@ -1,0 +1,9 @@
+[project]
+name = "ai-code-quality-system"
+version = "0.1.0"
+description = "Quality system and executable gate for AI-assisted codebases."
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
