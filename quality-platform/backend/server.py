@@ -124,6 +124,9 @@ def seed_state() -> dict:
         "sync_jobs": seed_sync_jobs(),
         "tool_runs": seed_tool_runs(),
         "agent_runs": [],
+        "gate_runs": [],
+        "runbook_steps": seed_runbook_steps(),
+        "agent_skill_catalog": seed_agent_skill_catalog(),
         "quality_metrics": seed_quality_metrics(),
         "agents": seed_agents(),
         "integrations": seed_integrations(),
@@ -486,6 +489,53 @@ def seed_policies() -> list:
     ]
 
 
+def seed_runbook_steps() -> list:
+    return [
+        {"id": "project_intake", "stage": "项目接入", "title": "确认大型项目空间", "agent_id": "architecture-agent", "gate": "project_scope_gate", "description": "确认项目已维护系统、仓库、Owner 和风险等级。"},
+        {"id": "prd_import", "stage": "需求澄清", "title": "导入 PRD 并生成规则卡", "agent_id": "requirement-agent", "gate": "prd_quality_gate", "description": "通过 Mock PRD Adapter 导入需求并抽取规则、验收、歧义和风险。"},
+        {"id": "prd_confirm", "stage": "需求澄清", "title": "确认 PRD 质量门禁", "agent_id": "requirement-agent", "gate": "prd_quality_gate", "description": "产品 Owner 确认规则卡，未确认歧义保留为人工 Review 项。"},
+        {"id": "pr_register", "stage": "PR 门禁", "title": "登记多仓库 PR", "agent_id": "pr-diff-agent", "gate": "pr_quality_gate", "description": "按项目、系统、仓库登记 AI Coding 产生的 PR。"},
+        {"id": "sonar_collect", "stage": "PR 门禁", "title": "拉取 Sonar 并执行 PR 门禁", "agent_id": "pr-diff-agent", "gate": "pr_quality_gate", "description": "汇聚 Sonar、AI 生成比例、变更规模和必跑测试建议。"},
+        {"id": "case_generate", "stage": "测试验证", "title": "生成候选测试用例", "agent_id": "test-orchestration-agent", "gate": "test_asset_gate", "description": "基于 PRD 和 PR 风险生成结构化候选用例。"},
+        {"id": "case_review", "stage": "测试验证", "title": "Review 并入库 P0/P1 用例", "agent_id": "test-orchestration-agent", "gate": "test_asset_gate", "description": "模拟 QA Review、批准入库和自动化绑定。"},
+        {"id": "automation_run", "stage": "测试验证", "title": "触发自动化执行", "agent_id": "test-orchestration-agent", "gate": "test_execution_gate", "description": "执行风险回归套件并把结果归一化为证据。"},
+        {"id": "agent_simulate", "stage": "全流程", "title": "运行 8 个阶段 Agent", "agent_id": "retrospective-agent", "gate": "agent_governance_gate", "description": "按当前项目上下文运行所有 Agent，记录工具调用和结论。"},
+        {"id": "release_gate", "stage": "发布决策", "title": "评估发布准入", "agent_id": "release-decision-agent", "gate": "release_gate", "description": "汇总 PR、测试、证据和阻断项，输出发布准入结论。"},
+    ]
+
+
+def seed_agent_skill_catalog() -> list:
+    def skill(skill_id, stage, agent_id, name, description, inputs, outputs, tools, rules):
+        return {
+            "id": skill_id,
+            "stage": stage,
+            "agent_id": agent_id,
+            "name": name,
+            "description": description,
+            "inputs": inputs,
+            "outputs": outputs,
+            "tools": tools,
+            "quality_rules": rules,
+            "eval_cases": [
+                {"id": f"{skill_id}-happy", "expected": "输出结构化结论和证据引用"},
+                {"id": f"{skill_id}-risk", "expected": "识别阻断项并给出人工确认动作"},
+            ],
+        }
+
+    return [
+        skill("prd-rule-card-extraction", "需求澄清", "requirement-agent", "PRD 规则卡抽取", "从 PRD 中抽取业务目标、规则、验收标准、歧义点和风险提示。", ["RequirementSource", "Project"], ["RequirementRuleCard", "QualityEvidence"], ["PRD Parser", "Document Adapter"], ["缺少验收标准必须 manual_review", "不得编造 PRD 未出现的业务概念"]),
+        skill("prd-quality-gate", "需求澄清", "requirement-agent", "PRD 质量门禁", "检查规则是否可测试、验收是否可执行、歧义是否闭环。", ["RequirementRuleCard"], ["GateResult", "ActionItems"], ["Policy Engine"], ["L3/L4 必须识别风险提示", "核心歧义未确认不得进入开发"]),
+        skill("architecture-impact-analysis", "方案评审", "architecture-agent", "跨系统影响面分析", "识别项目影响的系统、仓库、接口契约、上下游依赖和回滚风险。", ["Project", "Repositories", "RequirementRuleCard"], ["ImpactMap", "ArchitectureRisks"], ["CMDB", "API Catalog"], ["L3/L4 缺少系统 Owner 必须阻断", "接口契约未冻结必须提示"]),
+        skill("ai-coding-guardrail", "AI 编码", "coding-agent", "AI 编码约束", "约束 AI Coding 的仓库范围、变更范围、自检说明和单测建议。", ["Project", "Repositories", "Policy"], ["SelfCheck", "UnitTestPlan"], ["Git", "Unit Test"], ["AI 生成代码必须声明影响面", "不得越权修改无关模块"]),
+        skill("pr-diff-risk-gate", "PR 门禁", "pr-diff-agent", "PR Diff 风险门禁", "汇聚 Diff、Sonar、覆盖率、AI 生成比例和 Review 状态，输出门禁结论。", ["PullRequest", "SonarResult", "QualityMetrics"], ["PrGateResult", "RequiredTests"], ["Git", "Sonar", "CI"], ["Sonar ERROR 必须阻断", "AI 生成比例 >=60% 必须强化 Review"]),
+        skill("test-case-generation", "测试验证", "test-orchestration-agent", "专业测试用例生成", "按业务规则、风险、边界、异常、并发、回滚生成候选用例。", ["RequirementRuleCard", "PrGateResult", "RiskLevel"], ["TestCaseCandidates"], ["Case Library"], ["P0/P1 必须可追溯到需求或风险", "候选用例必须经过 Review 才能入库"]),
+        skill("test-execution-orchestration", "测试验证", "test-orchestration-agent", "测试执行编排", "触发数据银行、自动化、性能、混沌任务并归一化证据。", ["TestPlan", "TestCase", "Integrations"], ["TestExecution", "QualityEvidence"], ["Data Bank", "Automation", "Performance", "Chaos"], ["自动化失败必须归因", "资金/库存/核心状态风险不得无证据放行"]),
+        skill("uat-acceptance-checklist", "UAT 验收", "uat-agent", "业务验收清单", "把规则卡转成业务验收项，并沉淀 UAT 证据和遗留风险。", ["RequirementRuleCard", "TestEvidence"], ["UatChecklist", "UatEvidence"], ["UAT Platform", "Defect"], ["核心验收项失败不得进入发布决策"]),
+        skill("release-evidence-gate", "发布决策", "release-decision-agent", "发布证据准入", "汇总 PR、测试、UAT、灰度、回滚、审批证据，输出发布结论。", ["Evidence", "ReleasePlan", "ProjectRisk"], ["ReleaseGateResult", "ReleaseReport"], ["Release System", "Monitor", "Approval"], ["阻断项未关闭不得全量发布", "L4 必须人工审批"]),
+        skill("retro-policy-learning", "复盘沉淀", "retrospective-agent", "复盘策略学习", "把线上缺陷、门禁漏报、测试缺口沉淀为规则、用例和 Agent 评测样例。", ["Defect", "Incident", "GateRun"], ["PolicySuggestion", "EvalCase", "KnowledgeItem"], ["Defect", "Metrics", "Knowledge Base"], ["P0/P1 问题必须形成改进动作"]),
+    ]
+
+
 def load_state() -> dict:
     DATA.mkdir(exist_ok=True)
     if not STATE_FILE.exists():
@@ -509,6 +559,7 @@ def load_state() -> dict:
 
 def normalize_state(state: dict) -> None:
     seeded_agents = {agent["id"]: agent for agent in seed_agents()}
+    skill_catalog = seed_agent_skill_catalog()
     current_agents = {agent.get("id"): agent for agent in state.get("agents", [])}
     for agent_id, seeded in seeded_agents.items():
         if agent_id not in current_agents:
@@ -516,8 +567,14 @@ def normalize_state(state: dict) -> None:
         else:
             for key in ["capabilities", "context_policy", "maintenance", "owner"]:
                 current_agents[agent_id].setdefault(key, seeded[key])
+        agent_ref = current_agents.get(agent_id) or next((item for item in state["agents"] if item.get("id") == agent_id), None)
+        if agent_ref is not None:
+            agent_ref["skills"] = [skill for skill in skill_catalog if skill["agent_id"] == agent_id]
     state.setdefault("requirement_sources", [])
     state.setdefault("agent_runs", [])
+    state.setdefault("gate_runs", [])
+    state.setdefault("runbook_steps", seed_runbook_steps())
+    state.setdefault("agent_skill_catalog", skill_catalog)
     state.setdefault("quality_metrics", seed_quality_metrics())
     state.setdefault("external_mappings", seed_external_mappings())
     state.setdefault("webhook_events", seed_webhook_events())
@@ -972,6 +1029,298 @@ def normalize_tool_result_to_evidence(integration: dict, tool_run: dict) -> dict
     }
 
 
+def add_gate_run(state: dict, project_id: str, gate: str, stage: str, decision: str, summary: str, blockers: list[str] | None = None) -> dict:
+    gate_run = {
+        "id": new_id("GATE"),
+        "project_id": project_id,
+        "gate": gate,
+        "stage": stage,
+        "decision": decision,
+        "summary": summary,
+        "blockers": blockers or [],
+        "created_at": now(),
+    }
+    state.setdefault("gate_runs", []).insert(0, gate_run)
+    return gate_run
+
+
+def evaluate_prd_quality(state: dict, project: dict) -> dict:
+    requirements = [item for item in state["requirements"] if item["project_id"] == project["id"]]
+    if not requirements:
+        return add_gate_run(state, project["id"], "prd_quality_gate", "需求澄清", "blocked", "缺少 PRD 或需求规则卡", ["未导入 PRD"])
+    req = requirements[0]
+    blockers = []
+    if not req.get("rules"):
+        blockers.append("未识别业务规则")
+    if not req.get("acceptance_criteria"):
+        blockers.append("未识别验收标准")
+    if project.get("risk_level") in {"L3", "L4"} and not req.get("risk_hints"):
+        blockers.append("L3/L4 缺少风险提示")
+    if req.get("ambiguities") and req.get("status") != "confirmed":
+        decision = "manual_review"
+        summary = "存在歧义点，需要产品 Owner 确认"
+    elif blockers:
+        decision = "blocked"
+        summary = "PRD 质量门禁阻断"
+    else:
+        decision = "passed"
+        summary = "PRD 规则、验收和风险提示满足当前阶段要求"
+    return add_gate_run(state, project["id"], "prd_quality_gate", "需求澄清", decision, summary, blockers)
+
+
+def ensure_demo_requirement(state: dict, project: dict) -> dict:
+    existing = [item for item in state["requirements"] if item["project_id"] == project["id"]]
+    if existing:
+        return existing[0]
+    content = (
+        "目标：支持核心订单链路在优惠、库存、支付校验变更后保持金额和状态一致。\n"
+        "规则：仅支持全场券和商品券，商品券按 SKU 生效，全场券按订单金额门槛生效。\n"
+        "验收：支付前金额必须与结算金额一致；优惠计算失败时不得进入支付。\n"
+        "风险：库存并发、优惠回滚、支付超时和跨系统接口契约需要验证。\n"
+        "待确认：券叠加顺序是否以商品券优先。"
+    )
+    source = {
+        "id": new_id("SRC"),
+        "project_id": project["id"],
+        "source_type": "text",
+        "source_category": "开源演练",
+        "source_provider": "Mock PRD",
+        "import_action": "parse_text",
+        "source_category_id": "manual",
+        "source_provider_id": "mock_prd",
+        "import_mode": "paste",
+        "source_name": "OpenSDLC 演练 PRD",
+        "source_url": "",
+        "file_name": "",
+        "external_provider": "mock",
+        "external_doc_id": "opensource-demo-prd",
+        "version": "v1",
+        "content_hash": str(abs(hash(content))),
+        "parse_status": "parsed",
+        "permission_status": "local",
+        "imported_at": now(),
+    }
+    req = parse_requirement_text(content, project["id"])
+    req.update({"source_id": source["id"], "source_name": source["source_name"], "import_mode": "paste", "integration_status": "uploaded"})
+    state["requirement_sources"].insert(0, source)
+    state["requirements"].insert(0, req)
+    state["evidence"].insert(0, {"id": new_id("EVD"), "project_id": project["id"], "evidence_type": "requirement", "source_system": "runbook", "title": "OpenSDLC PRD 解析结果", "summary": req["business_goal"], "status": "ready", "uri": "", "collected_at": now()})
+    return req
+
+
+def ensure_demo_pr(state: dict, project: dict) -> dict:
+    existing = [item for item in state["prs"] if item["project_id"] == project["id"]]
+    if existing:
+        return existing[0]
+    repo = (project.get("repositories") or [{}])[0]
+    pr = {
+        "id": new_id("PR"),
+        "project_id": project["id"],
+        "provider": "mock",
+        "external_id": "opensource-demo-pr",
+        "repository_url": repo.get("url", project.get("repo_url", "")),
+        "repository_name": repo.get("name", "demo-repository"),
+        "system_name": repo.get("system", project.get("business_domain", "核心系统")),
+        "branch": "feature/ai-quality-demo",
+        "changed_files": 24,
+        "lines_added": 420,
+        "lines_deleted": 86,
+        "title": "feat: AI Coding 核心链路变更演练",
+        "author": "opensource-user",
+        "url": repo.get("url", "https://git.example.com/demo/repo") + "/pull/opensource-demo",
+        "status": "open",
+        "ai_generated_ratio": 65,
+        "gate_status": "pending",
+        "risk_summary": "",
+        "created_at": now(),
+        "updated_at": now(),
+    }
+    state["prs"].insert(0, pr)
+    return pr
+
+
+def collect_sonar_for_pr(state: dict, pr: dict, quality_gate_status: str = "ERROR") -> dict:
+    blockers = []
+    if quality_gate_status == "ERROR":
+        blockers.append("Sonar Quality Gate ERROR")
+    if pr.get("ai_generated_ratio", 0) >= 60:
+        blockers.append("AI 生成比例较高，需要加强单测和 Review")
+    if pr.get("changed_files", 0) >= 20:
+        blockers.append("变更文件较多，需要拆分风险或补充影响面说明")
+    sonar = {
+        "id": new_id("SONAR"),
+        "pr_id": pr["id"],
+        "project_id": pr["project_id"],
+        "projectKey": pr.get("repository_name") or "demo-project",
+        "repository_name": pr.get("repository_name", ""),
+        "system_name": pr.get("system_name", ""),
+        "qualityGateStatus": quality_gate_status,
+        "bugs": 1 if quality_gate_status == "ERROR" else 0,
+        "vulnerabilities": 0,
+        "codeSmells": 12,
+        "coverage": 78.5,
+        "duplicatedLinesDensity": 1.1,
+        "blockerIssues": blockers,
+        "criticalIssues": [],
+        "collected_at": now(),
+    }
+    pr["gate_status"] = "blocked" if blockers else "passed"
+    pr["risk_summary"] = "；".join(blockers) if blockers else "Sonar 通过，进入测试门禁。"
+    pr["updated_at"] = now()
+    state["sonar_results"].insert(0, sonar)
+    state["evidence"].insert(0, {"id": new_id("EVD"), "project_id": pr["project_id"], "evidence_type": "sonar", "source_system": "sonar", "title": "Sonar 扫描结果", "summary": pr["risk_summary"], "status": pr["gate_status"], "uri": "", "collected_at": now()})
+    add_gate_run(state, pr["project_id"], "pr_quality_gate", "PR 门禁", pr["gate_status"], pr["risk_summary"], blockers)
+    return sonar
+
+
+def simulate_agent_run(state: dict, agent: dict, project: dict) -> dict:
+    context = build_project_context(state, project)
+    output = summarize_agent_decision(agent, project, context)
+    result = {
+        "id": new_id("RUN"),
+        "agent_id": agent["id"],
+        "agent_name": agent["name"],
+        "project_id": project["id"],
+        "stage": agent["stage"],
+        "context_summary": {
+            "systems": len(context["systems"]),
+            "repositories": len(context["repositories"]),
+            "requirements": len(context["requirements"]),
+            "prs": len(context["prs"]),
+            "metrics": len(context["metrics"]),
+            "evidence": len(context["evidence"]),
+        },
+        "tool_calls": [tool["tool"] for tool in agent.get("tool_permissions", [])],
+        "output": output,
+        "status": "completed",
+        "created_at": now(),
+    }
+    state.setdefault("agent_runs", []).insert(0, result)
+    return result
+
+
+def run_runbook_step(state: dict, project: dict, step_id: str) -> dict:
+    if step_id == "project_intake":
+        blockers = []
+        if not project.get("systems"):
+            blockers.append("未维护影响系统")
+        if not project.get("repositories"):
+            blockers.append("未维护关联仓库")
+        decision = "blocked" if blockers else "passed"
+        gate = add_gate_run(state, project["id"], "project_scope_gate", "项目接入", decision, "大型项目空间检查完成", blockers)
+        audit(state, "runbook.project_intake", project["id"], decision)
+        return {"gate_run": gate}
+    if step_id == "prd_import":
+        req = ensure_demo_requirement(state, project)
+        gate = evaluate_prd_quality(state, project)
+        audit(state, "runbook.prd_import", req["id"], gate["decision"])
+        return {"requirement": req, "gate_run": gate}
+    if step_id == "prd_confirm":
+        req = ensure_demo_requirement(state, project)
+        req["status"] = "confirmed"
+        req["confirmed_by"] = "Product Owner"
+        req["confirmed_at"] = now()
+        gate = evaluate_prd_quality(state, project)
+        audit(state, "runbook.prd_confirm", req["id"], gate["decision"])
+        return {"requirement": req, "gate_run": gate}
+    if step_id == "pr_register":
+        pr = ensure_demo_pr(state, project)
+        gate = add_gate_run(state, project["id"], "pr_quality_gate", "PR 门禁", "manual_review", "PR 已登记，等待 Sonar 和 Review 证据", [])
+        audit(state, "runbook.pr_register", pr["id"], "registered")
+        return {"pr": pr, "gate_run": gate}
+    if step_id == "sonar_collect":
+        pr = ensure_demo_pr(state, project)
+        sonar = collect_sonar_for_pr(state, pr)
+        audit(state, "runbook.sonar_collect", sonar["id"], pr["gate_status"])
+        return {"sonar": sonar, "pr": pr}
+    if step_id == "case_generate":
+        requirements = [r for r in state["requirements"] if r["project_id"] == project["id"]]
+        if not [c for c in state["test_cases"] if c["project_id"] == project["id"]]:
+            cases = generate_cases(project, requirements[0] if requirements else None)
+            state["test_cases"] = cases + state["test_cases"]
+        else:
+            cases = [c for c in state["test_cases"] if c["project_id"] == project["id"]]
+        gate = add_gate_run(state, project["id"], "test_asset_gate", "测试验证", "manual_review", f"已生成 {len(cases)} 条候选用例，等待 QA Review", [])
+        audit(state, "runbook.case_generate", project["id"], f"{len(cases)} cases")
+        return {"test_cases": cases, "gate_run": gate}
+    if step_id == "case_review":
+        cases = [c for c in state["test_cases"] if c["project_id"] == project["id"]]
+        if not cases:
+            cases = generate_cases(project, None)
+            state["test_cases"] = cases + state["test_cases"]
+        for case in cases:
+            if case.get("priority") in {"P0", "P1"}:
+                case["status"] = "baselined"
+                case["review_status"] = "approved"
+                case["library_status"] = "in_library"
+                case["library_id"] = case.get("library_id") or new_id("LIB")
+                if case.get("automation_recommendation", {}).get("recommended"):
+                    case["automation_binding"] = {
+                        "framework": case["automation_recommendation"].get("framework", "接口自动化框架"),
+                        "suite": case["automation_recommendation"].get("suite", "risk-based-regression"),
+                        "case_key": f"AUTO-{case['id']}",
+                    }
+        gate = add_gate_run(state, project["id"], "test_asset_gate", "测试验证", "passed", "P0/P1 用例已 Review、入库并绑定自动化", [])
+        audit(state, "runbook.case_review", project["id"], "baselined")
+        return {"test_cases": cases, "gate_run": gate}
+    if step_id == "automation_run":
+        cases = [c for c in state["test_cases"] if c["project_id"] == project["id"]]
+        failed = 2 if project["risk_level"] in {"L3", "L4"} else 0
+        execution = {
+            "id": new_id("AUTO"),
+            "project_id": project["id"],
+            "execution_type": "api_automation",
+            "suite": "opensdlc-risk-regression",
+            "triggered_by": "runbook",
+            "total_count": max(len(cases), 8),
+            "passed_count": max(len(cases), 8) - failed,
+            "failed_count": failed,
+            "status": "failed" if failed else "passed",
+            "report_url": "https://auto.example.com/reports/opensdlc-demo",
+            "logs_url": "https://auto.example.com/logs/opensdlc-demo",
+            "started_at": now(),
+            "finished_at": now(),
+        }
+        state["executions"].insert(0, execution)
+        state["evidence"].insert(0, {"id": new_id("EVD"), "project_id": project["id"], "evidence_type": "automation", "source_system": "automation", "title": "OpenSDLC 自动化执行结果", "summary": f"{execution['passed_count']}/{execution['total_count']} passed", "status": execution["status"], "uri": execution["report_url"], "collected_at": now()})
+        blockers = ["自动化存在失败用例，需要归因"] if failed else []
+        gate = add_gate_run(state, project["id"], "test_execution_gate", "测试验证", "blocked" if failed else "passed", "自动化执行完成", blockers)
+        audit(state, "runbook.automation_run", execution["id"], execution["status"])
+        return {"execution": execution, "gate_run": gate}
+    if step_id == "agent_simulate":
+        runs = [simulate_agent_run(state, agent, project) for agent in state.get("agents", [])]
+        gate = add_gate_run(state, project["id"], "agent_governance_gate", "全流程", "passed", f"已运行 {len(runs)} 个阶段 Agent", [])
+        audit(state, "runbook.agent_simulate", project["id"], f"{len(runs)} agents")
+        return {"agent_runs": runs, "gate_run": gate}
+    if step_id == "release_gate":
+        gate = evaluate_release_gate(state, project)
+        gate_run = add_gate_run(state, project["id"], "release_gate", "发布决策", gate["decision"], f"发布准入评估完成，证据分 {gate['evidence_score']}", gate.get("blockers", []))
+        audit(state, "runbook.release_gate", gate["id"], gate["decision"])
+        return {"release_gate": gate, "gate_run": gate_run}
+    raise KeyError(step_id)
+
+
+def runbook_summary(state: dict, project: dict) -> dict:
+    project_id = project["id"]
+    gate_runs = [item for item in state.get("gate_runs", []) if item["project_id"] == project_id]
+    latest_by_gate = {}
+    for gate in gate_runs:
+        latest_by_gate.setdefault(gate["gate"], gate)
+    return {
+        "steps": state.get("runbook_steps", seed_runbook_steps()),
+        "gate_runs": gate_runs[:20],
+        "latest_by_gate": latest_by_gate,
+        "counts": {
+            "requirements": len([item for item in state["requirements"] if item["project_id"] == project_id]),
+            "prs": len([item for item in state["prs"] if item["project_id"] == project_id]),
+            "test_cases": len([item for item in state["test_cases"] if item["project_id"] == project_id]),
+            "executions": len([item for item in state["executions"] if item["project_id"] == project_id]),
+            "evidence": len([item for item in state["evidence"] if item["project_id"] == project_id]),
+            "agent_runs": len([item for item in state.get("agent_runs", []) if item["project_id"] == project_id]),
+        },
+    }
+
+
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(FRONTEND), **kwargs)
@@ -998,6 +1347,16 @@ class Handler(SimpleHTTPRequestHandler):
         try:
             if path == "/api/dashboard":
                 return self.send_json({"dashboard": self.dashboard(state)})
+            if path == "/api/open-source-blueprint":
+                return self.send_json({
+                    "name": "OpenSDLC AI Quality Platform",
+                    "positioning": "开源可运行的 AI Coding 全生命周期质量门禁平台",
+                    "modules": ["项目接入", "PRD 质量门禁", "PR 质量门禁", "测试资产", "测试执行", "发布准入", "Agent Skills", "Mock Adapter"],
+                    "extension_points": ["Integration Adapter", "Policy Rule", "Agent Skill", "Evidence Normalizer", "Runbook Step"],
+                    "run_command": "cd quality-platform/backend && python3 server.py --host 127.0.0.1 --port 8790",
+                })
+            if path == "/api/agent-skills":
+                return self.send_json({"skills": state.get("agent_skill_catalog", seed_agent_skill_catalog())})
             if path == "/api/projects":
                 return self.send_json({"projects": state["projects"]})
             if path.startswith("/api/projects/"):
@@ -1025,6 +1384,10 @@ class Handler(SimpleHTTPRequestHandler):
                     return self.send_json({"quality_metrics": [m for m in state.get("quality_metrics", []) if m["project_id"] == project["id"]]})
                 if len(parts) == 5 and parts[4] == "agent-runs":
                     return self.send_json({"agent_runs": [r for r in state.get("agent_runs", []) if r["project_id"] == project["id"]]})
+                if len(parts) == 5 and parts[4] == "runbook":
+                    return self.send_json({"runbook": runbook_summary(state, project)})
+                if len(parts) == 5 and parts[4] == "gate-runs":
+                    return self.send_json({"gate_runs": [r for r in state.get("gate_runs", []) if r["project_id"] == project["id"]]})
             if path == "/api/agents":
                 return self.send_json({"agents": state["agents"]})
             if path.startswith("/api/agents/"):
@@ -1199,38 +1562,21 @@ class Handler(SimpleHTTPRequestHandler):
                     audit(state, "release_gate.evaluate", gate["id"], gate["decision"])
                     save_state(state)
                     return self.send_json({"release_gate": gate}, 201)
+                if action == "runbook" and len(parts) == 6 and parts[5] == "run-step":
+                    result = run_runbook_step(state, project, payload.get("step_id", "project_intake"))
+                    save_state(state)
+                    return self.send_json({"result": result, "runbook": runbook_summary(state, project)}, 201)
+                if action == "runbook" and len(parts) == 6 and parts[5] == "run-all":
+                    results = []
+                    for step in seed_runbook_steps():
+                        results.append({"step_id": step["id"], "result": run_runbook_step(state, project, step["id"])})
+                    save_state(state)
+                    return self.send_json({"results": results, "runbook": runbook_summary(state, project)}, 201)
 
             if path.startswith("/api/prs/") and path.endswith("/collect-sonar"):
                 pr = find_item(state, "prs", path.split("/")[3])
                 status = payload.get("qualityGateStatus") or ("ERROR" if pr.get("ai_generated_ratio", 0) > 50 else "OK")
-                blockers = []
-                if status == "ERROR":
-                    blockers.append("Sonar Quality Gate ERROR")
-                if pr.get("ai_generated_ratio", 0) >= 60:
-                    blockers.append("AI 生成比例较高，需要加强单测和 Review")
-                if pr.get("changed_files", 0) >= 20:
-                    blockers.append("变更文件较多，需要拆分风险或补充影响面说明")
-                sonar = {
-                    "id": new_id("SONAR"),
-                    "pr_id": pr["id"],
-                    "project_id": pr["project_id"],
-                    "projectKey": payload.get("projectKey", "demo-project"),
-                    "repository_name": pr.get("repository_name", ""),
-                    "system_name": pr.get("system_name", ""),
-                    "qualityGateStatus": status,
-                    "bugs": payload.get("bugs", 1 if status == "ERROR" else 0),
-                    "vulnerabilities": payload.get("vulnerabilities", 0),
-                    "codeSmells": payload.get("codeSmells", 12),
-                    "coverage": payload.get("coverage", 78.5),
-                    "duplicatedLinesDensity": payload.get("duplicatedLinesDensity", 1.1),
-                    "blockerIssues": payload.get("blockerIssues", blockers),
-                    "criticalIssues": payload.get("criticalIssues", []),
-                    "collected_at": now(),
-                }
-                pr["gate_status"] = "blocked" if blockers else "passed"
-                pr["risk_summary"] = "；".join(blockers) if blockers else "Sonar 通过，进入测试门禁。"
-                state["sonar_results"].insert(0, sonar)
-                state["evidence"].insert(0, {"id": new_id("EVD"), "project_id": pr["project_id"], "evidence_type": "sonar", "source_system": "sonar", "title": "Sonar 扫描结果", "summary": pr["risk_summary"], "status": pr["gate_status"], "uri": "", "collected_at": now()})
+                sonar = collect_sonar_for_pr(state, pr, status)
                 audit(state, "sonar.collect", sonar["id"], pr["id"])
                 save_state(state)
                 return self.send_json({"sonar": sonar, "pr": pr}, 201)
@@ -1319,28 +1665,7 @@ class Handler(SimpleHTTPRequestHandler):
             if path.startswith("/api/agents/") and path.endswith("/simulate"):
                 agent = find_item(state, "agents", path.split("/")[3])
                 project = find_item(state, "projects", payload.get("project_id", state["projects"][0]["id"]))
-                context = build_project_context(state, project)
-                output = summarize_agent_decision(agent, project, context)
-                result = {
-                    "id": new_id("RUN"),
-                    "agent_id": agent["id"],
-                    "agent_name": agent["name"],
-                    "project_id": project["id"],
-                    "stage": agent["stage"],
-                    "context_summary": {
-                        "systems": len(context["systems"]),
-                        "repositories": len(context["repositories"]),
-                        "requirements": len(context["requirements"]),
-                        "prs": len(context["prs"]),
-                        "metrics": len(context["metrics"]),
-                        "evidence": len(context["evidence"]),
-                    },
-                    "tool_calls": [tool["tool"] for tool in agent.get("tool_permissions", [])],
-                    "output": output,
-                    "status": "completed",
-                    "created_at": now(),
-                }
-                state.setdefault("agent_runs", []).insert(0, result)
+                result = simulate_agent_run(state, agent, project)
                 audit(state, "agent.simulate", agent["id"], project["id"])
                 save_state(state)
                 return self.send_json({"result": result})

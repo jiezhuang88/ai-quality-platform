@@ -217,6 +217,10 @@ h3 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.grid.six {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
 .panel {
   min-width: 0;
   padding: 16px;
@@ -616,6 +620,88 @@ th {
   color: var(--primary-dark);
   font-size: 12px;
   font-weight: 700;
+}
+
+.runbook-steps {
+  display: grid;
+  gap: 10px;
+}
+
+.runbook-step {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  min-height: 92px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--soft);
+}
+
+.runbook-index {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 900;
+}
+
+.runbook-step p {
+  margin: 5px 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.runbook-step small {
+  color: var(--primary-dark);
+  font-weight: 800;
+}
+
+.runbook-action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.skill-matrix {
+  display: grid;
+  gap: 10px;
+  max-height: 760px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.skill-matrix details {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.skill-matrix summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.skill-matrix summary span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.skill-matrix .stack {
+  padding: 0 10px 10px;
+}
+
+.danger-text {
+  color: var(--danger);
+  font-weight: 800;
 }
 
 .metric-row {

@@ -1,5 +1,6 @@
 const routes = [
   ["dashboard", "组织驾驶舱", "Portfolio"],
+  ["runbook", "开源运行台", "Open Source"],
   ["workspace", "项目工作台", "Project Space"],
   ["intake", "项目接入", "Intake"],
   ["requirements", "PRD 与需求", "Requirement"],
@@ -59,6 +60,7 @@ const state = {
   projects: [],
   selectedProjectId: null,
   agents: [],
+  agentSkills: [],
   integrations: [],
   policies: [],
   testFilters: { status: "all", priority: "all", type: "all", system: "all", automation: "all", keyword: "", groupBy: "status" },
@@ -111,16 +113,18 @@ function currentProject() {
 }
 
 async function loadBase() {
-  const [dashboard, projects, agents, integrations, policies] = await Promise.all([
+  const [dashboard, projects, agents, skills, integrations, policies] = await Promise.all([
     api("/api/dashboard"),
     api("/api/projects"),
     api("/api/agents"),
+    api("/api/agent-skills"),
     api("/api/integrations"),
     api("/api/policies"),
   ]);
   state.dashboard = dashboard.dashboard;
   state.projects = projects.projects || [];
   state.agents = agents.agents || [];
+  state.agentSkills = skills.skills || [];
   state.integrations = integrations.integrations || [];
   state.policies = policies.policies || [];
   const preferredProject = state.projects.find((project) => project.id === "P-2026-001") || state.projects[0];
@@ -149,6 +153,7 @@ function renderShell() {
 async function renderRoute() {
   const renderers = {
     dashboard: renderDashboard,
+    runbook: renderRunbook,
     workspace: renderWorkspace,
     intake: renderIntake,
     requirements: renderRequirements,
@@ -189,11 +194,129 @@ async function renderDashboard() {
       </div>
     </section>
     <section class="panel section-gap">
-      <div class="panel-head"><h2>项目组合</h2><button data-route="intake">新建大型项目</button></div>
+      <div class="panel-head"><h2>项目组合</h2><div class="action-row"><button data-route="runbook">运行开源流程</button><button data-route="intake">新建大型项目</button></div></div>
       ${projectTable(state.projects)}
     </section>
   `;
   bindRouteButtons();
+}
+
+async function renderRunbook() {
+  const project = currentProject();
+  const [blueprint, runbook] = await Promise.all([
+    api("/api/open-source-blueprint"),
+    api(`/api/projects/${project.id}/runbook`),
+  ]);
+  const data = runbook.runbook || {};
+  els.view.innerHTML = `
+    <section class="project-hero">
+      <div>
+        <p class="eyebrow">${escapeHtml(blueprint.name)}</p>
+        <h2>开源端到端质量门禁演练</h2>
+        <p>${escapeHtml(blueprint.positioning)} · 当前项目：${escapeHtml(project.name)}</p>
+      </div>
+      <div class="hero-actions">
+        <button id="runAllBtn">一键跑完整流程</button>
+        <button class="primary" data-route="workspace">查看项目证据</button>
+      </div>
+    </section>
+    <section class="grid six section-gap">
+      ${metric("PRD", data.counts?.requirements || 0, "规则卡")}
+      ${metric("PR", data.counts?.prs || 0, "质量门禁")}
+      ${metric("用例", data.counts?.test_cases || 0, "候选/入库")}
+      ${metric("执行", data.counts?.executions || 0, "自动化")}
+      ${metric("证据", data.counts?.evidence || 0, "Evidence")}
+      ${metric("Agent", data.counts?.agent_runs || 0, "运行记录")}
+    </section>
+    <section class="grid layout-2-1 section-gap">
+      <div class="panel">
+        <div class="panel-head"><h2>可执行 Runbook</h2><span class="muted">逐步执行或一键完成</span></div>
+        <div class="runbook-steps">${(data.steps || []).map((step, index) => runbookStep(step, index, data.latest_by_gate || {})).join("")}</div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>开源扩展点</h2></div>
+        <div class="stage-list">
+          ${(blueprint.extension_points || []).map((item) => `<div class="stage-item"><strong>${escapeHtml(item)}</strong><span>${extensionHint(item)}</span></div>`).join("")}
+        </div>
+        <div class="hint-box section-gap"><strong>启动命令</strong><span>${escapeHtml(blueprint.run_command)}</span></div>
+      </div>
+    </section>
+    <section class="grid two section-gap">
+      <div class="panel">
+        <div class="panel-head"><h2>最新门禁结果</h2></div>
+        <div class="stack">${(data.gate_runs || []).slice(0, 10).map((gate) => `<div class="mini-card rich-card"><strong>${escapeHtml(gate.gate)}</strong>${badge(gate.decision)}<p class="muted">${escapeHtml(gate.stage)} · ${escapeHtml(gate.created_at)}</p><p>${escapeHtml(gate.summary)}</p>${(gate.blockers || []).length ? `<p class="danger-text">${escapeHtml(gate.blockers.join("；"))}</p>` : ""}</div>`).join("") || `<p class="muted">暂无门禁执行记录。</p>`}</div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Agent Skills 挂载矩阵</h2><button data-route="agents">进入 Agent 运维</button></div>
+        ${skillMatrix(state.agentSkills)}
+      </div>
+    </section>
+  `;
+  document.querySelector("#runAllBtn").addEventListener("click", runAllRunbook);
+  document.querySelectorAll("[data-run-step]").forEach((button) => button.addEventListener("click", () => runRunbookStep(button.dataset.runStep)));
+  bindRouteButtons();
+}
+
+function runbookStep(step, index, latestByGate) {
+  const latest = latestByGate[step.gate];
+  return `<div class="runbook-step">
+    <div class="runbook-index">${index + 1}</div>
+    <div>
+      <strong>${escapeHtml(step.title)}</strong>
+      <p>${escapeHtml(step.description)}</p>
+      <small>${escapeHtml(step.stage)} · ${escapeHtml(step.gate)} · ${escapeHtml(step.agent_id)}</small>
+    </div>
+    <div class="runbook-action">
+      ${latest ? badge(latest.decision) : badge("not_run")}
+      <button data-run-step="${step.id}">运行</button>
+    </div>
+  </div>`;
+}
+
+function extensionHint(item) {
+  return {
+    "Integration Adapter": "接入 Git、Sonar、CI、自动化、性能、混沌、缺陷和监控。",
+    "Policy Rule": "沉淀 PRD、PR、测试、发布准入规则，并支持风险等级加严。",
+    "Agent Skill": "为阶段 Agent 挂载可评测、可审计、可回滚的专业能力。",
+    "Evidence Normalizer": "把外部工具结果统一转成 Evidence，支撑审计和报告。",
+    "Runbook Step": "把组织流程固化为可执行步骤，支持一键演练和验收。",
+  }[item] || "可按开源接口扩展。";
+}
+
+function skillMatrix(skills) {
+  if (!skills.length) return `<p class="muted">暂无 Skill Catalog。</p>`;
+  const grouped = skills.reduce((groups, skill) => {
+    groups[skill.stage] = groups[skill.stage] || [];
+    groups[skill.stage].push(skill);
+    return groups;
+  }, {});
+  return `<div class="skill-matrix">${Object.entries(grouped).map(([stage, items]) => `<details open>
+    <summary><strong>${escapeHtml(stage)}</strong><span>${items.length} skills</span></summary>
+    <div class="stack">${items.map((skill) => `<div class="mini-card rich-card">
+      <strong>${escapeHtml(skill.name)}</strong><span class="muted">${escapeHtml(skill.id)} / ${escapeHtml(skill.agent_id)}</span>
+      <p>${escapeHtml(skill.description)}</p>
+      <p><b>输入</b> ${escapeHtml((skill.inputs || []).join(" / "))}</p>
+      <p><b>输出</b> ${escapeHtml((skill.outputs || []).join(" / "))}</p>
+      <p><b>规则</b> ${escapeHtml((skill.quality_rules || []).join("；"))}</p>
+    </div>`).join("")}</div>
+  </details>`).join("")}</div>`;
+}
+
+async function runRunbookStep(stepId) {
+  const project = currentProject();
+  await api(`/api/projects/${project.id}/runbook/run-step`, {
+    method: "POST",
+    body: JSON.stringify({ step_id: stepId }),
+  });
+  toast("Runbook 步骤已执行");
+  await loadBase();
+}
+
+async function runAllRunbook() {
+  const project = currentProject();
+  await api(`/api/projects/${project.id}/runbook/run-all`, { method: "POST", body: "{}" });
+  toast("完整 SDLC 质量门禁流程已执行");
+  await loadBase();
 }
 
 function stageControl(stage) {
@@ -839,6 +962,7 @@ async function renderAgents() {
         <div class="panel-head"><h2>${escapeHtml(active.name)}</h2><div>${badge(active.status)} ${badge(active.version)}</div></div>
         <div class="agent-detail">
           <label><span>系统提示词</span><textarea id="agentPrompt">${escapeHtml(active.system_prompt)}</textarea></label>
+          <div><h3>挂载 Skills</h3>${agentSkillList(active.skills || state.agentSkills.filter((skill) => skill.agent_id === active.id))}</div>
           <div class="grid two">
             <div><h3>平台能力</h3>${tagList(active.capabilities || [])}</div>
             <div><h3>工具权限</h3>${toolList(active.tool_permissions || [])}</div>
@@ -872,6 +996,17 @@ function tagList(items) {
 
 function toolList(items) {
   return `<div class="stack">${items.map((item) => `<div class="mini-card"><strong>${escapeHtml(item.tool)}</strong><span>${escapeHtml(item.access)}</span>${item.approval_required ? badge("approval") : ""}</div>`).join("")}</div>`;
+}
+
+function agentSkillList(skills) {
+  if (!skills.length) return `<p class="muted">该 Agent 暂未挂载 Skill。</p>`;
+  return `<div class="card-grid">${skills.map((skill) => `<div class="mini-card rich-card">
+    <strong>${escapeHtml(skill.name)}</strong><span class="muted">${escapeHtml(skill.id)}</span>
+    <p>${escapeHtml(skill.description)}</p>
+    <p><b>输入</b> ${escapeHtml((skill.inputs || []).join(" / "))}</p>
+    <p><b>输出</b> ${escapeHtml((skill.outputs || []).join(" / "))}</p>
+    <p><b>工具</b> ${escapeHtml((skill.tools || []).join(" / "))}</p>
+  </div>`).join("")}</div>`;
 }
 
 async function saveAgent(id) {

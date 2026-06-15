@@ -26,6 +26,7 @@ It combines human review standards, test strategy, risk control, and executable 
 - `.github/ISSUE_TEMPLATE/escaped-defect.md`: Escaped defect learning template.
 - `java-quality-workbench/`: Runnable Java Swing workbench for the full quality workflow.
 - `web-quality-workbench/`: Browser-accessible platform built on the full quality system.
+- `quality-platform/`: OpenSDLC AI Quality Platform, the product-grade local web app with executable PRD gates, PR gates, test asset flow, release gates, Agent Skills, and Mock Adapter integration.
 
 ## Quick Start
 
@@ -81,7 +82,27 @@ Use it to fill in change information, calculate risk, define the test plan, chec
 
 ## Web Platform
 
-The browser version is the most complete implementation of the quality system:
+The recommended product-grade local app is `quality-platform`:
+
+```bash
+cd quality-platform/backend
+python3 server.py --host 127.0.0.1 --port 8790
+```
+
+Open:
+
+```text
+http://127.0.0.1:8790
+```
+
+Use the `开源运行台` page to run the full SDLC quality gate flow end to end.
+
+Design docs:
+
+- `docs/open-source-ai-quality-platform-prd.md`
+- `docs/open-source-ai-quality-platform-technical-solution.md`
+
+The earlier browser workbench remains available for reference:
 
 ```bash
 cd web-quality-workbench
